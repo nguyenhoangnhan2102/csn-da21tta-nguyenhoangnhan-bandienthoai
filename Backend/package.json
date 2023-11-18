@@ -1,5 +1,5 @@
 {
-  "name": "ban-dien-thoai",
+  "name": "backend-website-ban-dien-thoai",
   "version": "1.0.0",
   "description": "Website ban dien thoai",
   "main": "server.js",
@@ -9,17 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nguyenhoangnhan2102/csn-da21tta-nguyenhoangnhan-bandienthoai.git"
+    "url": "(https://github.com/nguyenhoangnhan2102/csn-da21tta-nguyenhoangnhan-bandienthoai.git)"
   },
   "keywords": [
-    "nodejs"
+    "nodejs",
+    "react"
   ],
   "author": "Nguyen Hoang Nhan",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nguyenhoangnhan2102/csn-da21tta-nguyenhoangnhan-bandienthoai/issues"
-  },
-  "homepage": "https://github.com/nguyenhoangnhan2102/csn-da21tta-nguyenhoangnhan-bandienthoai#readme",
   "dependencies": {
     "express": "4.18.2"
   }
