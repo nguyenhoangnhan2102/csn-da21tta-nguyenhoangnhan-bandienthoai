@@ -8,6 +8,10 @@ const app = express();                     //app express
 const port = process.env.PORT || 9999;     //port
 const hostname = process.env.HOST_NAME;
 
+//config req.body
+app.use(express.json()); //for json
+app.use(express.urlencoded({ extended: true })); //for form data
+
 //Config template engine
 configViewEngine(app);
 

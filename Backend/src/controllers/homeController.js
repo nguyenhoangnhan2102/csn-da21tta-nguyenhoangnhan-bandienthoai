@@ -1,27 +1,29 @@
 const connection = require('../config/database');
 
 const getHomePage = (req, res) => {
-    let users = [];
+    return res.render('home.ejs');
+}
 
-    connection.query(
-        'SELECT * FROM Users u ',
-        function (err, results, fields) {
-            users = results;
-            console.log(">>>Check result: ", results);
-            res.send(JSON.stringify(users));
-        }
+const postCreateUser = async (req, res) => {
+    // let email = req.body.email;
+    // let name = req.body.myname;
+    // let city = req.body.city;
+
+    let { email, name, city } = req.body;
+
+    let [results, fields] = await connection.query(
+        `INSERT INTO Users (email, name, city) VALUES(?, ?, ?)`, [email, name, city]
     );
 
+    res.send("Created a new user succeed!!!");
+
+    res.redirect('/');
 }
 
-const getABC = (req, res) => {
-    res.send('Get ABC!!!');
-}
-
-const getNHNhan = (req, res) => {
-    res.render('sample.ejs');
+const getCreatePage = (req, res) => {
+    res.render("create.ejs")
 }
 
 module.exports = {
-    getHomePage, getABC, getNHNhan
+    getHomePage, postCreateUser, getCreatePage
 }
