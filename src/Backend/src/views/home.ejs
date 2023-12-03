@@ -4,14 +4,131 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 </head>
 
 <body>
     <div class="topnav">
         <a href="#home" class="active">Home</a>
-        <a href="/user-order">Users-Order</a>
+        <a href="/user-order">Khách Hàng</a>
+    </div>
+
+    <div class="w3-container">
+        <h2>Danh Sách Sản Phẩm</h2>
+
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>Mã Sản Phẩm</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Loại SP</th>
+                    <th>Tên NSX</th>
+                    <th>Số lượng</th>
+                    <th>Giá tiền</th>
+                    <th>Minh họa</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < dataProduct.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= dataProduct[i].id %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].tenSP %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].tenloaiSP %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].tenNSX %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].soluong %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].giatien %>
+                        </td>
+
+                        <td>
+                            <img src="/img/<%= dataProduct[i].mota %>" alt="" width="100px" height="100px" />
+                        </td>
+
+                        <td style="display: flex">
+                            <form action="/editproduct/<%=dataProduct[i].id%>" method="get">
+                                <button type="submit">Edit</button>
+                            </form>
+
+                            <form action="/delete-product" method="post">
+                                <input type="text" hidden value="<%=dataProduct[i].id%>" name="productId" /><button
+                                    type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="create-user-container">
+        <form action="/create-new-product" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend><b>Thêm Sản Phẩm</b></legend>
+
+                <div>
+                    <label for="">Mã Sản Phẩm : </label>
+                    <input type="text" name="id" />
+                </div>
+                <div>
+                    <label for="">Tên Sản Phẩm : </label>
+                    <input type="text" name="tenSP" />
+                </div>
+                <div>
+                    <label for="">Loại : </label>
+                    <select name="tenloaiSP" id="hall" value="3">
+                        <option>Android</option>
+                        <option>iOS</option>
+                        <option>Sản phẩm phổ thông</option>
+                    </select>
+                </div>
+                <div>
+                    <div class="input-group">
+                        <label for="size">NSX</label>
+                        <select name="tenNSX">
+                            <% AllNSX.forEach(function(AllNSX) { %>
+                                <option value="<%= AllNSX.tenNSX %>">
+                                    <%= AllNSX.tenNSX %>
+                                </option>
+                                <% }); %>
+                                    <!-- Thêm các option khác nếu cần -->
+                        </select>
+                        <span> <a href="/tao-moi-NSX" method="get">Thêm</a></span>
+                    </div>
+
+                </div>
+                <div>
+                    <label for="">Số lượng thêm : </label>
+                    <input type="text" name="soluong" />
+                </div>
+                <div>
+                    <label for="">Giá tiền : </label>
+                    <input type="text" name="giatien" />
+                </div>
+
+                <div>
+                    <label for="">Avatar: </label>
+                    <input type="file" name="profile_pic" />
+                </div>
+
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </fieldset>
+        </form>
+        <form method="POST" action="/upload-profile-pic" enctype="multipart/form-data"></form>
     </div>
 </body>
 

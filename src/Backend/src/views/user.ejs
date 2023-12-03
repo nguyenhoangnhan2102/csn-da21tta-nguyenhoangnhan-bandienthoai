@@ -1,0 +1,51 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="#" class="active">Khách Hàng</a>
+    </div>
+
+    <div class="w3-container">
+        <h2>List User</h2>
+
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>Mã KH</th>
+                    <th>Họ tên KH</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < dataUsers.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= dataUsers[i].maKH %>
+                        </td>
+                        <td>
+                            <%= dataUsers[i].tenKH %>
+                        </td>
+                        <td>
+                            <%= dataUsers[i].diachi %>
+                        </td>
+                        <td>
+                            <%= dataUsers[i].sdt %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>
