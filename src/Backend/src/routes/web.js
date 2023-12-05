@@ -13,7 +13,8 @@ const {
     updateProduct,
     getUserPage,
     addNewNSX,
-    getAddNew
+    getAddNew,
+    deleteNSX
 } = require('../controllers/homeController');
 
 const storage = multer.diskStorage({
@@ -57,5 +58,7 @@ router.get("/user-order", getUserPage);
 //Thêm loại sản phẩm
 router.get("/tao-moi-NSX", addNewNSX);
 router.post("/add-new-NSX", getAddNew);
+
+router.post("/delete-tenNSX", deleteNSX);
 
 module.exports = router;

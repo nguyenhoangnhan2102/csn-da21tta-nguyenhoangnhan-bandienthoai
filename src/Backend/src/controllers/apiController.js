@@ -87,9 +87,23 @@ const updateProduct = async (req, res) => {
     });
 };
 
+const deleteNSX = async (req, res) => {
+    const NSXId = req.params.tenNSX;
+    if (!NSXId) {
+        return res.status(200).json({
+            message: "missing ",
+        });
+    }
+    await connection.execute("delete from NHASANXUAT where tenNSX = ?", [NSXId]);
+    return res.status(200).json({
+        message: "ok",
+    });
+};
+
 module.exports = {
     getAllProduct,
     createProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    deleteNSX
 };

@@ -10,6 +10,7 @@
 
 <body>
     <div class="topnav">
+        <a href="/">Home</a>
         <a class="active" href="#news">Thêm NSX</a>
     </div>
 
@@ -31,23 +32,24 @@
     <table class="container-LoaiSP">
         <tbody>
             <tr class="hang-loaiSP">
-                <td class="cot1-tenNSX">
+                <td class="tenNSX">
                     TÊN NSX
                 </td>
-                <td class="cot2-chucnang">
+                <td class="chucnang">
                     CHỨC NĂNG
                 </td>
             </tr>
             <% AllNSX.forEach(function(AllNSX) { %>
 
-                <tr class="hang-loaiSP">
+                <tr class="Nhasanxuat">
 
-                    <td class="cot2-chucnang">
+                    <td class="ten-NSX">
                         <%= AllNSX.tenNSX %>
                     </td>
                     <td>
-                        <form action="/delete-tenNSX/<%= AllNSX.tenNSX %>" method="post">
-                            <button>Xóa</button>
+                        <form action="/delete-tenNSX" method="post">
+                            <input type="text" hidden value="<%=AllNSX.tenNSX%>" name="NSXId">
+                            <button class="delete-NSX">Xóa</button>
                         </form>
                     </td>
 

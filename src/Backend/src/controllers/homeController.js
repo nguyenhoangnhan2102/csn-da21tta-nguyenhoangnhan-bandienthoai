@@ -110,17 +110,24 @@ const addNewNSX = async (req, res) => {
     const getAllNSXX = await getAllNSX()
 
     res.render("addnew.ejs", { AllNSX: getAllNSXX });
-}
+};
 
 const getAddNew = async (req, res) => {
     let tenNSX = req.body.tenNSX;
     const [results, fields] = await (await connection).execute(`INSERT INTO NHASANXUAT (tenNSX) VALUES (?);`, [tenNSX]);
     const getAllNSXX = await getAllNSX()
     //res.render('addnew.ejs', { AllNSX: getAllNSXX });
-    const getAllSP = await getAllProduct()
+    //const getAllSP = await getAllProduct()
+    //res.render("home.ejs", { dataProduct: getAllSP, AllNSX: getAllNSXX });
+    res.render("addnew.ejs", { AllNSX: getAllNSXX });
+};
 
-    res.render("home.ejs", { dataProduct: getAllSP, AllNSX: getAllNSXX });
-}
+const deleteNSX = async (req, res) => {
+    const NSXId = req.body.NSXId;
+    await connection.execute("delete from NHASANXUAT where tenNSX = ?", [NSXId]);
+    const getAllNSXX = await getAllNSX();
+    return res.render("addnew.ejs", { AllNSX: getAllNSXX });
+};
 
 module.exports = {
     getHomePage,
@@ -131,5 +138,6 @@ module.exports = {
     updateProduct,
     getUserPage,
     addNewNSX,
-    getAddNew
+    getAddNew,
+    deleteNSX
 };
