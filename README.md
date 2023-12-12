@@ -5,4 +5,5 @@ Xây dựng Website bán điện thoại
 1. Đã lấy được cơ sở dữ liệu lên
 2. Đã có chức năng THÊM, SỬA, XÓA sản phẩm
 3. Đã tạo thêm nút để thêm mới NHÀ SẢN XUẤT
-+Frontend:(đang tiến hành)
++Frontend:
+1. Đã đem được data từ Backend lên Frontend
