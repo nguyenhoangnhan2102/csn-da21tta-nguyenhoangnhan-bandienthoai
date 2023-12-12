@@ -36,7 +36,9 @@ const createProduct = async (req, res) => {
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.loaisp;
     let soluong = req.body.soluong;
+    let dungluong = req.body.dungluong;
     let giatien = req.body.giatien;
+    let motachitiet = req.body.motachitiet;
     let tenNSX = req.body.tenNSX;
     if (!id || !tenSP || !tenloaiSP || !soluong || !giatien || !tenNSX) {
         return res.status(200).json({
@@ -44,8 +46,8 @@ const createProduct = async (req, res) => {
         });
     }
     await connection.execute(
-        "insert into SANPHAM(id, tenSP, tenloaiSP, tenNSX, soluong, giatien) values (?,?,?,?,?,?)",
-        [id, tenSP, tenloaiSP, tenNSX, soluong, giatien]
+        "insert into SANPHAM(id, tenSP, tenloaiSP, tenNSX, soluong, dungluong, giatien, motachitiet) values (?,?,?,?,?,?,?,?)",
+        [id, tenSP, tenloaiSP, tenNSX, soluong, giatien, dungluong, motachitiet]
     );
     return res.status(200).json({
         message: "ok",
@@ -70,8 +72,10 @@ const updateProduct = async (req, res) => {
     let id = req.body.id;
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.tenloaiSP;
+    let dungluong = req.body.dungluong;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
+    let motachitiet = req.body.motachitiet;
     let tenNSX = req.body.tenNSX;
     if (!id || !tenSP || !tenloaiSP || !soluong || !giatien || !tenNSX) {
         return res.status(200).json({
@@ -79,8 +83,8 @@ const updateProduct = async (req, res) => {
         });
     }
     await connection.execute(
-        "update SANPHAM set tenSP = ?, tenloaiSP = ?, tenNSX = ?, soluong = ?, giatien = ? where id = ?",
-        [tenSP, tenloaiSP, tenNSX, soluong, giatien, id]
+        "update SANPHAM set tenSP = ?, tenloaiSP = ?, tenNSX = ?, dungluong = ?, soluong = ?, giatien = ?, motachitiet = ? where id = ?",
+        [tenSP, tenloaiSP, tenNSX, dungluong, soluong, giatien, motachitiet, id]
     );
     return res.status(200).json({
         message: "ok",

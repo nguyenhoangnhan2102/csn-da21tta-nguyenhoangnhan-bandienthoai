@@ -26,6 +26,8 @@
                     <th>Tên NSX</th>
                     <th>Số lượng</th>
                     <th>Giá tiền</th>
+                    <th>RAM</th>
+                    <th>Mô tả</th>
                     <th>Minh họa</th>
                     <th>Chức năng</th>
                 </tr>
@@ -51,6 +53,14 @@
 
                         <td>
                             <%= dataProduct[i].giatien %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].dungluong %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].motachitiet %>
                         </td>
 
                         <td>
@@ -117,10 +127,25 @@
                     <label for="">Giá tiền : </label>
                     <input type="text" name="giatien" />
                 </div>
+                <div>
+                    <label for="">RAM : </label>
+                    <select name="dungluong" id="hall" value="3">
+                        <option>32 GB</option>
+                        <option>64 GB</option>
+                        <option>128 GB</option>
+                        <option>256 GB</option>
+                        <option>512 GB</option>
+                        <option>1 TB</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Mô tả : </label>
+                    <input type="text" name="motachitiet" />
+                </div>
 
                 <div>
                     <label for="">Avatar: </label>
-                    <input type="file" name="profile_pic" />
+                    <input type="file" name="product_pic" />
                 </div>
 
                 <div>

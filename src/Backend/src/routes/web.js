@@ -33,7 +33,7 @@ const storage = multer.diskStorage({
 
 const imageFilter = function (req, file, cb) {
     // Accept images only
-    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|webp)$/)) {
         req.fileValidationError = "Only image files are allowed!";
         return cb(new Error("Only image files are allowed!"), false);
     }
@@ -46,13 +46,13 @@ router.get("/", getHomePage);
 router.get("/detail/product/");
 router.post(
     "/create-new-product",
-    upload.single("profile_pic"),
+    upload.single("product_pic"),
     createNewProduct
 );
 
 router.post("/delete-product", deleteProduct);
 router.get("/editproduct/:id", getEditPage);
-router.post("/update-product", upload.single("profile_pic"), updateProduct);
+router.post("/update-product", upload.single("product_pic"), updateProduct);
 router.get("/user-order", getUserPage);
 
 //Thêm loại sản phẩm

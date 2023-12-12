@@ -33,8 +33,10 @@ const createNewProduct = async (req, res) => {
     let id = req.body.id;
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.tenloaiSP;
+    let dungluong = req.body.dungluong;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
+    let motachitiet = req.body.motachitiet;
     let tenNSX = req.body.tenNSX;
 
     if (req.fileValidationError) {
@@ -45,8 +47,8 @@ const createNewProduct = async (req, res) => {
 
     try {
         await connection.execute(
-            "insert into SANPHAM(id, tenSP, soluong, tenloaiSP, tenNSX, giatien, mota) values (?,?,?,?,?,?,?)",
-            [id, tenSP, soluong, tenloaiSP, tenNSX, giatien, req.file.filename]
+            "insert into SANPHAM(id, tenSP, soluong, dungluong, tenloaiSP, tenNSX, giatien, motachitiet, mota) values (?,?,?,?,?,?,?,?,?)",
+            [id, tenSP, soluong, dungluong, tenloaiSP, tenNSX, giatien, motachitiet, req.file.filename]
         );
 
         return res.redirect("/");
@@ -78,8 +80,10 @@ const updateProduct = async (req, res, err) => {
     let id = req.body.id;
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.tenloaiSP;
+    let dungluong = req.body.dungluong;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
+    let motachitiet = req.body.motachitiet;
     let tenNSX = req.body.tenNSX;
     if (req.fileValidationError) {
         return res.status(400).json({ error: req.fileValidationError });
@@ -88,8 +92,8 @@ const updateProduct = async (req, res, err) => {
     }
     try {
         await connection.execute(
-            "UPDATE SANPHAM SET tenSP = ?, soluong = ?, tenloaiSP = ?, tenNSX = ?, giatien = ?, mota = ? WHERE id = ?",
-            [tenSP, soluong, tenloaiSP, tenNSX, giatien, req.file.filename, id]
+            "UPDATE SANPHAM SET tenSP = ?, dungluong =?, soluong = ?, tenloaiSP = ?, tenNSX = ?, giatien = ?, motachitiet = ?, mota = ? WHERE id = ?",
+            [tenSP, dungluong, soluong, tenloaiSP, tenNSX, giatien, motachitiet, req.file.filename, id]
         );
 
         return res.redirect("/");
@@ -98,7 +102,7 @@ const updateProduct = async (req, res, err) => {
     }
 };
 
-const upload = multer().single("profile_pic");
+const upload = multer().single("product_pic");
 const getAllNSX = async () => {
 
     let [results, fields] = await (await connection).execute('select * from NHASANXUAT ')
