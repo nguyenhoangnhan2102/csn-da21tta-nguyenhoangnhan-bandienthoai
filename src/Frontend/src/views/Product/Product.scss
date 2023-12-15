@@ -1,0 +1,29 @@
+.fillter {
+    color: black;
+}
+
+h1 {
+    color: black;
+}
+
+.product-name {
+    color: black;
+}
+
+.product-price {
+    color: black;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product {
+    margin: 10px;
+    /* Thêm các thuộc tính CSS khác theo ý muốn của bạn */
+}
+
+.product-pic {
+    width: 300px;
+}

@@ -4,6 +4,9 @@ import {
     NavLink
 } from "react-router-dom";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+
 class Nav extends React.Component {
     render() {
         return (
@@ -20,7 +23,9 @@ class Nav extends React.Component {
                 <NavLink to="/user" activeClassName="active">
                     User
                 </NavLink>
+                <div className='cart-div'>  <a href="/cart"><FontAwesomeIcon icon={faCartShopping} className='font-awe' /></a></div>
             </div>
+
         )
     }
 }

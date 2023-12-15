@@ -9,18 +9,21 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-
+import Footer from "./Footer/Footer";
+import Product from "./Product/Product";
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <header className="App-header">
           <Nav />
-          <Switch>
+          <Product />
+          {/* <Switch>
             <Route path="/" exact>
               <ListProduct />
             </Route>
-          </Switch>
+          </Switch> */}
+          <Footer />
         </header>
       </div >
     </BrowserRouter>

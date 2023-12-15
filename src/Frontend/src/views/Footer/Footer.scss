@@ -1,0 +1,85 @@
+.container-footer {
+    width: 100%;
+    height: 200px;
+    display: flex;
+
+    .footer-logo {
+        width: 20%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .footer-hr {
+        width: 1px;
+        height: 100%;
+        border: 1px solid black;
+        margin-top: -1%;
+        opacity: 0.1;
+        margin-right: 3%;
+    }
+
+    .foolter {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        height: 200px;
+
+        .footer-thongtinlienhe {
+            width: 30%;
+        }
+
+        .footer-chinhsach {
+            width: 30%;
+        }
+
+        .footer-hotro {
+            width: 30%;
+        }
+
+        .footer-mangxahoi {
+            width: 30%;
+
+            .thea {
+                text-decoration: none;
+
+            }
+        }
+
+        .footer-thongtin2 {
+            color: black;
+            font-size: 19px;
+            font-weight: bold;
+            font-family: "Roboto Condensed";
+        }
+    }
+
+    .logo {
+        width: 90%;
+        border-radius: 50%;
+        height: 100%;
+
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+
+        font-family: Agbalumo;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+}
+
+@keyframes hueRotate {
+    0% {
+        filter: hue-rotate(0deg);
+        /* Màu bắt đầu từ màu gốc */
+    }
+
+    100% {
+        filter: hue-rotate(270deg);
+        /* Chuyển đến một màu tối hơn */
+    }
+}
