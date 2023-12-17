@@ -6,3 +6,4 @@ Xây dựng Website bán điện thoại
 - Đã tạo thêm nút để thêm mới NHÀ SẢN XUẤT
 # Frontend:
 - (12/12/2023): Đã đem được data từ Backend lên Frontend
+- (15-17/12/2023): Đã hoàn thành giao diện trang chủ gồm: thanh nav, danh sách sản phẩm và footer
