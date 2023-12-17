@@ -1,33 +1,22 @@
+// Nav.jsx
 import React from "react";
 import './Nav.scss';
-import {
-    NavLink
-} from "react-router-dom";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from "react-router-dom";
 
 class Nav extends React.Component {
     render() {
         return (
             <div className="topnav">
                 <NavLink to="/" activeClassName="active" exact={true}>
-                    Home
+                    Trang chủ
                 </NavLink>
-                <NavLink to="/todo" activeClassName="active">
-                    Todos
+                <NavLink to="/product" activeClassName="active">
+                    Sản phẩm
                 </NavLink>
-                <NavLink to="/about" activeClassName="active">
-                    About
-                </NavLink>
-                <NavLink to="/user" activeClassName="active">
-                    User
-                </NavLink>
-                <div className='cart-div'>  <a href="/cart"><FontAwesomeIcon icon={faCartShopping} className='font-awe' /></a></div>
             </div>
-
-        )
+        );
     }
 }
 
 export default Nav;
+

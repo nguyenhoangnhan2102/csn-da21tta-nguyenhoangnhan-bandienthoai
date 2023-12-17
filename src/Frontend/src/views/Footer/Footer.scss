@@ -2,75 +2,105 @@
     width: 100%;
     height: 200px;
     display: flex;
+}
 
-    .footer-logo {
-        width: 20%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-    }
+.foolter {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 200px;
+    color: black;
+}
 
-    .footer-hr {
-        width: 1px;
-        height: 100%;
-        border: 1px solid black;
-        margin-top: -1%;
-        opacity: 0.1;
-        margin-right: 3%;
-    }
+.thea {
+    text-decoration: none;
+}
 
-    .foolter {
-        display: flex;
-        justify-content: center;
-        width: 80%;
-        height: 200px;
+.footer-hr {
+    width: 1px;
+    //height: 100%;
+    border: 1px solid black;
+    margin-top: -1%;
+    opacity: 0.1;
+}
 
-        .footer-thongtinlienhe {
-            width: 30%;
-        }
 
-        .footer-chinhsach {
-            width: 30%;
-        }
+.logo {
+    width: 90%;
+    border-radius: 50%;
+    height: 100%;
 
-        .footer-hotro {
-            width: 30%;
-        }
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
 
-        .footer-mangxahoi {
-            width: 30%;
+    font-family: Agbalumo;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 
-            .thea {
-                text-decoration: none;
-
-            }
-        }
-
-        .footer-thongtin2 {
-            color: black;
-            font-size: 19px;
-            font-weight: bold;
-            font-family: "Roboto Condensed";
-        }
-    }
-
-    .logo {
-        width: 90%;
-        border-radius: 50%;
-        height: 100%;
-
-        color: black;
-        font-size: 20px;
-        font-weight: bold;
-
-        font-family: Agbalumo;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-    }
 
 }
+
+
+.footer-logo {
+    width: 20%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+}
+
+.footer-thongtinlienhe {
+    width: 30%;
+
+    .thongtinlienhe1 {
+        font-size: 25px;
+    }
+
+    .thongtinlienhe2 {
+        font-size: 20px;
+    }
+}
+
+.footer-chinhsach {
+    width: 30%;
+
+    .footer-chinhsach1 {
+        font-size: 25px;
+    }
+
+    .footer-chinhsach2 {
+        font-size: 20px;
+    }
+}
+
+.footer-hotro {
+    width: 30%;
+
+    .footer-hotro1 {
+        font-size: 25px;
+    }
+
+    .footer-hotro2 {
+        font-size: 20px;
+    }
+}
+
+.footer-mangxahoi {
+    width: 30%;
+
+    .mangxahoi1 {
+        font-size: 25px;
+    }
+
+    .mangxahoi2 {
+        font-size: 20px;
+    }
+}
+
+
 
 @keyframes hueRotate {
     0% {

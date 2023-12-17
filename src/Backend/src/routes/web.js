@@ -6,7 +6,7 @@ var appRoot = require('app-root-path');
 
 const {
     getHomePage,
-    getDetailPage,
+    //getDetailPage,
     createNewProduct,
     deleteProduct,
     getEditPage,
@@ -14,7 +14,8 @@ const {
     getUserPage,
     addNewNSX,
     getAddNew,
-    deleteNSX
+    deleteNSX,
+    //SearchProduct
 } = require('../controllers/homeController');
 
 const storage = multer.diskStorage({
@@ -46,13 +47,14 @@ router.get("/", getHomePage);
 router.get("/detail/product/");
 router.post(
     "/create-new-product",
-    upload.single("product_pic"),
+    upload.single("profile_pic"),
     createNewProduct
 );
 
 router.post("/delete-product", deleteProduct);
 router.get("/editproduct/:id", getEditPage);
-router.post("/update-product", upload.single("product_pic"), updateProduct);
+router.post("/update-product", upload.single("profile_pic"), updateProduct);
+
 router.get("/user-order", getUserPage);
 
 //Thêm loại sản phẩm
@@ -60,5 +62,7 @@ router.get("/tao-moi-NSX", addNewNSX);
 router.post("/add-new-NSX", getAddNew);
 
 router.post("/delete-tenNSX", deleteNSX);
+
+//router.post('/Tim', upload.none(), SearchProduct);
 
 module.exports = router;

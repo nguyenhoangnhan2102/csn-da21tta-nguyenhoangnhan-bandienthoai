@@ -1,0 +1,90 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/" class="active">Home</a>
+        <a href="/user-order">User Order</a>
+    </div>
+
+    <div class="w3-container">
+        <h2>Danh Sách Sản Phẩm</h2>
+        <form action="/Tim" method="post">
+            <input type="text" id="tenSP" placeholder="Nhập tên sản phẩm...">
+            <button type="submit" class="button">Tìm kiếm</button>
+        </form>
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>Mã Sản Phẩm</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Loại SP</th>
+                    <th>Tên NSX</th>
+                    <th>Số lượng</th>
+                    <th>Giá tiền</th>
+                    <th>Dung lượng</th>
+                    <th>Mô tả</th>
+                    <th>Minh họa</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < dataProduct.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= dataProduct[i].id %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].tenSP %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].tenloaiSP %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].tenNSX %>
+                        </td>
+                        <td>
+                            <%= dataProduct[i].soluong %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].giatien %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].dungluong %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].motachitiet %>
+                        </td>
+
+                        <td>
+                            <img src="/img/<%= dataProduct[i].mota %>" alt="" width="100px" height="100px" />
+                        </td>
+
+                        <td style="display: flex">
+                            <form action="/editproduct/<%=dataProduct[i].id%>" method="get">
+                                <button type="submit">Edit</button>
+                            </form>
+
+                            <form action="/delete-product" method="post">
+                                <input type="text" hidden value="<%=dataProduct[i].id%>" name="productId" /><button
+                                    type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

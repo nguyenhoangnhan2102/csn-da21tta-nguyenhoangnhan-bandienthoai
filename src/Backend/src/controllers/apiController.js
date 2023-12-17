@@ -18,7 +18,7 @@ const getAllProduct = async (req, res) => {
         });
 
         return res.status(200).json({
-            message: "ok",
+            //message: "ok",
             data: productsWithImageUrls,
         });
     } catch (error) {
@@ -37,17 +37,18 @@ const createProduct = async (req, res) => {
     let tenloaiSP = req.body.loaisp;
     let soluong = req.body.soluong;
     let dungluong = req.body.dungluong;
+    let ram = req.body.ram;
     let giatien = req.body.giatien;
-    let motachitiet = req.body.motachitiet;
+    let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
-    if (!id || !tenSP || !tenloaiSP || !soluong || !giatien || !tenNSX) {
+    if (!id || !tenSP || !tenloaiSP || !soluong || !dungluong || !ram || !giatien || !tenNSX) {
         return res.status(200).json({
             message: "missing ",
         });
     }
     await connection.execute(
-        "insert into SANPHAM(id, tenSP, tenloaiSP, tenNSX, soluong, dungluong, giatien, motachitiet) values (?,?,?,?,?,?,?,?)",
-        [id, tenSP, tenloaiSP, tenNSX, soluong, giatien, dungluong, motachitiet]
+        "insert into SANPHAM(id, tenSP, tenloaiSP, tenNSX, soluong, dungluong, ram, giatien, ghichu) values (?,?,?,?,?,?,?,?,?)",
+        [id, tenSP, tenloaiSP, tenNSX, soluong, giatien, dungluong, ram, ghichu]
     );
     return res.status(200).json({
         message: "ok",
@@ -73,11 +74,12 @@ const updateProduct = async (req, res) => {
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.tenloaiSP;
     let dungluong = req.body.dungluong;
+    let ram = req.body.ram;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
     let motachitiet = req.body.motachitiet;
     let tenNSX = req.body.tenNSX;
-    if (!id || !tenSP || !tenloaiSP || !soluong || !giatien || !tenNSX) {
+    if (!id || !tenSP || !tenloaiSP || !soluong || !dungluong || !ram || !giatien || !tenNSX) {
         return res.status(200).json({
             message: "missing ",
         });

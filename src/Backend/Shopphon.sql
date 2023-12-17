@@ -12,7 +12,7 @@ CREATE TABLE NHASANXUAT(
 
 INSERT INTO NHASANXUAT(tenNSX)
 values
-('Iphone'),
+('iPhone'),
 ('Samsung'),
 ('Oppo'),
 ('Nokia');
@@ -42,9 +42,16 @@ CREATE TABLE SANPHAM(
 );
 
 INSERT INTO SANPHAM (id, tenSP, soluong, tenloaiSP, tenNSX, dungluong, giatien, motachitiet, mota) VALUES
-('SP001', 'Iphone 12 Pro ', 10, 'iOS', 'Iphone', '32GB', '130000', 'Bền đẹp và sang trọng','profile_pic-1700324563454.jpg'),
-('SP002', 'Samsung Galaxy S8 ', 5, 'Android', 'Samsung', '64GB', '150000', 'Bền đẹp và sang trọng', 'profile_pic-1700324563420.jpg'),
-('SP003', 'Nokia', 10, 'Sản phẩm phổ thông', 'Nokia', '32GB', '140000', 'Bền đẹp và sang trọng', 'profile_pic-1700324563453.jpg');
+('SP003', 'Iphone 10 Max ', 10, 'iOS', 'Iphone', '32GB', '13000000', 'Bền đẹp và sang trọng','profile_pic-1700324563454.jpg'),
+('SP004', 'Samsung Galaxy S8 ', 5, 'Android', 'Samsung', '64GB', '5400000', 'Bền đẹp và sang trọng', 'profile_pic-1700324563420.jpg'),
+('SP005', 'Nokia', 10, 'Sản phẩm phổ thông', 'Nokia', '32GB', '1900000', 'Bền đẹp và sang trọng', 'profile_pic-1700324563453.jpg');
+
+CREATE TABLE HOADON(
+	maHD varchar(255) NOT NULL PRIMARY KEY,
+	maKH varchar(255) NOT NULL,
+	ngay date,
+	FOREIGN KEY (maKH) REFERENCES KHACHHANG(maKH)
+);
 
 CREATE TABLE CHITIETHOADON(
 	maHD varchar(255),
@@ -56,9 +63,3 @@ CREATE TABLE CHITIETHOADON(
 	FOREIGN KEY (id) REFERENCES SANPHAM(id)
 );
 
-CREATE TABLE HOADON(
-	maHD varchar(255) NOT NULL PRIMARY KEY,
-	maKH varchar(255) NOT NULL,
-	ngay date,
-	FOREIGN KEY (maKH) REFERENCES KHACHHANG(maKH)
-);

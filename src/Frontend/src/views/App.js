@@ -1,28 +1,38 @@
+// App.jsx
 import React from "react";
 import './App.scss';
-
-import Nav from './Nav/Nav';
-import ListProduct from "./List/ListProduct";
 
 import {
   BrowserRouter,
   Switch,
   Route
 } from "react-router-dom";
+
+import Nav from './Nav/Nav';
 import Footer from "./Footer/Footer";
-import Product from "./Product/Product";
+
+import ListProduct from "./ListProduct/ListProduct";
+import SanPham from "./SanPham/SanPham";
+import InfoProduct from "./InfoProduct/InfoProduct";
+
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter forceRefresh={true}>
       <div className="App">
         <header className="App-header">
           <Nav />
-          <Product />
-          {/* <Switch>
+
+          <Switch>
             <Route path="/" exact>
               <ListProduct />
             </Route>
-          </Switch> */}
+            <Route path="/product" exact>
+              <SanPham />
+            </Route>
+            <Route path="/product/:id">
+              <InfoProduct />
+            </Route>
+          </Switch>
           <Footer />
         </header>
       </div >

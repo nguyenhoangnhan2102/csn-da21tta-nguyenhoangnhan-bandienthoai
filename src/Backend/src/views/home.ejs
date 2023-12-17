@@ -10,24 +10,28 @@
 
 <body>
     <div class="topnav">
-        <a href="#home" class="active">Home</a>
-        <a href="/user-order">Khách Hàng</a>
+        <a href="#" class="active">Home</a>
+        <a href="/user-order">User Order</a>
     </div>
 
     <div class="w3-container">
         <h2>Danh Sách Sản Phẩm</h2>
-
+        <form action="/Tim" method="post">
+            <input type="text" id="tenSP" placeholder="Nhập tên sản phẩm">
+            <button type="submit" class="button">Tìm kiếm</button>
+        </form>
         <table class="w3-table-all w3-hoverable">
             <thead>
                 <tr class="w3-light-grey">
-                    <th>Mã Sản Phẩm</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Loại SP</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Loại sản phẩm</th>
                     <th>Tên NSX</th>
                     <th>Số lượng</th>
                     <th>Giá tiền</th>
+                    <th>Dung lượng</th>
                     <th>RAM</th>
-                    <th>Mô tả</th>
+                    <th>Ghi chú</th>
                     <th>Minh họa</th>
                     <th>Chức năng</th>
                 </tr>
@@ -60,7 +64,11 @@
                         </td>
 
                         <td>
-                            <%= dataProduct[i].motachitiet %>
+                            <%= dataProduct[i].ram %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].ghichu %>
                         </td>
 
                         <td>
@@ -86,14 +94,13 @@
     <div class="create-user-container">
         <form action="/create-new-product" method="post" enctype="multipart/form-data">
             <fieldset>
-                <legend><b>Thêm Sản Phẩm</b></legend>
-
+                <legend><b>Thêm sản phẩm</b></legend>
                 <div>
-                    <label for="">Mã Sản Phẩm : </label>
+                    <label for="">Mã sản phẩm : </label>
                     <input type="text" name="id" />
                 </div>
                 <div>
-                    <label for="">Tên Sản Phẩm : </label>
+                    <label for="">Tên sản phẩm : </label>
                     <input type="text" name="tenSP" />
                 </div>
                 <div>
@@ -128,7 +135,7 @@
                     <input type="text" name="giatien" />
                 </div>
                 <div>
-                    <label for="">RAM : </label>
+                    <label for="">Dung lượng : </label>
                     <select name="dungluong" id="hall" value="3">
                         <option>32 GB</option>
                         <option>64 GB</option>
@@ -138,14 +145,27 @@
                         <option>1 TB</option>
                     </select>
                 </div>
+
                 <div>
-                    <label for="">Mô tả : </label>
-                    <input type="text" name="motachitiet" />
+                    <label for="">RAM : </label>
+                    <select name="ram" id="hall" value="3">
+                        <option>1 GB</option>
+                        <option>2 GB</option>
+                        <option>4 GB</option>
+                        <option>6 GB</option>
+                        <option>8 GB</option>
+                        <option>12 GB</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="">Ghi chú : </label>
+                    <input type="text" name="ghichu" />
                 </div>
 
                 <div>
                     <label for="">Avatar: </label>
-                    <input type="file" name="product_pic" />
+                    <input type="file" name="profile_pic" />
                 </div>
 
                 <div>

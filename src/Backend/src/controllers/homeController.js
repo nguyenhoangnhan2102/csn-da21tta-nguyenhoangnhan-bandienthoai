@@ -14,14 +14,6 @@ const getHomePage = async (req, res) => {
     return res.render("home.ejs", { dataProduct: results, AllNSX: getAllNSXX });
 };
 
-// const getDetailPage = async (req, res) => {
-//     let userid = req.params.id;
-//     let [user, fields] = await connection.query(
-//         "SELECT * FROM SANPHAM where id = 1"
-//     );
-//     console.log("check user", user);
-//     return res.send(JSON.stringify(user));
-// };
 
 const getUserPage = async (req, res) => {
     const [results, fields] = await connection.execute("SELECT * FROM KHACHHANG ");
@@ -34,9 +26,10 @@ const createNewProduct = async (req, res) => {
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.tenloaiSP;
     let dungluong = req.body.dungluong;
+    let ram = req.body.ram;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
-    let motachitiet = req.body.motachitiet;
+    let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
 
     if (req.fileValidationError) {
@@ -47,8 +40,8 @@ const createNewProduct = async (req, res) => {
 
     try {
         await connection.execute(
-            "insert into SANPHAM(id, tenSP, soluong, dungluong, tenloaiSP, tenNSX, giatien, motachitiet, mota) values (?,?,?,?,?,?,?,?,?)",
-            [id, tenSP, soluong, dungluong, tenloaiSP, tenNSX, giatien, motachitiet, req.file.filename]
+            "insert into SANPHAM(id, tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, mota) values (?,?,?,?,?,?,?,?,?,?)",
+            [id, tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, req.file.filename]
         );
 
         return res.redirect("/");
@@ -81,9 +74,10 @@ const updateProduct = async (req, res, err) => {
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.tenloaiSP;
     let dungluong = req.body.dungluong;
+    let ram = req.body.ram;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
-    let motachitiet = req.body.motachitiet;
+    let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
     if (req.fileValidationError) {
         return res.status(400).json({ error: req.fileValidationError });
@@ -92,8 +86,8 @@ const updateProduct = async (req, res, err) => {
     }
     try {
         await connection.execute(
-            "UPDATE SANPHAM SET tenSP = ?, dungluong =?, soluong = ?, tenloaiSP = ?, tenNSX = ?, giatien = ?, motachitiet = ?, mota = ? WHERE id = ?",
-            [tenSP, dungluong, soluong, tenloaiSP, tenNSX, giatien, motachitiet, req.file.filename, id]
+            "UPDATE SANPHAM SET tenSP = ?, dungluong =?, ram = ?, soluong = ?, tenloaiSP = ?, tenNSX = ?, giatien = ?, ghichu = ?, mota = ? WHERE id = ?",
+            [tenSP, dungluong, ram, soluong, tenloaiSP, tenNSX, giatien, ghichu, req.file.filename, id]
         );
 
         return res.redirect("/");
@@ -102,14 +96,15 @@ const updateProduct = async (req, res, err) => {
     }
 };
 
-const upload = multer().single("product_pic");
+const upload = multer().single("profile_pic");
+
 const getAllNSX = async () => {
 
     let [results, fields] = await (await connection).execute('select * from NHASANXUAT ')
     return results;
 }
 const addNewNSX = async (req, res) => {
-    let NSX = req.body.tenNSX
+    let NSX = req.body.tenNSX;
 
     const getAllNSXX = await getAllNSX()
 
@@ -143,5 +138,6 @@ module.exports = {
     getUserPage,
     addNewNSX,
     getAddNew,
-    deleteNSX
+    deleteNSX,
+    //SearchProduct
 };
