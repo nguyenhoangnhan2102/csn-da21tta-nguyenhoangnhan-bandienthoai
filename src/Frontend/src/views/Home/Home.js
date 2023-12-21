@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import './ListProduct.scss';
+import './Home.scss';
 
 class ListProduct extends React.Component {
 
@@ -55,9 +55,10 @@ class ListProduct extends React.Component {
         this.setState({ priceFilter: value });
     };
 
-    handleViewInfoProduct = (product) => {
-        this.props.history.push(`/product/${product.id}`)
-    }
+    // handleViewInfoProduct = (product) => {
+    //     this.props.history.push(`/product/${product.id}`)
+    // }
+
     render() {
         const { data, loading, error, searchTerm, priceFilter } = this.state;
 
@@ -73,18 +74,26 @@ class ListProduct extends React.Component {
                         ? item.giatien < 5000000
                         : priceFilter === "10000000"
                             ? item.giatien <= 10000000 && item.giatien >= 5000000
-                            : priceFilter === "15000000"
-                                ? item.giatien <= 15000000 && item.giatien > 10000000
-                                : true
+                            : priceFilter === "20000000"
+                                ? item.giatien <= 20000000 && item.giatien > 10000000
+                                : priceFilter === "above20000000" // Thêm điều kiện mới
+                                    ? item.giatien > 20000000
+                                    : true
                 );
 
-        const firstTenProducts = filteredData ? filteredData.slice(0, 3) : [];
+        const priceOptions = [
+            { label: "Dưới 5 triệu", value: "5000000" },
+            { label: "5 - 10 triệu", value: "10000000" },
+            { label: "10 - 20 triệu", value: "20000000" },
+            { label: "Trên 20 triệu", value: "above20000000" },
+        ];
+        const firstTenProducts = filteredData ? filteredData.slice(0, 10) : [];
 
         return (
             <div className="container">
                 <div className="tieude1">
                     <div>
-                        <h1>Danh Sách Sản Phẩm</h1>
+                        <h1>Chào mừng đến với Shopphone</h1>
                     </div>
 
                     <div className="Searchfillter">
@@ -95,7 +104,7 @@ class ListProduct extends React.Component {
                                 onChange={this.handleSearchChange}
                             />
                         </div>
-                        <div className="fillter">
+                        {/* <div className="fillter">
                             <label>
                                 <input
                                     hidden type="radio"
@@ -120,13 +129,39 @@ class ListProduct extends React.Component {
                                 <input
                                     hidden type="radio"
                                     name="priceFilter"
-                                    value="15000000"
-                                    checked={priceFilter === "15000000"}
-                                    onChange={() => this.handlePriceFilterChange("15000000")}
+                                    value="20000000"
+                                    checked={priceFilter === "20000000"}
+                                    onChange={() => this.handlePriceFilterChange("20000000")}
                                 />
-                                <a className="price">10 - 15 triệu</a>
+                                <a className="price">10 - 20 triệu</a>
                             </label>
+                            <label>
+                                <input
+                                    hidden type="radio"
+                                    name="priceFilter"
+                                    value="above20000000"
+                                    checked={priceFilter === "above20000000"}
+                                    onChange={() => this.handlePriceFilterChange("above20000000")}
+                                />
+                                <a className="price">Trên 20 triệu</a>
+                            </label>
+                        </div> */}
+                        <div>
+                            {priceOptions.map((option) => (
+                                <button
+                                    key={option.value}
+                                    className={
+                                        this.state.priceFilter === option.value ? "selected" : ""
+                                    }
+                                    onClick={() => this.handlePriceFilterChange(option.value)}
+                                >
+                                    {option.label}
+                                </button>
+                            ))}
                         </div>
+
+
+
                     </div>
                 </div >
 
@@ -154,12 +189,12 @@ class ListProduct extends React.Component {
                                 <div className="product-info">
                                     <div className="product-name">{item.tenSP}</div>
                                     <div className="product-price">
-                                        {item.giatien.toLocaleString()} VND
+                                        {item.giatien.toLocaleString()}<sup><u>đ</u></sup>
                                     </div>
                                 </div>
-                                <div onClick={() => this.handleViewInfoProduct(item)}>
+                                {/* <div onClick={() => this.handleViewInfoProduct(item)}>
                                     <a className="mua">Mua</a>
-                                </div>
+                                </div> */}
                             </li>
                         ))}
                 </ul>

@@ -16,9 +16,9 @@ class Footer extends React.Component {
                         <div className="footer-thongtinlienhe">
                             <p className="thongtinlienhe1"><b>Thông Tin Liên Hệ</b></p>
                             <div className="thongtinlienhe2">
-                                <p>Địa chỉ: Tỉnh Trà Vinh</p>
+                                <p>Địa chỉ: Trà Vinh</p>
                                 <p>Email: nhnhan2102@gmail.com</p>
-                                <p>Hotline: 0987863073</p>
+                                <p>Hotline: 0987 863 073</p>
                             </div>
 
                         </div>
@@ -29,7 +29,7 @@ class Footer extends React.Component {
                             </p>
                             <div className="footer-chinhsach2">
                                 <p>Bảo hành 12 tháng</p>
-                                <p>Đổi trả sau 3 ngày </p>
+                                <p>Đổi trả sau 7 ngày </p>
                             </div>
                         </div>
                         <div className="footer-hr"></div>

@@ -11,10 +11,10 @@ import {
 import Nav from './Nav/Nav';
 import Footer from "./Footer/Footer";
 
-import ListProduct from "./ListProduct/ListProduct";
+import Home from "./Home/Home";
 import SanPham from "./SanPham/SanPham";
+import Muahang from "./Muahang/Muahang";
 import InfoProduct from "./InfoProduct/InfoProduct";
-
 function App() {
   return (
     <BrowserRouter forceRefresh={true}>
@@ -24,13 +24,16 @@ function App() {
 
           <Switch>
             <Route path="/" exact>
-              <ListProduct />
+              <Home />
             </Route>
             <Route path="/product" exact>
               <SanPham />
             </Route>
             <Route path="/product/:id">
               <InfoProduct />
+            </Route>
+            <Route path="/mua/:id">
+              <Muahang />
             </Route>
           </Switch>
           <Footer />

@@ -1,5 +1,5 @@
 .container {
-    background-color: #d7d3d3;
+    background-color: #ffffff;
 }
 
 .product-content {
@@ -38,16 +38,29 @@
     /* Đảm bảo hình ảnh không bị méo khi thay đổi kích thước */
 }
 
+.product-pic {
+    transition: transform 0.7s ease;
+    /* Hiệu ứng chuyển động mượt mà trong 0.3 giây */
+}
+
+.product-pic:hover {
+    transform: translateY(-10px);
+    /* Tăng kích thước ảnh lên 1.1 lần khi di chuột vào */
+}
+
 .product-name {
+    font-size: 18px;
     font-weight: bold;
     flex-grow: 1;
     color: black;
-    font-size: 20px;
     /* Để mô tả sản phẩm chiếm hết không gian dọc */
 }
 
 .product-price {
-    color: green;
+    margin-top: 5px;
+    font-size: 20px;
+    color: red;
+    font-weight: bold;
 }
 
 .mua {
@@ -94,7 +107,7 @@ h1 {
 
 input {
     height: 30px;
-    background-color: #e9d7d7;
+    background-color: #ffffff;
     //margin-left: 29px;
 }
 

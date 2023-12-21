@@ -1,0 +1,136 @@
+.muahang-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    color: black;
+}
+
+.container-thongtinkhachhang {
+    width: 50%;
+    height: auto;
+}
+
+.muahang-product {
+    width: 50%;
+    height: auto;
+}
+
+.container-thongtinkhachhang>input {
+    width: 70%;
+    height: 40px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border-radius: 10px;
+    padding-left: 15px;
+}
+
+.container-thongtinkhachhang>h3 {
+    text-align: left;
+    margin-left: 15%;
+}
+
+.thanhdoc {
+    width: 1px;
+    height: 500px;
+    background-color: black;
+    opacity: 0.2;
+}
+
+.muahang-product-img {
+    width: 150px;
+    height: 150px;
+}
+
+.content-muahang {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.content-muahang>label {
+    margin-left: 20px;
+}
+
+.content-muahang>.product-pricee {
+    color: red;
+    font-weight: bold;
+}
+
+.muahang-product-right {
+    width: 100%;
+    height: auto;
+}
+
+.soluong-container {
+    display: flex;
+}
+
+.soluong-title {
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: right;
+    margin-top: 39px;
+    font-size: 25px;
+    margin-right: 50px;
+}
+
+.product-soluong {
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    margin-top: 5%;
+}
+
+.tru {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 5%;
+    color: white;
+    background-color: black;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+}
+
+.tru:hover,
+.cong {
+    cursor: pointer;
+}
+
+.input {
+    width: 20%;
+    border: 2px solid black;
+    text-align: center;
+}
+
+.cong {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: 5%;
+    color: white;
+    background-color: black;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.muahang-muasp {
+    margin-top: 5%;
+}
+
+.tongtien {
+    display: flex;
+}
+
+.tongtien-title {
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    margin-top: 5%;
+}

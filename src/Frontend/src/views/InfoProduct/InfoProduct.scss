@@ -1,0 +1,83 @@
+.product {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.product-container {
+    display: flex;
+    margin: 10px;
+}
+
+.product-left {
+    flex: 1;
+    padding: 10px;
+}
+
+.product-right {
+    flex: 1;
+    padding: 10px;
+}
+
+.product-top img {
+    max-width: 100%;
+    height: auto;
+    width: 400px;
+}
+
+.name-product {
+    color: black;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.price-product {
+    color: red;
+    font-size: 25px;
+    margin-left: -280px;
+    font-weight: bold;
+}
+
+.muasp {
+    //display: block;
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.7s ease;
+}
+
+.ghichu {
+    color: black;
+    margin-top: 10px;
+}
+
+.border {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid grey;
+}
+
+.table {
+    margin: 10px 0px 30px 21%;
+    width: 500px;
+}
+
+.table-content {
+    color: black;
+    text-align: left;
+}
+
+.table-name-content {
+    font-size: 20px;
+    font-weight: bold;
+    padding-right: 80px;
+    padding-bottom: 10px;
+}
+
+.table-value-content {
+    font-size: 20px;
+    padding-left: 80px;
+}
