@@ -7,7 +7,9 @@ const {
     createProduct,
     deleteProduct,
     updateProduct,
-    deleteNSX
+    deleteNSX,
+    getIdProduct,
+    getTenLoaiSP
 } = require("../controllers/apiController");
 
 //const { deleteNSX } = require("../controllers/homeController");
@@ -17,5 +19,7 @@ router.post("/create-product", createProduct);
 router.put("/update-product", updateProduct);
 router.delete("/delete-product/:id", deleteProduct);
 router.delete("/delete-tenNSX/:tenNSX", deleteNSX);
+router.get("/product/:id", getIdProduct)
+router.get("/product/:tenloaiSP", getTenLoaiSP);
 
 module.exports = router;

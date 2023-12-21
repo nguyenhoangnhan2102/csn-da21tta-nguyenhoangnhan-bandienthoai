@@ -22,7 +22,7 @@ const getUserPage = async (req, res) => {
 };
 
 const createNewProduct = async (req, res) => {
-    let id = req.body.id;
+    //let id = req.body.id;
     let tenSP = req.body.tenSP;
     let tenloaiSP = req.body.tenloaiSP;
     let dungluong = req.body.dungluong;
@@ -40,8 +40,8 @@ const createNewProduct = async (req, res) => {
 
     try {
         await connection.execute(
-            "insert into SANPHAM(id, tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, mota) values (?,?,?,?,?,?,?,?,?,?)",
-            [id, tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, req.file.filename]
+            "insert into SANPHAM(tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, mota) values (?,?,?,?,?,?,?,?,?)",
+            [tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, req.file.filename]
         );
 
         return res.redirect("/");
@@ -108,7 +108,7 @@ const addNewNSX = async (req, res) => {
 
     const getAllNSXX = await getAllNSX()
 
-    res.render("addnew.ejs", { AllNSX: getAllNSXX });
+    res.render("newNSX.ejs", { AllNSX: getAllNSXX });
 };
 
 const getAddNew = async (req, res) => {
@@ -118,14 +118,77 @@ const getAddNew = async (req, res) => {
     //res.render('addnew.ejs', { AllNSX: getAllNSXX });
     //const getAllSP = await getAllProduct()
     //res.render("home.ejs", { dataProduct: getAllSP, AllNSX: getAllNSXX });
-    res.render("addnew.ejs", { AllNSX: getAllNSXX });
+    res.render("newNSX.ejs", { AllNSX: getAllNSXX });
 };
 
 const deleteNSX = async (req, res) => {
     const NSXId = req.body.NSXId;
     await connection.execute("delete from NHASANXUAT where tenNSX = ?", [NSXId]);
     const getAllNSXX = await getAllNSX();
-    return res.render("addnew.ejs", { AllNSX: getAllNSXX });
+    return res.render("newNSX.ejs", { AllNSX: getAllNSXX });
+};
+
+const updateUser = async (req, res) => {
+    try {
+        function getRandomInt(min, max) {
+            min = Math.ceil(min);
+            max = Math.floor(max);
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        // Kiểm tra dữ liệu đầu vào
+        const { hotenKH, sdt, diachi, soluong, id, tenSP } = req.body;
+        if (!hotenKH || !sdt || !diachi || !soluong || !id) {
+            throw new Error("Bạn chưa truyền đủ thông tin không thể đặt hàng !!!!");
+        }
+
+        // Lấy thời gian hiện tại
+        const currentTime = new Date();
+        const formattedTime = currentTime
+            .toISOString()
+            .slice(0, 19)
+            .replace("T", " ");
+
+        // Tạo các số ngẫu nhiên
+        const randomIntegerInRange = getRandomInt(0, 60000);
+        const randomIntegerHoadon = getRandomInt(0, 60000);
+
+        // Insert thông tin khách hàng
+        await connection.execute(
+            "INSERT INTO KHACHHANG(maKH, hotenKH, sdt, diachi) VALUES (?, ?, ?, ?)",
+            [randomIntegerInRange, hotenKH, sdt, diachi]
+        );
+
+        // Cập nhật thông tin sản phẩm
+        await connection.execute("UPDATE SANPHAM SET soluong = ? WHERE id = ?", [
+            soluong,
+            id,
+        ]);
+
+        // Insert thông tin hóa đơn
+        await connection.execute(
+            "INSERT INTO HOADON(maHD, maKH, diachigiaohang, thoigiandat) VALUES (?, ?, ?, ?)",
+            [randomIntegerHoadon, randomIntegerInRange, diachi, formattedTime]
+        );
+
+        // Insert thông tin chi tiết hóa đơn
+        await connection.execute(
+            "INSERT INTO CHITIETHOADON(maHD, id, soluongSP) VALUES (?, ?, ?)",
+            [randomIntegerHoadon, id, soluong]
+        );
+
+        await connection.execute(
+            " UPDATE SANPHAM SET soluong = soluong - ? WHERE id = ?",
+            [soluong, id]
+        );
+
+        // Chuyển hướng về trang chủ sau khi đặt hàng thành công
+        const successMessage = "Bạn đã đặt hàng thành công!";
+
+        return res.send("cảm ơn bạn đã đặt hàng");
+    } catch (error) {
+        console.error("An error occurred:", error);
+        return res.status(500).send(error.message || "Đã có lỗi xảy ra");
+    }
 };
 
 module.exports = {
@@ -139,5 +202,6 @@ module.exports = {
     addNewNSX,
     getAddNew,
     deleteNSX,
-    //SearchProduct
+    //SearchProduct,
+    updateUser
 };

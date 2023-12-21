@@ -9,7 +9,7 @@ const getAllProduct = async (req, res) => {
             "SELECT * FROM SANPHAM"
         );
 
-        // Thêm đường dẫn đầy đủ cho mỗi sản phẩm
+        //Thêm đường dẫn đầy đủ cho mỗi sản phẩm
         const productsWithImageUrls = results.map((product) => {
             return {
                 ...product,
@@ -29,6 +29,34 @@ const getAllProduct = async (req, res) => {
         });
     }
 };
+
+const getIdProduct = async (req, res) => {
+    let id = req.params.id;
+    try {
+        const [results, fields] = await connection.execute(
+            "SELECT * FROM SANPHAM WHERE id = ?", [id]
+        );
+
+        //Thêm đường dẫn đầy đủ cho mỗi sản phẩm
+        const productsWithImageUrls = results.map((product) => {
+            return {
+                ...product,
+                imageUrl: `http://localhost:8080/api/v1/img/${product.mota}`,
+            };
+        });
+
+        return res.status(200).json({
+            //message: "ok",
+            data: productsWithImageUrls,
+        });
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({
+            message: "Internal server error!!!",
+            error: error.message,
+        });
+    }
+}
 
 //them data thong qua api
 const createProduct = async (req, res) => {
@@ -106,10 +134,40 @@ const deleteNSX = async (req, res) => {
     });
 };
 
+const getTenLoaiSP = async (req, res) => {
+    let tenloaiSP = req.params.tenloaiSP;
+    try {
+        const [results, fields] = await connection.execute(
+            "SELECT * FROM SANPHAM WHERE tenloaiSP = ?", [tenloaiSP]
+        );
+
+        //Thêm đường dẫn đầy đủ cho mỗi sản phẩm
+        const productsWithImageUrls = results.map((product) => {
+            return {
+                ...product,
+                imageUrl: `http://localhost:8080/api/v1/img/${product.mota}`,
+            };
+        });
+
+        return res.status(200).json({
+            //message: "ok",
+            data: productsWithImageUrls,
+        });
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({
+            message: "Internal server error!!!",
+            error: error.message,
+        });
+    }
+}
+
 module.exports = {
     getAllProduct,
     createProduct,
     deleteProduct,
     updateProduct,
-    deleteNSX
+    deleteNSX,
+    getIdProduct,
+    getTenLoaiSP
 };
