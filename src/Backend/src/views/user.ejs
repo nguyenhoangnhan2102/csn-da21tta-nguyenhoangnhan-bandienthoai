@@ -11,7 +11,7 @@
 <body>
     <div class="topnav">
         <a href="/">Home</a>
-        <a href="#" class="active">User Order</a>
+        <a href="#" class="active">Người dùng</a>
     </div>
 
     <div class="w3-container">
@@ -22,8 +22,8 @@
                 <tr class="w3-light-grey">
                     <th>Mã KH</th>
                     <th>Họ tên KH</th>
-                    <th>Địa chỉ</th>
                     <th>Số điện thoại</th>
+                    <th>Địa chỉ chi tiết</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,10 +36,10 @@
                             <%= dataUsers[i].tenKH %>
                         </td>
                         <td>
-                            <%= dataUsers[i].diachi %>
+                            <%= dataUsers[i].sdt %>
                         </td>
                         <td>
-                            <%= dataUsers[i].sdt %>
+                            <%= dataUsers[i].diachi %>
                         </td>
                     </tr>
                     <% } %>

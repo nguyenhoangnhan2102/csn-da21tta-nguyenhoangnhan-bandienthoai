@@ -158,12 +158,6 @@ const updateUser = async (req, res) => {
             [randomIntegerInRange, hotenKH, sdt, diachi]
         );
 
-        // Cập nhật thông tin sản phẩm
-        await connection.execute("UPDATE SANPHAM SET soluong = ? WHERE id = ?", [
-            soluong,
-            id,
-        ]);
-
         // Insert thông tin hóa đơn
         await connection.execute(
             "INSERT INTO HOADON(maHD, maKH, diachigiaohang, thoigiandat) VALUES (?, ?, ?, ?)",

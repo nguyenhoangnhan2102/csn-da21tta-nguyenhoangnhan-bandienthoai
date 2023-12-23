@@ -14,6 +14,26 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/api/v1/confirm-order', (req, res) => {
+    const { hoTenKhachHang, sodienthoai, diachi, quantity, totalPrice } = req.body;
+
+    // Thực hiện xử lý với dữ liệu đã nhận được từ frontend
+    // Ví dụ: Lưu vào cơ sở dữ liệu, gửi email xác nhận, vv.
+
+    // Trả về kết quả cho frontend (ở đây là một ví dụ)
+    res.json({
+        success: true,
+        message: 'Đơn hàng đã được xác nhận thành công!',
+        data: {
+            hoTenKhachHang,
+            sodienthoai,
+            diachi,
+            quantity,
+            totalPrice,
+        },
+    });
+});
+
 //configViewEngine
 configViewEngine(app);
 app.use(cors());

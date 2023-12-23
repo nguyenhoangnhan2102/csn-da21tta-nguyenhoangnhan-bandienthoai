@@ -65,6 +65,5 @@ router.post("/add-new-NSX", getAddNew);
 router.post("/delete-tenNSX", deleteNSX);
 
 router.post("/update-user", updateUser);
-//router.post('/Tim', upload.none(), SearchProduct);
 
 module.exports = router;
