@@ -10,9 +10,10 @@
     height: auto;
 }
 
-.muahang-product {
+.container-muahang {
     width: 50%;
     height: auto;
+    margin-bottom: 5%;
 }
 
 .container-thongtinkhachhang>input {
@@ -31,7 +32,7 @@
 
 .thanhdoc {
     width: 1px;
-    height: 500px;
+    height: auto;
     background-color: black;
     opacity: 0.2;
 }
@@ -41,10 +42,17 @@
     height: 150px;
 }
 
+hr {
+    width: 90%;
+    background-color: black;
+    opacity: 0.8;
+}
+
 .content-muahang {
     justify-content: center;
     display: flex;
     align-items: center;
+    margin-bottom: 5%;
 }
 
 .content-muahang>label {
@@ -56,31 +64,31 @@
     font-weight: bold;
 }
 
-.muahang-product-right {
+.thongtinsanpham {
     width: 100%;
     height: auto;
 }
 
 .soluong-container {
     display: flex;
+    margin: 2%;
 }
 
 .soluong-title {
-    width: 50%;
+    width: 40%;
+    flex: 1;
     height: auto;
     display: flex;
-    justify-content: right;
-    margin-top: 39px;
+    align-items: center;
     font-size: 25px;
-    margin-right: 50px;
+    margin-left: 17%;
 }
 
 .product-soluong {
-    width: 50%;
+    width: 60%;
     height: auto;
     display: flex;
     justify-content: left;
-    margin-top: 5%;
 }
 
 .tru {
@@ -119,18 +127,81 @@
     border-bottom-right-radius: 5px;
 }
 
-.muahang-muasp {
-    margin-top: 5%;
+.tamtinh {
+    display: flex;
+    margin: 3%;
+}
+
+.tamtinh-title {
+    width: 50%;
+    flex: 1;
+    height: auto;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-left: 16.2%;
+}
+
+.tamtinh-value {
+    width: 50%;
+    flex: 1;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    font-size: 20px;
+}
+
+.phivanchuyen {
+    display: flex;
+    margin: 3%;
+}
+
+.phivanchuyen-title {
+    width: 50%;
+    flex: 1;
+    height: auto;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin-left: 16.2%;
+}
+
+.phivanchuyen-value {
+    width: 50%;
+    flex: 1;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    font-size: 20px;
 }
 
 .tongtien {
     display: flex;
+    margin: 3%;
 }
 
 .tongtien-title {
     width: 50%;
+    flex: 1;
     height: auto;
     display: flex;
-    justify-content: left;
+    align-items: center;
+    font-size: 25px;
+    margin-left: 16.2%;
+}
+
+.tongtien-value {
+    width: 50%;
+    flex: 1;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin-left: 10%;
+    font-weight: bold;
+}
+
+.muahang-muasp {
     margin-top: 5%;
 }

@@ -92,8 +92,10 @@ class ListProduct extends React.Component {
         return (
             <div className="container">
                 <div className="tieude1">
-                    <div>
-                        <h1>Chào mừng đến với Shopphone</h1>
+                    <div className="logo">
+                        <a>
+                            <img src="logoshop.png" />
+                        </a>
                     </div>
 
                     <div className="Searchfillter">

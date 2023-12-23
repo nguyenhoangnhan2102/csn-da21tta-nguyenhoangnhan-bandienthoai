@@ -8,7 +8,7 @@ class Footer extends React.Component {
                 <hr></hr>
                 <div className="container-footer">
                     <div className="footer-logo">
-                        <p className="logo" style={{ fontFamily: 'courier, arial, helvetica' }}>Shopphone</p>
+                        <p className="logo">Shopphone</p>
                     </div>
 
                     <div className="footer-hr"></div>

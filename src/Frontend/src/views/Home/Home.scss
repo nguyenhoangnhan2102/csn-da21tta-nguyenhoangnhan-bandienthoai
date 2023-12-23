@@ -1,5 +1,22 @@
+.logo {
+    text-align: center;
+    margin: auto;
+    font-size: 40px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.logo img {
+    width: 300px;
+    /* Điều chỉnh kích thước ảnh theo nhu cầu của bạn */
+    height: auto;
+    /* Giữ tỷ lệ khung hình */
+}
+
+
 .container {
-    background-color: #ffffff;
+    // background-color: #ffffff;
+    background-color: #00fffb;
 }
 
 .content {

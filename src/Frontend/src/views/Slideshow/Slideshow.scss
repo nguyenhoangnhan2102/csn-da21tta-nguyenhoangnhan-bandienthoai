@@ -1,0 +1,42 @@
+.slideshow-container {
+    max-width: 600px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+}
+
+.mySlides {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    animation: fade 2s infinite;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+/* Hiển thị các ảnh */
+.mySlides:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.mySlides:nth-child(2) {
+    animation-delay: 2s;
+}
+
+.mySlides:nth-child(3) {
+    animation-delay: 4s;
+}

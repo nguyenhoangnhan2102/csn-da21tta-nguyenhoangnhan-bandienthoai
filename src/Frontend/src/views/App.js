@@ -15,13 +15,14 @@ import Home from "./Home/Home";
 import SanPham from "./SanPham/SanPham";
 import Muahang from "./Muahang/Muahang";
 import InfoProduct from "./InfoProduct/InfoProduct";
+import Slideshow from "./Slideshow/Slideshow";
 function App() {
   return (
     <BrowserRouter forceRefresh={true}>
       <div className="App">
         <header className="App-header">
           <Nav />
-
+          {/* <Slideshow /> */}
           <Switch>
             <Route path="/" exact>
               <Home />
@@ -34,6 +35,9 @@ function App() {
             </Route>
             <Route path="/mua/:id">
               <Muahang />
+            </Route>
+            <Route path="/slideshow">
+              <Slideshow />
             </Route>
           </Switch>
           <Footer />

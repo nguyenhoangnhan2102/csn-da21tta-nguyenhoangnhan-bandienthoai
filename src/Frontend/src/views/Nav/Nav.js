@@ -13,6 +13,9 @@ class Nav extends React.Component {
                 <NavLink to="/product" activeClassName="active">
                     Sản phẩm
                 </NavLink>
+                <NavLink to="/slideshow" activeClassName="active">
+                    Slideshow
+                </NavLink>
             </div>
         );
     }
