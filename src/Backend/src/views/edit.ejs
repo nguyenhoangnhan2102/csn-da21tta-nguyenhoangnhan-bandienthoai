@@ -14,6 +14,83 @@
         <a class="active" href="#update">Update Product</a>
     </div>
 
+    <div class="create-user-container">
+        <form action="/update-product" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <legend><b>Cập nhật sản phẩm</b></legend>
+                <div>
+                    <input type="text" name="id" hidden value="<%=dataProduct.id %>" />
+                </div>
+                <div>
+                    <label for="">Tên sản Phẩm : </label>
+                    <input type="text" name="tenSP" value="<%= dataProduct.tenSP %>" />
+                </div>
+                <div>
+                    <label for="">Loại : </label>
+                    <select name="tenloaiSP" id="hall" value="<%=dataProduct.tenloaiSP %>">
+                        <option <%=dataProduct.tenloaiSP==='Android' ? 'selected' : '' %>>Android</option>
+                        <option <%=dataProduct.tenloaiSP==='iOS' ? 'selected' : '' %>>iOS</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Tên nhà sản xuất</label>
+                    <select name="tenNSX" value="<%=dataProduct.tenNSX %>">
+                        <option <%=dataProduct.tenNSX==='Apple' ? 'selected' : '' %>>Apple</option>
+                        <option <%=dataProduct.tenNSX==='OPPO' ? 'selected' : '' %>>OPPO</option>
+                        <option <%=dataProduct.tenNSX==='realme' ? 'selected' : '' %>>realme</option>
+                        <option <%=dataProduct.tenNSX==='Samsung' ? 'selected' : '' %>>Samsung</option>
+                        <option <%=dataProduct.tenNSX==='vivo' ? 'selected' : '' %>>vivo</option>
+                        <option <%=dataProduct.tenNSX==='Xiaomi' ? 'selected' : '' %>>Xiaomi</option>
+
+                    </select>
+                </div>
+                <div>
+                    <label for="">Số lượng thêm : </label>
+                    <input type="text" name="soluong" value="<%=dataProduct.soluong %>" />
+                </div>
+                <div>
+                    <label for="">Giá tiền : </label>
+                    <input type="text" name="giatien" value="<%=dataProduct.giatien %>" />
+                </div>
+                <div>
+                    <label for="">Dung lượng : </label>
+                    <select name="dungluong" id="hall" value="<%=dataProduct.dungluong %>">
+                        <option>32 GB</option>
+                        <option>64 GB</option>
+                        <option>128 GB</option>
+                        <option>256 GB</option>
+                        <option>512 GB</option>
+                        <option>1 TB</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">RAM : </label>
+                    <select name="ram" id="hall" value="<%=dataProduct.ram %>">
+                        <option>1 GB</option>
+                        <option>2 GB</option>
+                        <option>4 GB</option>
+                        <option>6 GB</option>
+                        <option>8 GB</option>
+                        <option>12 GB</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Ghi chú : </label>
+                    <input type="text" name="ghichu" value="<%=dataProduct.ghichu %>" />
+                </div>
+
+                <div>
+                    <label for="">Avatar: </label>
+                    <input type="file" name="profile_pic" value="<%=dataProduct.mota %>" />
+                </div>
+
+                <div>
+                    <button type="submit">Save</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
     <div class="w3-container">
         <h2>Danh Sách Sản Phẩm</h2>
         <table class="w3-table-all w3-hoverable">
@@ -86,85 +163,7 @@
         </table>
     </div>
 
-    <div class="create-user-container">
-        <form action="/update-product" method="post" enctype="multipart/form-data">
-            <fieldset>
-                <legend><b>Cập nhật sản phẩm</b></legend>
-                <div>
-                    <input type="text" name="id" hidden value="<%=dataProduct.id %>" />
-                </div>
-                <div>
-                    <label for="">Tên sản Phẩm : </label>
-                    <input type="text" name="tenSP" value="<%= dataProduct.tenSP %>" />
-                </div>
-                <div>
-                    <label for="">Loại : </label>
-                    <select name="tenloaiSP" id="hall" value="<%=dataProduct.tenloaiSP %>">
-                        <option <%=dataProduct.tenloaiSP==='Android' ? 'selected' : '' %>>Android</option>
-                        <option <%=dataProduct.tenloaiSP==='iOS' ? 'selected' : '' %>>iOS</option>
-                        <option <%=dataProduct.tenloaiSP==='Điện thoại phổ thông' ? 'selected' : '' %>Điện thoại phổ
-                            thông
-                        </option>
-                    </select>
-                </div>
-                <div>
-                    <label for="">Tên nhà sản xuất</label>
-                    <select name="tenNSX" value="<%=dataProduct.tenNSX %>">
-                        <option <%=dataProduct.tenNSX==='Apple' ? 'selected' : '' %>>Apple</option>
-                        <option <%=dataProduct.tenNSX==='Nokia' ? 'selected' : '' %>>Nokia</option>
-                        <option <%=dataProduct.tenNSX==='Oppo' ? 'selected' : '' %>>Oppo</option>
-                        <option <%=dataProduct.tenNSX==='Realme' ? 'selected' : '' %>>Realme</option>
-                        <option <%=dataProduct.tenNSX==='Samsung' ? 'selected' : '' %>>Samsung</option>
-                        <option <%=dataProduct.tenNSX==='Vivo' ? 'selected' : '' %>>Vivo</option>
-                        <option <%=dataProduct.tenNSX==='Xiaomi' ? 'selected' : '' %>>Xiaomi</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="">Số lượng thêm : </label>
-                    <input type="text" name="soluong" value="<%=dataProduct.soluong %>" />
-                </div>
-                <div>
-                    <label for="">Giá tiền : </label>
-                    <input type="text" name="giatien" value="<%=dataProduct.giatien %>" />
-                </div>
-                <div>
-                    <label for="">Dung lượng : </label>
-                    <select name="dungluong" id="hall" value="<%=dataProduct.dungluong %>">
-                        <option>32 GB</option>
-                        <option>64 GB</option>
-                        <option>128 GB</option>
-                        <option>256 GB</option>
-                        <option>512 GB</option>
-                        <option>1 TB</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="">RAM : </label>
-                    <select name="ram" id="hall" value="<%=dataProduct.ram %>">
-                        <option>1 GB</option>
-                        <option>2 GB</option>
-                        <option>4 GB</option>
-                        <option>6 GB</option>
-                        <option>8 GB</option>
-                        <option>12 GB</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="">Ghi chú : </label>
-                    <input type="text" name="ghichu" value="<%=dataProduct.ghichu %>" />
-                </div>
 
-                <div>
-                    <label for="">Avatar: </label>
-                    <input type="file" name="profile_pic" value="<%=dataProduct.mota %>" />
-                </div>
-
-                <div>
-                    <button type="submit">Save</button>
-                </div>
-            </fieldset>
-        </form>
-    </div>
 </body>
 
 </html>
