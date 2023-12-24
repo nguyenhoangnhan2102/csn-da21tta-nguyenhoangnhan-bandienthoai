@@ -1,34 +1,19 @@
-.logo {
-    text-align: center;
-    margin: auto;
-    font-size: 40px;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
-.logo img {
-    width: 300px;
-    /* Điều chỉnh kích thước ảnh theo nhu cầu của bạn */
-    height: auto;
-    /* Giữ tỷ lệ khung hình */
-}
-
-
 .container {
-    // background-color: #ffffff;
-    background-color: #00fffb;
+    background-color: #ffffff;
 }
 
 .content {
-    margin-left: 80px;
+    margin-left: 90px;
     font-size: 40px;
     color: black;
     text-align: left;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .products {
-    margin-left: 80px;
-    margin-right: 80px;
+    margin-left: 92px;
+    margin-right: 92px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
@@ -111,8 +96,55 @@ h1 {
     outline: none;
 }
 
-input {
-    height: 30px;
-    background-color: #e9d7d7;
-    //margin-left: 29px;
+.price-filter {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5%;
+    margin-left: 1%;
+}
+
+.gia-title {
+    margin-right: 10px;
+    color: black;
+}
+
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Optional: Style for selected option */
+select option:checked {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.product-type-filter {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5%;
+    margin-left: 1%;
+}
+
+.type-title {
+    margin-right: 10px;
+    color: black;
+}
+
+.manufacturer-filter {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5%;
+    margin-left: 1%;
+}
+
+.manufacturer-title {
+    margin-right: 10px;
+    color: black;
 }

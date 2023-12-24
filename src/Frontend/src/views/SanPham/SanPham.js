@@ -26,7 +26,9 @@ class SanPham extends React.Component {
             loading: true,
             error: null,
             searchTerm: "",
-            priceFilter: "", // Thêm state để lưu trữ giá trị của nút radio
+            priceFilter: "",
+            productTypeFilter: "",
+            manufacturerFilter: "",
         };
     }
 
@@ -69,11 +71,20 @@ class SanPham extends React.Component {
         this.setState({ priceFilter: value });
     };
 
-    handleViewInfoProduct = (product) => {
-        this.props.history.push(`/product/${product.id}`)
-    }
+    // handleViewInfoProduct = (product) => {
+    //     this.props.history.push(`/product/${product.id}`)
+    // }
+
+    handleManufacturerFilterChange = (value) => {
+        this.setState({ manufacturerFilter: value });
+    };
+
+    handleProductTypeFilterChange = (value) => {
+        this.setState({ productTypeFilter: value });
+    };
+
     render() {
-        const { data, loading, error, searchTerm, priceFilter } = this.state;
+        const { data, loading, error, searchTerm, priceFilter, productTypeFilter, manufacturerFilter } = this.state;
 
         const filteredData =
             data &&
@@ -87,17 +98,44 @@ class SanPham extends React.Component {
                         ? item.giatien < 5000000
                         : priceFilter === "10000000"
                             ? item.giatien <= 10000000 && item.giatien >= 5000000
-                            : priceFilter === "15000000"
-                                ? item.giatien <= 15000000 && item.giatien > 10000000
-                                : priceFilter === "above20000000"
+                            : priceFilter === "20000000"
+                                ? item.giatien <= 20000000 && item.giatien > 10000000
+                                : priceFilter === "above20000000" // Thêm điều kiện mới
                                     ? item.giatien > 20000000
                                     : true
+                )
+                .filter((item) =>
+                    manufacturerFilter
+                        ? item.tenNSX === manufacturerFilter
+                        : true
+                )
+                .filter((item) =>
+                    productTypeFilter
+                        ? item.tenloaiSP === productTypeFilter
+                        : true
                 );
+
         const priceOptions = [
             { label: "Dưới 5 triệu", value: "5000000" },
             { label: "5 - 10 triệu", value: "10000000" },
             { label: "10 - 20 triệu", value: "20000000" },
             { label: "Trên 20 triệu", value: "above20000000" },
+        ];
+
+        const manufacturerOptions = [
+            { label: "Tất cả", value: "" },
+            { label: "Apple", value: "Apple" },
+            { label: "OPPO", value: "OPPO" },
+            { label: "realme", value: "realme" },
+            { label: "Samsung", value: "Samsung" },
+            { label: "vivo", value: "vivo" },
+            { label: "Xiaomi", value: "Xiaomi" },
+        ];
+
+        const productTypeOptions = [
+            { label: "Tất cả", value: "" },
+            { label: "Android", value: "Android" },
+            { label: "iOS", value: "iOS" },
         ];
 
         return (
@@ -115,50 +153,47 @@ class SanPham extends React.Component {
                                 onChange={this.handleSearchChange}
                             />
                         </div>
-                        {/* <div className="fillter">
-                            <label>
-                                <input
-                                    hidden type="radio"
-                                    name="priceFilter"
-                                    value="5000000"
-                                    checked={priceFilter === "5000000"}
-                                    onChange={() => this.handlePriceFilterChange("5000000")}
-                                />
-                                <a>Dưới 5 triệu</a>
-                            </label>
-                            <label>
-                                <input
-                                    hidden type="radio"
-                                    name="priceFilter"
-                                    value="10000000"
-                                    checked={priceFilter === "10000000"}
-                                    onChange={() => this.handlePriceFilterChange("10000000")}
-                                />
-                                <a>5 - 10 triệu</a>
-                            </label>
-                            <label>
-                                <input
-                                    hidden type="radio"
-                                    name="priceFilter"
-                                    value="15000000"
-                                    checked={priceFilter === "15000000"}
-                                    onChange={() => this.handlePriceFilterChange("15000000")}
-                                />
-                                <a className="price">10 - 15 triệu</a>
-                            </label>
-                        </div> */}
-                        <div>
-                            {priceOptions.map((option) => (
-                                <button
-                                    key={option.value}
-                                    className={
-                                        this.state.priceFilter === option.value ? "selected" : ""
-                                    }
-                                    onClick={() => this.handlePriceFilterChange(option.value)}
-                                >
-                                    {option.label}
-                                </button>
-                            ))}
+                        <div className="price-filter">
+                            <label className="gia-title">Chọn giá:</label>
+                            <select
+                                value={priceFilter}
+                                onChange={(e) => this.handlePriceFilterChange(e.target.value)}
+                            >
+                                <option value="">Tất cả</option>
+                                {priceOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="manufacturer-filter">
+                            <label className="manufacturer-title">Hãng:</label>
+                            <select
+                                value={manufacturerFilter}
+                                onChange={(e) => this.handleManufacturerFilterChange(e.target.value)}
+                            >
+                                {manufacturerOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div className="product-type-filter">
+                            <label className="type-title">Loại điện thoại:</label>
+                            <select
+                                value={productTypeFilter}
+                                onChange={(e) => this.handleProductTypeFilterChange(e.target.value)}
+                            >
+                                {productTypeOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                 </div >

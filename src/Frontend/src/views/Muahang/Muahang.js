@@ -43,38 +43,30 @@ class Muahang extends React.Component {
         }
     };
 
-    // handleConfirm = () => {
-    //     const hoTenKhachHang = document.querySelector('input[name="tenKH"]').value;
-    //     const sodienthoai = document.querySelector('input[name="sdt"]').value;
-    //     const diachi = document.querySelector('input[name="diachi"]').value;
-
-    //     if (!hoTenKhachHang || !sodienthoai || !diachi) {
-    //         alert("Vui lòng điền đầy đủ thông tin khách hàng.");
-    //         return;
-    //     }
-
-    //     const { quantity, infoProduct } = this.state;
-    //     const selectedProduct = infoProduct[0]; // Assuming there's only one product
-
-    //     const totalPrice = quantity * selectedProduct.giatien;
-
-    //     // Display the quantity and total price in the alert
-    //     alert(`
-    //         Xác nhận với tên khách hàng: ${hoTenKhachHang}
-    //         Xác nhận với số điện thoại: ${sodienthoai}
-    //         Xác nhận với địa chỉ: ${diachi}
-    //         Số lượng sản phẩm: ${quantity}
-    //         Tổng tiền: ${totalPrice.toLocaleString()}đ
-    //     `);
-    // };
-
     handleConfirm = () => {
-        const { hoTenKhachHang, sodienthoai, diachi, quantity, infoProduct } = this.state;
+        const hoTenKhachHang = document.querySelector('input[name="tenKH"]').value;
+        const sodienthoai = document.querySelector('input[name="sdt"]').value;
+        const diachi = document.querySelector('input[name="diachi"]').value;
+
+        if (!hoTenKhachHang || !sodienthoai || !diachi) {
+            alert("Vui lòng điền đầy đủ thông tin khách hàng.");
+            return;
+        }
+
+        const { quantity, infoProduct } = this.state;
         const selectedProduct = infoProduct[0]; // Assuming there's only one product
+
         const totalPrice = quantity * selectedProduct.giatien;
 
-        // Gửi dữ liệu lên server
-        axios.post('http://localhost:8080/api/v1/confirm-order', {
+        // Display the quantity and total price in the alert
+        alert(`
+            Xác nhận với tên khách hàng: ${hoTenKhachHang}
+            Xác nhận với số điện thoại: ${sodienthoai}
+            Xác nhận với địa chỉ: ${diachi}
+            Số lượng sản phẩm: ${quantity}
+            Tổng tiền: ${totalPrice.toLocaleString()}đ
+        `);
+        axios.post('http://localhost:8080/confirmOrder', {
             hoTenKhachHang,
             sodienthoai,
             diachi,
@@ -82,18 +74,14 @@ class Muahang extends React.Component {
             totalPrice,
         })
             .then(response => {
-                console.log('Dữ liệu đã được gửi thành công', response.data);
-                // Xử lý kết quả nếu cần
+                alert('Đơn hàng đã được xác nhận và lưu vào cơ sở dữ liệu.');
+                // Có thể thêm các xử lý khác sau khi xác nhận đơn hàng thành công
             })
             .catch(error => {
-                console.error('Đã có lỗi xảy ra khi gửi dữ liệu', error);
-                // Xử lý lỗi nếu cần
+                console.error('Error confirming order:', error);
+                alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
             });
     };
-
-    render() {
-        // ... (Phần render không thay đổi)
-    }
 
     render() {
         let { infoProduct } = this.state;
@@ -131,7 +119,7 @@ class Muahang extends React.Component {
                                                 </div>
                                                 <div className="product-soluong">
                                                     <div className="tru" onClick={this.decreaseQuantity}>-</div>
-                                                    <input type="text" name="soluong" className="input" value={this.state.quantity} readOnly />
+                                                    <input type="text" name="soluong" value={this.state.quantity} readOnly />
                                                     <div className="cong" onClick={this.increaseQuantity}>+</div>
                                                 </div>
                                             </div>
@@ -162,11 +150,12 @@ class Muahang extends React.Component {
                                                     {(this.state.quantity * item.giatien + 20000).toLocaleString()}đ
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div className="muahang-xacnhan">
                                                 <button
-                                                    type="summit"  // Đặt type là "button" để tránh form tự submit
+                                                    type="button"  // Đặt type là "button" để tránh form tự submit
                                                     onClick={this.handleConfirm}
-                                                    className="muahang-muasp">Xác nhận</button>
+                                                >Xác nhận
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
