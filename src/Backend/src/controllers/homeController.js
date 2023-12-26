@@ -185,6 +185,35 @@ const updateUser = async (req, res) => {
     }
 };
 
+const searchProduct = async (req, res) => {
+    try {
+        const searchKeyword = req.body.tenSP;
+        const tenNSXFilter = req.body.tenNSX || ''; // Lấy giá trị lọc từ dropdown
+        const tenloaiSPFilter = req.body.tenloaiSP || '';
+
+        let query = "SELECT * FROM SANPHAM WHERE tenSP LIKE ?";
+
+        if (tenNSXFilter) {
+            query += " AND tenNSX = ?";
+        }
+
+        if (tenloaiSPFilter) {
+            query += " AND tenloaiSP = ?";
+        }
+
+        const [results, fields] = await connection.execute(
+            query,
+            ['%' + searchKeyword + '%', tenNSXFilter, tenloaiSPFilter]
+        );
+
+        // Render trang chứa kết quả tìm kiếm và lọc
+        return res.render("search.ejs", { dataProduct: results });
+    } catch (error) {
+        console.error("An error occurred:", error);
+        return res.status(500).send(error.message || "Đã có lỗi xảy ra");
+    }
+};
+
 module.exports = {
     getHomePage,
     //getDetailPage,
@@ -196,6 +225,6 @@ module.exports = {
     addNewNSX,
     getAddNew,
     deleteNSX,
-    //SearchProduct,
+    searchProduct,
     updateUser
 };

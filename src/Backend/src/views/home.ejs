@@ -99,17 +99,30 @@
 
     <div class="w3-container">
         <h2>Danh Sách Sản Phẩm</h2>
+        <!-- Trong phần HTML -->
         <form action="/Tim" method="post">
-            <input type="text" id="tenSP" placeholder="Nhập tên sản phẩm">
+            <input type="text" id="tenSP" name="tenSP" placeholder="Nhập tên sản phẩm">
+            <button type="submit" class="button">Tìm kiếm</button>
+
+            <input type="text" id="tenloaiSP" name="tenloaiSP" placeholder="Nhập tên loại">
+
+            <!-- Nút tìm kiếm -->
+            <button type="submit" class="button">Tìm kiếm</button>
+
+            <!-- Ô nhập tên sản phẩm -->
+            <input type="text" id="tenNSX" name="tenNSX" placeholder="Nhập tên hãng">
+
+            <!-- Nút tìm kiếm -->
             <button type="submit" class="button">Tìm kiếm</button>
         </form>
+
         <table class="w3-table-all w3-hoverable">
             <thead>
                 <tr class="w3-light-grey">
                     <th>Mã sản phẩm</th>
                     <th>Tên sản phẩm</th>
                     <th>Loại sản phẩm</th>
-                    <th>Tên NSX</th>
+                    <th>Tên hãng</th>
                     <th>Số lượng</th>
                     <th>Giá tiền</th>
                     <th>Dung lượng</th>

@@ -15,7 +15,7 @@ const {
     addNewNSX,
     getAddNew,
     deleteNSX,
-    //SearchProduct,
+    searchProduct,
     updateUser
 } = require('../controllers/homeController');
 
@@ -61,6 +61,8 @@ router.get("/user-order", getUserPage);
 //Thêm loại sản phẩm
 router.get("/tao-moi-NSX", addNewNSX);
 router.post("/add-new-NSX", getAddNew);
+
+router.post("/Tim", searchProduct);
 
 router.post("/delete-tenNSX", deleteNSX);
 

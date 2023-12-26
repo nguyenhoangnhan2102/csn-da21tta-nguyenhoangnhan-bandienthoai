@@ -33,7 +33,7 @@
                             <%= dataUsers[i].maKH %>
                         </td>
                         <td>
-                            <%= dataUsers[i].tenKH %>
+                            <%= dataUsers[i].hotenKH %>
                         </td>
                         <td>
                             <%= dataUsers[i].sdt %>
@@ -41,6 +41,12 @@
                         <td>
                             <%= dataUsers[i].diachi %>
                         </td>
+                        <!-- <td style="display: flex">
+                            <form action="/delete-product" method="post">
+                                <input type="text" hidden value="<%=dataProduct[i].id%>" name="productId" /><button
+                                    type="submit">Delete</button>
+                            </form>
+                        </td> -->
                     </tr>
                     <% } %>
             </tbody>

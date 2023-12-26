@@ -51,46 +51,6 @@ body {
     padding-left: 30px;
 }
 
-/* .search {
-    position: relative;
-    width: 60px;
-    height: 60px;
-    background: #fff;
-    border-radius: 60px;
-    transition: 0.5s;
-    box-shadow: 0 0 0 5px #2573ef;
+input {
+    width: 200px;
 }
-
-.search .icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 60px;
-    height: 60px;
-    background: #fff;
-    border-radius: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    cursor: pointer;
-}
-
-.search .icon::before {
-    content: '';
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border: 3px solid #287dfc;
-    border-radius: 50%;
-    transform: translate(-4px, -4px);
-}
-
-.search .icon::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    height: 12px;
-    background: #287dfc;
-    transform: translate(6px, 6px) rotate(315deg);
-} */
