@@ -43,45 +43,60 @@ class Muahang extends React.Component {
         }
     };
 
-    handleConfirm = () => {
-        const hoTenKhachHang = document.querySelector('input[name="tenKH"]').value;
-        const sodienthoai = document.querySelector('input[name="sdt"]').value;
-        const diachi = document.querySelector('input[name="diachi"]').value;
+    handleConfirm = async (event) => {
+        try {
+            event.preventDefault(); // Prevent the default form submission behavior
 
-        if (!hoTenKhachHang || !sodienthoai || !diachi) {
-            alert("Vui lòng điền đầy đủ thông tin khách hàng.");
-            return;
-        }
+            let id = this.props.match.params.id;
+            console.log(id);
+            const hoTenKhachHang = document.querySelector('input[name="tenKH"]').value;
+            const sodienthoai = document.querySelector('input[name="sdt"]').value;
+            const diachi = document.querySelector('input[name="diachi"]').value;
 
-        const { quantity, infoProduct } = this.state;
-        const selectedProduct = infoProduct[0]; // Assuming there's only one product
+            if (!hoTenKhachHang || !sodienthoai || !diachi) {
+                alert("Vui lòng điền đầy đủ thông tin khách hàng.");
+                return;
+            }
 
-        const totalPrice = quantity * selectedProduct.giatien;
+            const { quantity, infoProduct } = this.state;
+            const selectedProduct = infoProduct[0]; // Assuming there's only one product
 
-        // Display the quantity and total price in the alert
-        alert(`
-            Xác nhận với tên khách hàng: ${hoTenKhachHang}
-            Xác nhận với số điện thoại: ${sodienthoai}
-            Xác nhận với địa chỉ: ${diachi}
-            Số lượng sản phẩm: ${quantity}
-            Tổng tiền: ${totalPrice.toLocaleString()}đ
-        `);
-        axios.post('http://localhost:8080/confirmOrder', {
-            hoTenKhachHang,
-            sodienthoai,
-            diachi,
-            quantity,
-            totalPrice,
-        })
-            .then(response => {
-                alert('Đơn hàng đã được xác nhận và lưu vào cơ sở dữ liệu.');
-                // Có thể thêm các xử lý khác sau khi xác nhận đơn hàng thành công
-            })
-            .catch(error => {
-                console.error('Error confirming order:', error);
-                alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+            const totalPrice = quantity * selectedProduct.giatien;
+
+            // Display the quantity and total price in the alert
+            alert(`
+                Xác nhận với tên khách hàng: ${hoTenKhachHang}
+                Xác nhận với số điện thoại: ${sodienthoai}
+                Xác nhận với địa chỉ: ${diachi}
+                Số lượng sản phẩm: ${quantity}
+                Tổng tiền: ${totalPrice.toLocaleString()}đ
+            `);
+
+            // Assuming you have axios imported
+            const response = await axios.post('http://localhost:8080/confirmOrder', {
+                id,
+                hoTenKhachHang,
+                sodienthoai,
+                diachi,
+                quantity,
+                totalPrice,
             });
+
+            // Check the response status
+            if (response.status === 200) {
+                console.log("Order confirmed successfully:", response.data);
+                // Optionally, you can perform actions after a successful request
+            } else {
+                console.error("Unexpected response status:", response.status);
+                alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
+            }
+        } catch (error) {
+            console.error("An error occurred:", error);
+            alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
+        }
     };
+
+
 
     render() {
         let { infoProduct } = this.state;
@@ -153,7 +168,7 @@ class Muahang extends React.Component {
                                             <div className="muahang-xacnhan">
                                                 <button
                                                     type="button"  // Đặt type là "button" để tránh form tự submit
-                                                    onClick={this.handleConfirm}
+                                                    onClick={(event) => this.handleConfirm(event)}
                                                 >Xác nhận
                                                 </button>
                                             </div>
