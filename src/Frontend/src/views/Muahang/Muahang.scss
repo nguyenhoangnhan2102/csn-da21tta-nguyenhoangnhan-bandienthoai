@@ -3,11 +3,16 @@
     height: auto;
     display: flex;
     color: black;
+    margin-bottom: 100px;
 }
 
 .container-thongtinkhachhang {
     width: 50%;
     height: auto;
+}
+
+.input-ttkh {
+    margin-bottom: 5%;
 }
 
 .container-muahang {
@@ -32,9 +37,9 @@
 
 .thanhdoc {
     width: 1px;
-    height: auto;
+    height: 500px;
     background-color: black;
-    opacity: 0.2;
+    opacity: 0.8;
 }
 
 .muahang-product-img {
@@ -43,7 +48,7 @@
 }
 
 hr {
-    width: 90%;
+    width: 100%;
     background-color: black;
     opacity: 0.8;
 }
@@ -109,8 +114,8 @@ hr {
     cursor: pointer;
 }
 
-.input {
-    width: 10%;
+.input-soluong {
+    width: 20%;
     border: 2px solid black;
     text-align: center;
 }
@@ -202,6 +207,17 @@ hr {
     font-weight: bold;
 }
 
-.muahang-muasp {
-    margin-top: 5%;
+.muahang-xacnhan {
+    margin-top: 2%;
+    font-size: 20px;
+    background-color: #ffffff;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    /* Thêm hiệu ứng chuyển động */
+}
+
+.muahang-xacnhan:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    filter: brightness(120%);
 }

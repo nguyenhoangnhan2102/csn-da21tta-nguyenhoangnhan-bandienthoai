@@ -61,16 +61,10 @@ class Muahang extends React.Component {
             const { quantity, infoProduct } = this.state;
             const selectedProduct = infoProduct[0]; // Assuming there's only one product
 
-            const totalPrice = quantity * selectedProduct.giatien;
+            const totalPrice = (quantity * selectedProduct.giatien) + 20000;
 
             // Display the quantity and total price in the alert
-            alert(`
-                Xác nhận với tên khách hàng: ${hoTenKhachHang}
-                Xác nhận với số điện thoại: ${sodienthoai}
-                Xác nhận với địa chỉ: ${diachi}
-                Số lượng sản phẩm: ${quantity}
-                Tổng tiền: ${totalPrice.toLocaleString()}đ
-            `);
+            alert("Đặt hàng thành công!!!");
 
             // Assuming you have axios imported
             const response = await axios.post('http://localhost:8080/confirmOrder', {
@@ -124,7 +118,7 @@ class Muahang extends React.Component {
                                                 />
                                                 <label className="product-tensp">{item.tenSP}</label>
                                                 <label className="product-pricee">
-                                                    {item.giatien.toLocaleString()}
+                                                    {item.giatien.toLocaleString()}đ
                                                 </label>
                                             </div>
                                             <hr></hr>
@@ -134,14 +128,14 @@ class Muahang extends React.Component {
                                                 </div>
                                                 <div className="product-soluong">
                                                     <div className="tru" onClick={this.decreaseQuantity}>-</div>
-                                                    <input type="text" name="soluong" value={this.state.quantity} readOnly />
+                                                    <input className="input-soluong" type="text" name="soluong" value={this.state.quantity} readOnly />
                                                     <div className="cong" onClick={this.increaseQuantity}>+</div>
                                                 </div>
                                             </div>
                                             <hr></hr>
                                             <div className="tamtinh">
                                                 <div className="tamtinh-title">
-                                                    Giá tiền:
+                                                    Tạm tính:
                                                 </div>
                                                 <div className="tamtinh-value">
                                                     {(this.state.quantity * item.giatien).toLocaleString()}đ
@@ -165,8 +159,9 @@ class Muahang extends React.Component {
                                                     {(this.state.quantity * item.giatien + 20000).toLocaleString()}đ
                                                 </div>
                                             </div>
-                                            <div className="muahang-xacnhan">
+                                            <div>
                                                 <button
+                                                    className="muahang-xacnhan"
                                                     type="button"  // Đặt type là "button" để tránh form tự submit
                                                     onClick={(event) => this.handleConfirm(event)}
                                                 >Xác nhận
