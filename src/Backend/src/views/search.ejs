@@ -11,14 +11,26 @@
 <body>
     <div class="topnav">
         <a href="/" class="active">Home</a>
-        <a href="/user-order">User Order</a>
+        <a href="/user-order">User</a>
     </div>
 
     <div class="w3-container">
-        <h2>Danh Sách Sản Phẩm</h2>
+        <h2>Kết quả tìm được</h2>
         <form action="/Tim" method="post">
-            <input type="text" id="tenSP" placeholder="Nhập tên sản phẩm...">
-            <button type="submit" class="button">Tìm kiếm</button>
+            <label class="search-container">
+                <input class="search" type="text" id="tenSP" name="tenSP" placeholder="Nhập tên sản phẩm...">
+                <button type="submit">Tìm kiếm</button>
+            </label>
+
+            <label class="search-container">
+                <input class="search" type="text" id="tenloaiSP" name="tenloaiSP" placeholder="Nhập tên loại...">
+                <button type="submit">Tìm kiếm</button>
+            </label>
+
+            <label class="search-container">
+                <input class="search" type="text" id="tenNSX" name="tenNSX" placeholder="Nhập tên hãng...">
+                <button type="submit">Tìm kiếm</button>
+            </label>
         </form>
         <table class="w3-table-all w3-hoverable">
             <thead>

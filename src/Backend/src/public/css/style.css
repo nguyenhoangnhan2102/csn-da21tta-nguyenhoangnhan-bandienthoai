@@ -54,3 +54,11 @@ body {
 input {
     width: 200px;
 }
+
+.search-container {
+    margin-right: 80px;
+}
+
+button {
+    margin-right: 10px;
+}

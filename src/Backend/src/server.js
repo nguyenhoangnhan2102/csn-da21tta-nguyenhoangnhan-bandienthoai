@@ -72,7 +72,7 @@ const hoadon = async (maKH, diachi, id, quantity, totalPrice) => {
 
         await chitiethoadon(maHD, id, quantity, totalPrice);
 
-        console.log('Order confirmed and saved to database');
+        console.log('Hóa đơn');
     } catch (error) {
         console.error('Error inserting into HOADON:', error);
         throw error;
@@ -86,7 +86,8 @@ const chitiethoadon = async (maHD, id, quantity, totalPrice) => {
                 VALUES (?, ?, ?, ?)
                 `, [maHD, id, quantity, totalPrice]);
 
-        console.log('Order confirmed and saved to database');
+        console.log('số lượng', quantity);
+        console.log('tổng tiền', totalPrice);
     } catch (error) {
         console.error('Error inserting into CHITIETHOADON:', error);
         throw error;
@@ -105,7 +106,7 @@ app.post('/confirmOrder', async (req, res) => {
             VALUES (?, ?, ?, ?)
             `, [maKH, hoTenKhachHang, sodienthoai, diachi]);
 
-        console.log('Order confirmed and saved to database');
+        console.log('Khách hàng');
 
         await hoadon(maKH, diachi, id, quantity, totalPrice);
 

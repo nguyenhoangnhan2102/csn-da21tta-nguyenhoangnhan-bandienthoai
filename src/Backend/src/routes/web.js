@@ -16,7 +16,9 @@ const {
     getAddNew,
     deleteNSX,
     searchProduct,
-    updateUser
+    deleteUser,
+    getDetailBill,
+    //deleteDetailBill,
 } = require('../controllers/homeController');
 
 const storage = multer.diskStorage({
@@ -66,6 +68,9 @@ router.post("/Tim", searchProduct);
 
 router.post("/delete-tenNSX", deleteNSX);
 
-router.post("/update-user", updateUser);
+router.post("/delete-user", deleteUser);
+
+router.get("/bill-order", getDetailBill);
+// router.post("/delete-detailbill", deleteDetailBill);
 
 module.exports = router;

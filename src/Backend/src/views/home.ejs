@@ -10,14 +10,17 @@
 
 <body>
     <div class="topnav">
-        <a href="#" class="active">Home</a>
-        <a href="/user-order">Người dùng</a>
+        <a href="/" class="active">Home</a>
+        <a href="/user-order">User</a>
+        <a href="/bill-order">Bill</a>
     </div>
 
     <div class="create-user-container">
         <form action="/create-new-product" method="post" enctype="multipart/form-data">
             <fieldset>
-                <legend><b>Thêm sản phẩm</b></legend>
+                <legend>
+                    <h2><b>Thêm sản phẩm</b></h2>
+                </legend>
                 <!-- <div>
                     <label for="">Mã sản phẩm : </label>
                     <input type="text" name="id" />
@@ -101,19 +104,20 @@
         <h2>Danh Sách Sản Phẩm</h2>
         <!-- Trong phần HTML -->
         <form action="/Tim" method="post">
-            <input type="text" id="tenSP" name="tenSP" placeholder="Nhập tên sản phẩm">
-            <button type="submit" class="button">Tìm kiếm</button>
+            <label class="search-container">
+                <input class="search" type="text" id="tenSP" name="tenSP" placeholder="Nhập tên sản phẩm...">
+                <button type="submit" class="button">Tìm kiếm</button>
+            </label>
 
-            <input type="text" id="tenloaiSP" name="tenloaiSP" placeholder="Nhập tên loại">
+            <label class="search-container">
+                <input class="search" type="text" id="tenloaiSP" name="tenloaiSP" placeholder="Nhập tên loại...">
+                <button class="button" type="submit">Tìm kiếm</button>
+            </label>
 
-            <!-- Nút tìm kiếm -->
-            <button type="submit" class="button">Tìm kiếm</button>
-
-            <!-- Ô nhập tên sản phẩm -->
-            <input type="text" id="tenNSX" name="tenNSX" placeholder="Nhập tên hãng">
-
-            <!-- Nút tìm kiếm -->
-            <button type="submit" class="button">Tìm kiếm</button>
+            <label class="search-container">
+                <input class="search" type="text" id="tenNSX" name="tenNSX" placeholder="Nhập tên hãng...">
+                <button class="button" type="submit">Tìm kiếm</button>
+            </label>
         </form>
 
         <table class="w3-table-all w3-hoverable">

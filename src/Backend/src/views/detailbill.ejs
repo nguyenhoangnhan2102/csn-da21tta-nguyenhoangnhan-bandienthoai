@@ -1,0 +1,90 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <!-- <script>
+        function deleteDetailBill(index) {
+            var formId = 'deleteForm' + index;
+            var form = document.getElementById(formId);
+            if (confirm('Bạn có chắc chắn muốn hóa đơn này không?')) {
+                form.submit();
+            }
+        }
+    </script> -->
+    <!-- <script>
+        function formatCurrency(amount) {
+            // Convert the amount to a number
+            amount = parseFloat(amount);
+
+            // Check if the amount is a valid number
+            if (isNaN(amount)) {
+                return "Invalid amount";
+            }
+
+            // Format the amount with commas
+            return amount.toLocaleString('en-US');
+        }
+    </script> -->
+
+</head>
+
+<body>
+    <div class="topnav">
+        <a href="/">Home</a>
+        <a href="/user-order">User</a>
+        <a href="/bill-order" class="active">Bill</a>
+    </div>
+
+    <div class="w3-container">
+        <h2>Chi tiết hóa đơn</h2>
+
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>Mã hóa đơn</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Tên khách hàng</th>
+                    <th>Địa chỉ giao hàng</th>
+                    <th>Số lượng</th>
+                    <th>Tổng tiền</th>
+                    <th>Thời gian đặt hàng</th>
+                    <th>Chức năng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < dataBills.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= dataBills[i].maHD %>
+                        </td>
+                        <td>
+                            <%= dataBills[i].tenSP %>
+                        </td>
+                        <td>
+                            <%= dataBills[i].hotenKH %>
+                        </td>
+                        <td>
+                            <%= dataBills[i].diachi %>
+                        </td>
+                        <td>
+                            <%= dataBills[i].soluongSP %>
+                        </td>
+                        <td>
+                            <%= dataBills[i].tongtien %>
+                        </td>
+
+                        <td>
+                            <%= dataBills[i].thoigiandat %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

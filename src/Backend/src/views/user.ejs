@@ -6,16 +6,26 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <script>
+        function deleteUser(index) {
+            var formId = 'deleteForm' + index;
+            var form = document.getElementById(formId);
+            if (confirm('Bạn có chắc chắn muốn xóa người dùng này không?')) {
+                form.submit();
+            }
+        }
+    </script>
 </head>
 
 <body>
     <div class="topnav">
         <a href="/">Home</a>
-        <a href="#" class="active">Người dùng</a>
+        <a href="#" class="active">User</a>
+        <a href="/bill-order">Bill</a>
     </div>
 
     <div class="w3-container">
-        <h2>Thống kê</h2>
+        <h2>Khách hàng</h2>
 
         <table class="w3-table-all w3-hoverable">
             <thead>
@@ -27,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% for(let i=0; i < dataUsers.length; i++) { %>
+                <% for (let i=0; i < dataUsers.length; i++) { %>
                     <tr>
                         <td>
                             <%= dataUsers[i].maKH %>
@@ -41,14 +51,15 @@
                         <td>
                             <%= dataUsers[i].diachi %>
                         </td>
-                        <!-- <td style="display: flex">
-                            <form action="/delete-product" method="post">
-                                <input type="text" hidden value="<%=dataProduct[i].id%>" name="productId" /><button
-                                    type="submit">Delete</button>
+                        <td style="display: flex">
+                            <form id="deleteForm<%= i %>" action="/delete-user" method="post">
+                                <input type="text" hidden value="<%= dataUsers[i].maKH %>" name="idUser" />
+                                <button type="button" onclick="deleteUser('<%= i %>')">Xóa</button>
                             </form>
-                        </td> -->
+                        </td>
                     </tr>
                     <% } %>
+
             </tbody>
         </table>
     </div>

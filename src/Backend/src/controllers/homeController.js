@@ -21,6 +21,36 @@ const getUserPage = async (req, res) => {
     return res.render("user.ejs", { dataUsers: results });
 };
 
+const getDetailBill = async (req, res) => {
+    try {
+        const [results, fields] = await connection.execute(`
+            SELECT
+                HOADON.maHD,
+                SANPHAM.tenSP,
+                KHACHHANG.hotenKH,
+                KHACHHANG.diachi,
+                CHITIETHOADON.soluongSP,
+                CHITIETHOADON.tongtien,
+                HOADON.thoigiandat
+            FROM
+                HOADON
+            JOIN
+                KHACHHANG ON HOADON.maKH = KHACHHANG.maKH
+            JOIN
+                CHITIETHOADON ON HOADON.maHD = CHITIETHOADON.maHD
+            JOIN
+                SANPHAM ON CHITIETHOADON.id = SANPHAM.id
+        `);
+
+        return res.render("detailbill.ejs", { dataBills: results });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return res.status(500).send("Internal Server Error");
+    }
+};
+
+
+
 const createNewProduct = async (req, res) => {
     //let id = req.body.id;
     let tenSP = req.body.tenSP;
@@ -55,6 +85,55 @@ const deleteProduct = async (req, res) => {
     await connection.execute("delete from SANPHAM where id = ?", [productId]);
     return res.redirect("/");
 };
+
+const deleteUser = async (req, res) => {
+    const maKH = req.body.idUser;
+
+    try {
+        // Xóa tất cả chi tiết hóa đơn của các hóa đơn liên quan
+        await connection.execute("DELETE FROM CHITIETHOADON WHERE maHD IN (SELECT maHD FROM HOADON WHERE maKH = ?)", [maKH]);
+
+        // Sau đó xóa các hóa đơn của khách hàng
+        await connection.execute("DELETE FROM HOADON WHERE maKH = ?", [maKH]);
+
+        // Cuối cùng, xóa khách hàng
+        await connection.execute("DELETE FROM KHACHHANG WHERE maKH = ?", [maKH]);
+
+        res.redirect("/user-order");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Lỗi Nội Server");
+    }
+};
+
+// const deleteDetailBill = async (req, res) => {
+//     const maHD = req.body.idBill;
+
+//     try {
+//         // Lấy ID sản phẩm liên quan đến chi tiết hóa đơn
+//         const [productId] = await connection.execute("SELECT id FROM CHITIETHOADON WHERE maHD = ?", [maHD]);
+
+//         if (productId.length > 0) {
+//             // Xóa bản ghi chi tiết hóa đơn
+//             await connection.execute("DELETE FROM CHITIETHOADON WHERE maHD = ?", [maHD]);
+
+//             // Xóa bản ghi sản phẩm
+//             await connection.execute("DELETE FROM SANPHAM WHERE id = ?", [productId[0].id]);
+//         }
+
+//         // Xóa bản ghi đơn hàng và khách hàng
+//         await connection.execute("DELETE FROM HOADON WHERE maKH = ?", [maKH]);
+//         await connection.execute("DELETE FROM KHACHHANG WHERE maKH = ?", [maKH]);
+
+//         res.redirect("/bill-order");
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send("Lỗi Nội Server");
+//     }
+// };
+
+
+
 
 const getEditPage = async (req, res) => {
     let id = req.params.id;
@@ -128,70 +207,17 @@ const deleteNSX = async (req, res) => {
     return res.render("newNSX.ejs", { AllNSX: getAllNSXX });
 };
 
-const updateUser = async (req, res) => {
-    try {
-        function getRandomInt(min, max) {
-            min = Math.ceil(min);
-            max = Math.floor(max);
-            return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
-        // Kiểm tra dữ liệu đầu vào
-        const { hotenKH, sdt, diachi, soluong, id, tenSP } = req.body;
-        if (!hotenKH || !sdt || !diachi || !soluong || !id) {
-            throw new Error("Bạn chưa truyền đủ thông tin không thể đặt hàng !!!!");
-        }
-
-        // Lấy thời gian hiện tại
-        const currentTime = new Date();
-        const formattedTime = currentTime
-            .toISOString()
-            .slice(0, 19)
-            .replace("T", " ");
-
-        // Tạo các số ngẫu nhiên
-        const randomIntegerInRange = getRandomInt(0, 60000);
-        const randomIntegerHoadon = getRandomInt(0, 60000);
-
-        // Insert thông tin khách hàng
-        await connection.execute(
-            "INSERT INTO KHACHHANG(maKH, hotenKH, sdt, diachi) VALUES (?, ?, ?, ?)",
-            [randomIntegerInRange, hotenKH, sdt, diachi]
-        );
-
-        // Insert thông tin hóa đơn
-        await connection.execute(
-            "INSERT INTO HOADON(maHD, maKH, diachigiaohang, thoigiandat) VALUES (?, ?, ?, ?)",
-            [randomIntegerHoadon, randomIntegerInRange, diachi, formattedTime]
-        );
-
-        // Insert thông tin chi tiết hóa đơn
-        await connection.execute(
-            "INSERT INTO CHITIETHOADON(maHD, id, soluongSP) VALUES (?, ?, ?)",
-            [randomIntegerHoadon, id, soluong]
-        );
-
-        await connection.execute(
-            " UPDATE SANPHAM SET soluong = soluong - ? WHERE id = ?",
-            [soluong, id]
-        );
-
-        // Chuyển hướng về trang chủ sau khi đặt hàng thành công
-        const successMessage = "Bạn đã đặt hàng thành công!";
-
-        return res.send("cảm ơn bạn đã đặt hàng");
-    } catch (error) {
-        console.error("An error occurred:", error);
-        return res.status(500).send(error.message || "Đã có lỗi xảy ra");
-    }
-};
-
 const searchProduct = async (req, res) => {
     try {
-        const searchKeyword = req.body.tenSP;
+        const search = req.body.tenSP || ''; // Lấy giá trị tìm kiếm từ form
         const tenNSXFilter = req.body.tenNSX || ''; // Lấy giá trị lọc từ dropdown
         const tenloaiSPFilter = req.body.tenloaiSP || '';
 
-        let query = "SELECT * FROM SANPHAM WHERE tenSP LIKE ?";
+        let query = "SELECT * FROM SANPHAM WHERE 1"; // 1 để bắt đầu chuỗi truy vấn
+
+        if (search) {
+            query += " AND tenSP LIKE ?";
+        }
 
         if (tenNSXFilter) {
             query += " AND tenNSX = ?";
@@ -201,9 +227,23 @@ const searchProduct = async (req, res) => {
             query += " AND tenloaiSP = ?";
         }
 
+        const queryParams = [];
+
+        if (search) {
+            queryParams.push('%' + search + '%');
+        }
+
+        if (tenNSXFilter) {
+            queryParams.push(tenNSXFilter);
+        }
+
+        if (tenloaiSPFilter) {
+            queryParams.push(tenloaiSPFilter);
+        }
+
         const [results, fields] = await connection.execute(
             query,
-            ['%' + searchKeyword + '%', tenNSXFilter, tenloaiSPFilter]
+            queryParams
         );
 
         // Render trang chứa kết quả tìm kiếm và lọc
@@ -213,6 +253,8 @@ const searchProduct = async (req, res) => {
         return res.status(500).send(error.message || "Đã có lỗi xảy ra");
     }
 };
+
+
 
 module.exports = {
     getHomePage,
@@ -226,5 +268,7 @@ module.exports = {
     getAddNew,
     deleteNSX,
     searchProduct,
-    updateUser
+    deleteUser,
+    getDetailBill,
+    //deleteDetailBill
 };
