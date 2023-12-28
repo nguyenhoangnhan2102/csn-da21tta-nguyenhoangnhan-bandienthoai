@@ -25,6 +25,9 @@
 }
 
 .name-product {
+    text-align: left;
+    margin-left: 21%;
+    margin-bottom: 2%;
     color: black;
     font-size: 50px;
     font-weight: bold;
@@ -33,7 +36,9 @@
 .price-product {
     color: red;
     font-size: 25px;
-    margin-left: -290px;
+    text-align: left;
+    margin-left: 21%;
+    margin-bottom: 5%;
     font-weight: bold;
 }
 

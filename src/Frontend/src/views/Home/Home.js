@@ -4,6 +4,8 @@ import './Home.scss';
 
 class Home extends React.Component {
 
+
+
     constructor(props) {
         super(props);
 
@@ -15,6 +17,7 @@ class Home extends React.Component {
             priceFilter: "",
             productTypeFilter: "",
             manufacturerFilter: "",
+            currentImageIndex: 0,
         };
     }
 
@@ -65,9 +68,29 @@ class Home extends React.Component {
         this.setState({ productTypeFilter: value });
     };
 
+    handleNextImage = () => {
+        const { currentImageIndex } = this.state;
+        const totalImages = 5; // Số lượng ảnh trong danh sách
 
+        // Chuyển đến ảnh tiếp theo, quay lại ảnh đầu nếu đã đến ảnh cuối cùng
+        this.setState({
+            currentImageIndex: (currentImageIndex + 1) % totalImages,
+        });
+    };
+
+    handlePrevImage = () => {
+        const { currentImageIndex } = this.state;
+        const totalImages = 5; // Số lượng ảnh trong danh sách
+
+        // Chuyển đến ảnh trước đó, quay lại ảnh cuối cùng nếu đã ở ảnh đầu tiên
+        this.setState({
+            currentImageIndex:
+                (currentImageIndex - 1 + totalImages) % totalImages,
+        });
+    };
 
     render() {
+
         const { data,
             loading,
             error,
@@ -130,10 +153,29 @@ class Home extends React.Component {
             { label: "iOS", value: "iOS" },
         ];
 
+        const { currentImageIndex } = this.state;
+        const imageSources = ['/img/Anh1.jpg', '/img/Anh2.webp', '/img/Anh3.jpg', '/img/Anh4.jpg', '/img/Anh5.jpg'];
+
         const firstTenProducts = filteredData ? filteredData.slice(0, 10) : [];
 
         return (
             <div className="container">
+                <div className="introduce">
+                    <button className="introduce-slide" onClick={this.handlePrevImage}>&lt;</button>
+                    <div>
+                        {imageSources.map((src, index) => (
+                            <img
+                                key={index}
+                                className={`introduce-pic ${index === currentImageIndex ? 'visible' : 'hidden'
+                                    }`}
+                                src={src}
+                                alt={`Image ${index + 1}`}
+                            />
+                        ))}
+                    </div>
+
+                    <button className="introduce-slide" onClick={this.handleNextImage}>&gt;</button>
+                </div>
                 <div className="tieude1">
 
                     {/* Bên trong phương thức render của component ListProduct của bạn */}

@@ -2,6 +2,53 @@
     background-color: #ffffff;
 }
 
+.introduce {
+    margin-bottom: 5%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.introduce div {
+    display: inline-block;
+}
+
+.introduce-pic {
+    width: 1000px;
+    height: 500px;
+    display: none;
+    max-width: 100%;
+}
+
+.visible {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.introduce-slide {
+    font-size: 20px;
+    margin: 0 10px;
+    border: none;
+    /* Loại bỏ đường viền */
+    background: none;
+    /* Loại bỏ nền */
+    padding: 0;
+    /* Loại bỏ padding nếu có */
+    cursor: pointer;
+    /* Biểu tượng con trỏ khi rê chuột vào */
+    outline: none;
+    /* Loại bỏ đường viền xung quanh khi được focus (đối với việc trình duyệt mặc định) */
+}
+
+.introduce-slide {
+    margin: 0 10px;
+    /* Đặt margin để tạo khoảng cách giữa các phần tử */
+}
+
 .content {
     margin-left: 90px;
     font-size: 40px;

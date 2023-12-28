@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
-import './InfoProduct.scss';
+import './Chitietsanpham.scss'
 
 class InfoProduct extends React.Component {
 
@@ -54,42 +54,27 @@ class InfoProduct extends React.Component {
                                 </div>
                                 <div className="table">
                                     <table>
-                                        <div className="table-content">
+                                        <tbody className="table-content">
                                             <tr>
-                                                <td className="table-name-content">
-                                                    Dung lượng:
-                                                </td>
-                                                <td className="table-value-content">
-                                                    {item.dungluong}
-                                                </td>
+                                                <td className="table-name-content">Dung lượng:</td>
+                                                <td className="table-value-content">{item.dungluong}</td>
                                             </tr>
                                             <tr>
-                                                <td className="table-name-content">
-                                                    RAM:
-                                                </td>
-                                                <td className="table-value-content">
-                                                    {item.ram}
-                                                </td>
+                                                <td className="table-name-content">RAM:</td>
+                                                <td className="table-value-content">{item.ram}</td>
                                             </tr>
                                             <tr>
-                                                <td className="table-name-content">
-                                                    Hệ điều hành:
-                                                </td>
-                                                <td className="table-value-content">
-                                                    {item.tenloaiSP}
-                                                </td>
+                                                <td className="table-name-content">Hệ điều hành:</td>
+                                                <td className="table-value-content">{item.tenloaiSP}</td>
                                             </tr>
                                             <tr>
-                                                <td className="table-name-content">
-                                                    Hãng:
-                                                </td>
-                                                <td className="table-value-content">
-                                                    {item.tenNSX}
-                                                </td>
+                                                <td className="table-name-content">Hãng:</td>
+                                                <td className="table-value-content">{item.tenNSX}</td>
                                             </tr>
-                                        </div>
+                                        </tbody>
                                     </table>
                                 </div>
+
                                 <div>
                                     <a href={`/mua/${item.id}`} className="muasp">Mua</a>
                                 </div>

@@ -8,10 +8,10 @@ class Nav extends React.Component {
         return (
             <div className="topnav">
                 <NavLink to="/" activeClassName="active" exact={true}>
-                    <a>Shopphone</a>
+                    Shopphone
                 </NavLink>
                 <NavLink to="/product" activeClassName="active">
-                    <a>Tất cả</a>
+                    Tất cả
                 </NavLink>
             </div>
         );

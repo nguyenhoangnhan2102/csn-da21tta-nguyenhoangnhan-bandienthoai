@@ -14,7 +14,7 @@ import Footer from "./Footer/Footer";
 import Home from "./Home/Home";
 import SanPham from "./SanPham/SanPham";
 import Muahang from "./Muahang/Muahang";
-import InfoProduct from "./InfoProduct/InfoProduct";
+import Chitietsanpham from "./InfoProduct/Chitietsanpham";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
               <SanPham />
             </Route>
             <Route path="/product/:id">
-              <InfoProduct />
+              <Chitietsanpham />
             </Route>
             <Route path="/mua/:id">
               <Muahang />
