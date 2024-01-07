@@ -82,7 +82,7 @@ const hoadon = async (maKH, diachi, id, quantity, totalPrice) => {
 const chitiethoadon = async (maHD, id, quantity, totalPrice) => {
     try {
         await connection.execute(`
-                INSERT INTO CHITIETHOADON (maHD, id, soluongSP, tongtien)
+                INSERT INTO CHITIETHOADON (maHD, id, soluongdat, tongtien)
                 VALUES (?, ?, ?, ?)
                 `, [maHD, id, quantity, totalPrice]);
 

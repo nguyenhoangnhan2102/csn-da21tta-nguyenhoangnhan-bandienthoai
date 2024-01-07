@@ -20,7 +20,7 @@
                 <legend><b>Thêm Nhà Sản Xuất</b></legend>
                 <div>
                     <label for="">Tên NSX</label>
-                    <input type="text" name="tenNSX">
+                    <input type="text" name="tenhang">
                 </div>
                 <div>
                     <button type="submit">Save</button>
@@ -32,23 +32,23 @@
     <table class="container-LoaiSP">
         <tbody>
             <tr class="hang-loaiSP">
-                <td class="tenNSX">
+                <td class="tenhang">
                     TÊN NSX
                 </td>
                 <td class="chucnang">
                     CHỨC NĂNG
                 </td>
             </tr>
-            <% AllNSX.forEach(function(AllNSX) { %>
+            <% AllHang.forEach(function(AllHang) { %>
 
                 <tr class="Nhasanxuat">
 
                     <td class="ten-NSX">
-                        <%= AllNSX.tenNSX %>
+                        <%= AllHang.tenhang %>
                     </td>
                     <td>
-                        <form action="/delete-tenNSX" method="post">
-                            <input type="text" hidden value="<%=AllNSX.tenNSX%>" name="NSXId">
+                        <form action="/delete-tenhang" method="post">
+                            <input type="text" hidden value="<%=AllHang.tenhang%>" name="NSXId">
                             <button class="delete-NSX">Xóa</button>
                         </form>
                     </td>

@@ -29,7 +29,7 @@ const getDetailBill = async (req, res) => {
                 SANPHAM.tenSP,
                 KHACHHANG.hotenKH,
                 KHACHHANG.diachi,
-                CHITIETHOADON.soluongSP,
+                CHITIETHOADON.soluongdat,
                 CHITIETHOADON.tongtien,
                 HOADON.thoigiandat
             FROM
@@ -105,35 +105,6 @@ const deleteUser = async (req, res) => {
         res.status(500).send("Lỗi Nội Server");
     }
 };
-
-// const deleteDetailBill = async (req, res) => {
-//     const maHD = req.body.idBill;
-
-//     try {
-//         // Lấy ID sản phẩm liên quan đến chi tiết hóa đơn
-//         const [productId] = await connection.execute("SELECT id FROM CHITIETHOADON WHERE maHD = ?", [maHD]);
-
-//         if (productId.length > 0) {
-//             // Xóa bản ghi chi tiết hóa đơn
-//             await connection.execute("DELETE FROM CHITIETHOADON WHERE maHD = ?", [maHD]);
-
-//             // Xóa bản ghi sản phẩm
-//             await connection.execute("DELETE FROM SANPHAM WHERE id = ?", [productId[0].id]);
-//         }
-
-//         // Xóa bản ghi đơn hàng và khách hàng
-//         await connection.execute("DELETE FROM HOADON WHERE maKH = ?", [maKH]);
-//         await connection.execute("DELETE FROM KHACHHANG WHERE maKH = ?", [maKH]);
-
-//         res.redirect("/bill-order");
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).send("Lỗi Nội Server");
-//     }
-// };
-
-
-
 
 const getEditPage = async (req, res) => {
     let id = req.params.id;

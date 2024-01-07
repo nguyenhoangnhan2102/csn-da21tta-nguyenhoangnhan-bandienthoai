@@ -6,29 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <!-- <script>
-        function deleteDetailBill(index) {
-            var formId = 'deleteForm' + index;
-            var form = document.getElementById(formId);
-            if (confirm('Bạn có chắc chắn muốn hóa đơn này không?')) {
-                form.submit();
-            }
-        }
-    </script> -->
-    <!-- <script>
-        function formatCurrency(amount) {
-            // Convert the amount to a number
-            amount = parseFloat(amount);
 
-            // Check if the amount is a valid number
-            if (isNaN(amount)) {
-                return "Invalid amount";
-            }
-
-            // Format the amount with commas
-            return amount.toLocaleString('en-US');
-        }
-    </script> -->
 
 </head>
 
@@ -70,7 +48,7 @@
                             <%= dataBills[i].diachi %>
                         </td>
                         <td>
-                            <%= dataBills[i].soluongSP %>
+                            <%= dataBills[i].soluongdat %>
                         </td>
                         <td>
                             <%= dataBills[i].tongtien %>

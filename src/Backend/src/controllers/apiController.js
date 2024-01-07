@@ -105,7 +105,7 @@ const updateProduct = async (req, res) => {
     let ram = req.body.ram;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
-    let motachitiet = req.body.motachitiet;
+    let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
     if (!id || !tenSP || !tenloaiSP || !soluong || !dungluong || !ram || !giatien || !tenNSX) {
         return res.status(200).json({
@@ -113,8 +113,8 @@ const updateProduct = async (req, res) => {
         });
     }
     await connection.execute(
-        "update SANPHAM set tenSP = ?, tenloaiSP = ?, tenNSX = ?, dungluong = ?, soluong = ?, giatien = ?, motachitiet = ? where id = ?",
-        [tenSP, tenloaiSP, tenNSX, dungluong, soluong, giatien, motachitiet, id]
+        "update SANPHAM set tenSP = ?, tenloaiSP = ?, tenNSX = ?, dungluong = ?, soluong = ?, giatien = ?, ghichu = ? where id = ?",
+        [tenSP, tenloaiSP, tenNSX, dungluong, soluong, giatien, ghichu, id]
     );
     return res.status(200).json({
         message: "ok",
