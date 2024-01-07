@@ -14,7 +14,7 @@ import Footer from "./Footer/Footer";
 import Home from "./Home/Home";
 import SanPham from "./SanPham/SanPham";
 import Muahang from "./Muahang/Muahang";
-import Chitietsanpham from "./InfoProduct/Chitietsanpham";
+import Chitietsanpham from "./Chitietsanpham/Chitietsanpham";
 
 function App() {
   return (
