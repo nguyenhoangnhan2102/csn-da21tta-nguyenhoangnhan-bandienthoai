@@ -26,7 +26,7 @@
                     <input type="text" name="id" />
                 </div> -->
                 <div>
-                    <label for="">Tên sản phẩm : </label>
+                    <label for="">Tên sản phẩm: </label>
                     <input type="text" name="tenSP" />
                 </div>
                 <div>
@@ -51,15 +51,19 @@
 
                 </div>
                 <div>
-                    <label for="">Số lượng thêm : </label>
+                    <label for="">Số lượng thêm: </label>
                     <input type="text" name="soluong" />
                 </div>
                 <div>
-                    <label for="">Giá tiền : </label>
+                    <label for="">Giá tiền: </label>
                     <input type="text" name="giatien" />
                 </div>
                 <div>
-                    <label for="">Dung lượng : </label>
+                    <label for="">Màn hình: </label>
+                    <input type="text" name="manhinh" />
+                </div>
+                <div>
+                    <label for="">Dung lượng: </label>
                     <select name="dungluong" id="hall" value="3">
                         <option>32 GB</option>
                         <option>64 GB</option>
@@ -71,7 +75,7 @@
                 </div>
 
                 <div>
-                    <label for="">RAM : </label>
+                    <label for="">RAM: </label>
                     <select name="ram" id="hall" value="3">
                         <option>1 GB</option>
                         <option>2 GB</option>
@@ -81,7 +85,10 @@
                         <option>12 GB</option>
                     </select>
                 </div>
-
+                <div>
+                    <label for="">Pin, sạc: </label>
+                    <input type="text" name="pin" />
+                </div>
                 <div>
                     <label for="">Ghi chú : </label>
                     <input type="text" name="ghichu" />
@@ -129,8 +136,10 @@
                     <th>Tên hãng</th>
                     <th>Số lượng</th>
                     <th>Giá tiền</th>
+                    <th>Màn hình</th>
                     <th>Dung lượng</th>
                     <th>RAM</th>
+                    <th>Pin, sạc</th>
                     <th>Ghi chú</th>
                     <th>Minh họa</th>
                     <th>Chức năng</th>
@@ -160,11 +169,19 @@
                         </td>
 
                         <td>
+                            <%= dataProduct[i].manhinh %>
+                        </td>
+
+                        <td>
                             <%= dataProduct[i].dungluong %>
                         </td>
 
                         <td>
                             <%= dataProduct[i].ram %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].pin %>
                         </td>
 
                         <td>

@@ -28,14 +28,14 @@
                     <input type="text" name="tenSP" value="<%= dataProduct.tenSP %>" />
                 </div>
                 <div>
-                    <label for="">Loại : </label>
+                    <label for="">Loại: </label>
                     <select name="tenloaiSP" id="hall" value="<%=dataProduct.tenloaiSP %>">
                         <option <%=dataProduct.tenloaiSP==='Android' ? 'selected' : '' %>>Android</option>
                         <option <%=dataProduct.tenloaiSP==='iOS' ? 'selected' : '' %>>iOS</option>
                     </select>
                 </div>
                 <div>
-                    <label for="">Tên nhà sản xuất</label>
+                    <label for="">Tên hãng:</label>
                     <select name="tenNSX" value="<%=dataProduct.tenNSX %>">
                         <option <%=dataProduct.tenNSX==='Apple' ? 'selected' : '' %>>Apple</option>
                         <option <%=dataProduct.tenNSX==='OPPO' ? 'selected' : '' %>>OPPO</option>
@@ -47,15 +47,19 @@
                     </select>
                 </div>
                 <div>
-                    <label for="">Số lượng thêm : </label>
+                    <label for="">Số lượng thêm: </label>
                     <input type="text" name="soluong" value="<%=dataProduct.soluong %>" />
                 </div>
                 <div>
-                    <label for="">Giá tiền : </label>
+                    <label for="">Giá tiền: </label>
                     <input type="text" name="giatien" value="<%=dataProduct.giatien %>" />
                 </div>
                 <div>
-                    <label for="">Dung lượng : </label>
+                    <label for="">Màn hình: </label>
+                    <input type="text" name="manhinh" value="<%=dataProduct.manhinh %>" />
+                </div>
+                <div>
+                    <label for="">Dung lượng: </label>
                     <select name="dungluong" id="hall" value="<%=dataProduct.dungluong %>">
                         <option>32 GB</option>
                         <option>64 GB</option>
@@ -66,7 +70,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="">RAM : </label>
+                    <label for="">RAM: </label>
                     <select name="ram" id="hall" value="<%=dataProduct.ram %>">
                         <option>1 GB</option>
                         <option>2 GB</option>
@@ -77,12 +81,16 @@
                     </select>
                 </div>
                 <div>
-                    <label for="">Ghi chú : </label>
+                    <label for="">Pin, sạc: </label>
+                    <input type="text" name="pin" value="<%=dataProduct.pin %>" />
+                </div>
+                <div>
+                    <label for="">Ghi chú: </label>
                     <input type="text" name="ghichu" value="<%=dataProduct.ghichu %>" />
                 </div>
 
                 <div>
-                    <label for="">Avatar: </label>
+                    <label for="">Ảnh: </label>
                     <input type="file" name="profile_pic" value="<%=dataProduct.mota %>" />
                 </div>
 
@@ -104,7 +112,10 @@
                     <th>Tên NSX</th>
                     <th>Số lượng</th>
                     <th>Giá tiền</th>
+                    <th>Màn hình</th>
                     <th>Dung lượng</th>
+                    <th>RAM</th>
+                    <th>Pin, sạc</th>
                     <th>Ghi chú</th>
                     <th>Minh họa</th>
                     <th>Chức năng</th>
@@ -134,11 +145,19 @@
                         </td>
 
                         <td>
+                            <%= dataproduct[i].manhinh %>
+                        </td>
+
+                        <td>
                             <%= dataproduct[i].dungluong %>
                         </td>
 
                         <td>
                             <%= dataproduct[i].ram %>
+                        </td>
+
+                        <td>
+                            <%= dataproduct[i].pin %>
                         </td>
 
                         <td>

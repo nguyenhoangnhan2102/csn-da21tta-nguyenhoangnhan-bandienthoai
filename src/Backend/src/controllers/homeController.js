@@ -61,6 +61,8 @@ const createNewProduct = async (req, res) => {
     let giatien = req.body.giatien;
     let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
+    let manhinh = req.body.manhinh;
+    let pin = req.body.pin;
 
     if (req.fileValidationError) {
         return res.status(400).json({ error: req.fileValidationError });
@@ -70,8 +72,8 @@ const createNewProduct = async (req, res) => {
 
     try {
         await connection.execute(
-            "insert into SANPHAM(tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, mota) values (?,?,?,?,?,?,?,?,?)",
-            [tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, ghichu, req.file.filename]
+            "insert into SANPHAM(tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, manhinh, pin, ghichu, mota) values (?,?,?,?,?,?,?,?,?,?,?)",
+            [tenSP, soluong, dungluong, ram, tenloaiSP, tenNSX, giatien, manhinh, pin, ghichu, req.file.filename]
         );
 
         return res.redirect("/");
@@ -129,6 +131,8 @@ const updateProduct = async (req, res, err) => {
     let giatien = req.body.giatien;
     let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
+    let manhinh = req.body.manhinh;
+    let pin = req.body.pin;
     if (req.fileValidationError) {
         return res.status(400).json({ error: req.fileValidationError });
     } else if (!req.file) {
@@ -136,8 +140,8 @@ const updateProduct = async (req, res, err) => {
     }
     try {
         await connection.execute(
-            "UPDATE SANPHAM SET tenSP = ?, dungluong =?, ram = ?, soluong = ?, tenloaiSP = ?, tenNSX = ?, giatien = ?, ghichu = ?, mota = ? WHERE id = ?",
-            [tenSP, dungluong, ram, soluong, tenloaiSP, tenNSX, giatien, ghichu, req.file.filename, id]
+            "UPDATE SANPHAM SET tenSP = ?, dungluong =?, ram = ?, soluong = ?, tenloaiSP = ?, tenNSX = ?, giatien = ?, manhinh = ?, pin = ?, ghichu = ?, mota = ? WHERE id = ?",
+            [tenSP, dungluong, ram, soluong, tenloaiSP, tenNSX, giatien, manhinh, pin, ghichu, req.file.filename, id]
         );
 
         return res.redirect("/");
