@@ -56,6 +56,14 @@ class InfoProduct extends React.Component {
                                     <table>
                                         <tbody className="table-content">
                                             <tr>
+                                                <td className="table-name-content">Màn hình:</td>
+                                                <td className="table-value-content">{item.manhinh}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className="table-name-content">Hệ điều hành:</td>
+                                                <td className="table-value-content">{item.tenloaiSP}</td>
+                                            </tr>
+                                            <tr>
                                                 <td className="table-name-content">Dung lượng:</td>
                                                 <td className="table-value-content">{item.dungluong}</td>
                                             </tr>
@@ -64,8 +72,8 @@ class InfoProduct extends React.Component {
                                                 <td className="table-value-content">{item.ram}</td>
                                             </tr>
                                             <tr>
-                                                <td className="table-name-content">Hệ điều hành:</td>
-                                                <td className="table-value-content">{item.tenloaiSP}</td>
+                                                <td className="table-name-content">Pin, sạc:</td>
+                                                <td className="table-value-content">{item.pin}</td>
                                             </tr>
                                             <tr>
                                                 <td className="table-name-content">Hãng:</td>

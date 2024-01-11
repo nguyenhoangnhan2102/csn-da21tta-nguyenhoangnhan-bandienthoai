@@ -72,8 +72,8 @@
 }
 
 .table {
-    margin: 10px 0px 30px 21%;
-    width: 500px;
+    margin: 10px 0px 70px 21%;
+    width: 600px;
 }
 
 .table-content {
@@ -82,13 +82,18 @@
 }
 
 .table-name-content {
+    width: 40%;
     font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;
     padding-right: 80px;
     padding-bottom: 10px;
 }
 
 .table-value-content {
+    width: 60%;
     font-size: 20px;
-    padding-left: 80px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-left: 60px;
+    padding-bottom: 10px;
 }
