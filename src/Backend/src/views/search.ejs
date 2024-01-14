@@ -35,14 +35,17 @@
         <table class="w3-table-all w3-hoverable">
             <thead>
                 <tr class="w3-light-grey">
-                    <th>Mã Sản Phẩm</th>
-                    <th>Tên Sản Phẩm</th>
-                    <th>Loại SP</th>
-                    <th>Tên NSX</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Hệ điều hành</th>
+                    <th>Tên hãng</th>
                     <th>Số lượng</th>
                     <th>Giá tiền</th>
+                    <th>Màn hình</th>
                     <th>Dung lượng</th>
-                    <th>Mô tả</th>
+                    <th>RAM</th>
+                    <th>Pin, sạc</th>
+                    <th>Ghi chú</th>
                     <th>Minh họa</th>
                     <th>Chức năng</th>
                 </tr>
@@ -71,11 +74,23 @@
                         </td>
 
                         <td>
+                            <%= dataProduct[i].manhinh %>
+                        </td>
+
+                        <td>
                             <%= dataProduct[i].dungluong %>
                         </td>
 
                         <td>
-                            <%= dataProduct[i].motachitiet %>
+                            <%= dataProduct[i].ram %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].pin %>
+                        </td>
+
+                        <td>
+                            <%= dataProduct[i].ghichu %>
                         </td>
 
                         <td>
