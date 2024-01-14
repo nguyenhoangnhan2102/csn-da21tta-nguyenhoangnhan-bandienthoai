@@ -221,9 +221,6 @@ class SanPham extends React.Component {
                                         {item.giatien.toLocaleString()}<sup><u>đ</u></sup>
                                     </div>
                                 </div>
-                                {/* <div onClick={() => this.handleViewInfoProduct(item)}>
-                                    <a className="mua">Mua</a>
-                                </div> */}
                             </li>
                         ))}
                 </ul>
