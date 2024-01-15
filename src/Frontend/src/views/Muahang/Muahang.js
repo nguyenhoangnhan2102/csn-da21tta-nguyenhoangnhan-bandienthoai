@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import axios from 'axios';
 import './Muahang.scss';
+import { toast } from 'react-toastify';
 
 class Muahang extends React.Component {
 
@@ -11,6 +12,8 @@ class Muahang extends React.Component {
         hoTenKhachHang: '',
         sodienthoai: '',
         diachi: '',
+        soluong: '',
+        sodienthoaiError: '',
     }
 
     async componentDidMount() {
@@ -30,22 +33,40 @@ class Muahang extends React.Component {
         }
     }
 
+    // increaseQuantity = () => {
+    //     const { quantity, infoProduct } = this.state;
+
+    //     if (quantity < infoProduct[0].soluong) {
+    //         this.setState((prevState) => ({
+    //             quantity: prevState.quantity + 1,
+    //             errorMessage: '',
+    //         }));
+    //     } else {
+    //         toast.error("Đã vượt quá số lượng sản phẩm sẵn có!!!");
+
+    //     }
+    // };
+
     increaseQuantity = () => {
-        if (this.state.quantity < 20) {
+        const { quantity, infoProduct } = this.state;
+
+        if (infoProduct[0].soluong > 0 && quantity < infoProduct[0].soluong) {
             this.setState((prevState) => ({
                 quantity: prevState.quantity + 1,
                 errorMessage: '',
             }));
         } else {
-            this.setState({
-                errorMessage: 'Số lượng không thể vượt quá 20',
-            });
+            if (infoProduct[0].soluong <= 0) {
+                toast.error("Sản phẩm đã hết hàng!!!");
+            } else {
+                toast.error("Đã vượt quá số lượng sản phẩm sẵn có!!!");
+            }
         }
     };
 
     handleConfirm = async (event) => {
         try {
-            event.preventDefault(); // Prevent the default form submission behavior
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của việc gửi form
 
             let id = this.props.match.params.id;
             console.log(id);
@@ -54,19 +75,15 @@ class Muahang extends React.Component {
             const diachi = document.querySelector('input[name="diachi"]').value;
 
             if (!hoTenKhachHang || !sodienthoai || !diachi) {
-                alert("Vui lòng điền đầy đủ thông tin khách hàng.");
+                toast.error("Vui lòng điền đầy đủ thông tin khách hàng!!!");
                 return;
             }
 
             const { quantity, infoProduct } = this.state;
-            const selectedProduct = infoProduct[0]; // Assuming there's only one product
+            const selectedProduct = infoProduct[0]; // Giả sử chỉ có một sản phẩm
 
             const totalPrice = (quantity * selectedProduct.giatien) + 20000;
 
-            // Display the quantity and total price in the alert
-            alert("Đặt hàng thành công!!!");
-
-            // Assuming you have axios imported
             const response = await axios.post('http://localhost:8080/confirmOrder', {
                 id,
                 hoTenKhachHang,
@@ -88,6 +105,7 @@ class Muahang extends React.Component {
             console.error("An error occurred:", error);
             alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
         }
+        toast.success("Đặt hàng thành công!!!");
     };
 
 
@@ -100,9 +118,9 @@ class Muahang extends React.Component {
                     <div className="muahang-container">
                         <div className="container-thongtinkhachhang">
                             <h3>Thông tin khách hàng</h3>
-                            <input type="text" name="tenKH" placeholder="Họ và tên" required ></input> <br></br>
-                            <input type="text" name="sdt" placeholder="Số điện thoại"></input> <br></br>
-                            <input type="text" name="diachi" placeholder="Địa chỉ"></input> <br></br>
+                            <input type="text" name="tenKH" placeholder="Họ và tên" required /> <br></br>
+                            <input type="number" name="sdt" placeholder="Số điện thoại" /> <br></br>
+                            <input type="text" name="diachi" placeholder="Địa chỉ" /> <br></br>
                         </div>
                         <div className="thanhdoc"></div>
                         <div className="container-muahang">
@@ -120,6 +138,14 @@ class Muahang extends React.Component {
                                                 <label className="product-pricee">
                                                     {item.giatien.toLocaleString()}đ
                                                 </label>
+
+                                            </div>
+                                            <div className="ton-kho">
+                                                {item.soluong > 0 ? (
+                                                    <span style={{ color: 'green' }}>Còn: {item.soluong}</span>
+                                                ) : (
+                                                    <span style={{ color: 'red' }}>*Hết hàng</span>
+                                                )}
                                             </div>
                                             <hr></hr>
                                             <div className="soluong-container">
@@ -164,8 +190,11 @@ class Muahang extends React.Component {
                                                     className="muahang-xacnhan"
                                                     type="button"  // Đặt type là "button" để tránh form tự submit
                                                     onClick={(event) => this.handleConfirm(event)}
-                                                >Xác nhận
+                                                    disabled={infoProduct[0].soluong <= 0}  // Vô hiệu hóa nút nếu sản phẩm đã hết hàng
+                                                >
+                                                    {infoProduct[0].soluong > 0 ? 'ĐẶT HÀNG' : 'ĐÃ HẾT HÀNG'}
                                                 </button>
+
                                             </div>
                                         </div>
                                     </div>

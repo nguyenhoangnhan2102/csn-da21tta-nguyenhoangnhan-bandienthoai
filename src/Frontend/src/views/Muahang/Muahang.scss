@@ -37,7 +37,7 @@
 
 .thanhdoc {
     width: 1px;
-    height: 500px;
+    height: auto;
     background-color: black;
     opacity: 0.8;
 }
@@ -45,6 +45,13 @@
 .muahang-product-img {
     width: 150px;
     height: 150px;
+}
+
+.ton-kho {
+    font-size: 20px;
+    text-align: left;
+    font-weight: bold;
+    margin-left: 140px;
 }
 
 hr {
@@ -208,16 +215,17 @@ hr {
 }
 
 .muahang-xacnhan {
-    margin-top: 2%;
+    padding: 5px;
+    margin-top: 10%;
     font-size: 20px;
-    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
     transition: background-color 0.3s ease;
     cursor: pointer;
-    background-color: #f0f0f0;
-    /* Thêm hiệu ứng chuyển động */
+    background-color: #ff0000;
 }
 
 .muahang-xacnhan:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    filter: brightness(120%);
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    filter: brightness(200%);
 }

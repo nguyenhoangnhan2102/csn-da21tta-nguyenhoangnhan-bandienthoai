@@ -7,6 +7,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Nav from './Nav/Nav';
 import Footer from "./Footer/Footer";
@@ -38,6 +40,17 @@ function App() {
           </Switch>
           <Footer />
         </header>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div >
     </BrowserRouter>
   );

@@ -85,7 +85,7 @@ const chitiethoadon = async (maHD, id, quantity, totalPrice) => {
                 INSERT INTO CHITIETHOADON (maHD, id, soluongdat, tongtien)
                 VALUES (?, ?, ?, ?)
                 `, [maHD, id, quantity, totalPrice]);
-
+        subtractProductQuantity(id, quantity);
         console.log('số lượng', quantity);
         console.log('tổng tiền', totalPrice);
     } catch (error) {
@@ -93,6 +93,36 @@ const chitiethoadon = async (maHD, id, quantity, totalPrice) => {
         throw error;
     }
 };
+
+///-------------------------------------------------------------------------------------------------------
+
+async function subtractProductQuantity(id, quantity) {
+    // Tạo kết nối đến cơ sở dữ liệu
+
+    try {
+        // Lấy số lượng sản phẩm trước khi trừ
+        const [rows] = await connection.execute('SELECT soluong FROM SANPHAM WHERE id = ?', [id]);
+
+        if (rows.length > 0) {
+            const currentQuantity = rows[0].soluong;
+
+            // Kiểm tra xem có đủ số lượng sản phẩm để trừ không
+            if (currentQuantity >= quantity) {
+                // Thực hiện trừ số lượng sản phẩm
+                await connection.execute('UPDATE SANPHAM SET soluong = ? WHERE id = ?', [currentQuantity - quantity, id]);
+                console.log('Cập nhật thành công.');
+            } else {
+                console.log('Không đủ số lượng sản phẩm');
+            }
+        } else {
+            console.log('Không tìm thấy.');
+        }
+    } catch (error) {
+        console.error('Lỗi: ' + error.message);
+    }
+}
+
+//------------------------------------------------------------------------------------------------------//
 
 // Xử lý POST request từ React
 app.post('/confirmOrder', async (req, res) => {

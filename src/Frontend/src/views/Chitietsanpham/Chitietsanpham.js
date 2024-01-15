@@ -84,7 +84,7 @@ class InfoProduct extends React.Component {
                                 </div>
 
                                 <div>
-                                    <a href={`/mua/${item.id}`} className="muasp">Mua</a>
+                                    <a href={`/mua/${item.id}`} className="muasp">MUA NGAY</a>
                                 </div>
                             </div>
                         </div>

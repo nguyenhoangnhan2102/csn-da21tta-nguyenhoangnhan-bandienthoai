@@ -216,7 +216,7 @@ class Home extends React.Component {
                         </div>
 
                         <div className="product-type-filter">
-                            <label className="type-title">Loại điện thoại:</label>
+                            <label className="type-title">Hệ điều hành:</label>
                             <select
                                 value={productTypeFilter}
                                 onChange={(e) => this.handleProductTypeFilterChange(e.target.value)}

@@ -3,7 +3,6 @@ body {
 }
 
 .topnav {
-    margin: 0 2% 2% 2%;
     background-color: #ffffff;
     overflow: hidden;
 }
@@ -16,6 +15,14 @@ body {
     text-decoration: none;
     font-size: 25px;
     margin-top: 0.5%;
-    font-style: italic;
     font-weight: bold;
+}
+
+.logo-shopphone {
+    font-family: 'Niconne', cursive;
+    font-style: italic;
+}
+
+.all-product {
+    font-family: 'Times New Roman', Times, serif;
 }

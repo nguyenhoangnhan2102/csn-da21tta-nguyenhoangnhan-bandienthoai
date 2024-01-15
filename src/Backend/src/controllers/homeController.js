@@ -28,6 +28,7 @@ const getDetailBill = async (req, res) => {
                 HOADON.maHD,
                 SANPHAM.tenSP,
                 KHACHHANG.hotenKH,
+                KHACHHANG.sdt,
                 KHACHHANG.diachi,
                 CHITIETHOADON.soluongdat,
                 CHITIETHOADON.tongtien,

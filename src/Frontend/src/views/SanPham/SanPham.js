@@ -137,6 +137,7 @@ class SanPham extends React.Component {
             { label: "Android", value: "Android" },
             { label: "iOS", value: "iOS" },
         ];
+        console.log(this.state.data)
 
         return (
             <div className="container">
