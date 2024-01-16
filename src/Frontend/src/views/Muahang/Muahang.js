@@ -13,7 +13,6 @@ class Muahang extends React.Component {
         sodienthoai: '',
         diachi: '',
         soluong: '',
-        //isButtonVisible: true, // Thêm trạng thái mới để kiểm soát việc ẩn hiện của nút
     }
 
     async componentDidMount() {
@@ -44,6 +43,8 @@ class Muahang extends React.Component {
         } else {
             if (infoProduct[0].soluong <= 0) {
                 toast.error("Sản phẩm đã hết hàng!!!");
+            } else {
+                toast.error("Số lượng vượt quá số lượng tồn kho!!!");
             }
         }
     };
@@ -61,7 +62,7 @@ class Muahang extends React.Component {
             //let infoProduct = this.state.infoProduct;
             const { quantity, infoProduct } = this.state;
             if (infoProduct[0].soluong <= 0) {
-                toast.error("Xin lỗi, không thể đặt hàng!!!");
+                toast.error("Xin lỗi quý khách, đã hết hàng!!!");
                 //this.setState({ isButtonVisible: false }); // Ẩn nút khi sản phẩm hết hàng
                 return;
             }
@@ -109,11 +110,15 @@ class Muahang extends React.Component {
                 console.error("Unexpected response status:", response.status);
                 alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
             }
+            toast.success("Đặt hàng thành công!!!");
+            setTimeout(() => {
+                // Reload the page to reset all input fields
+                window.location.reload();
+            }, 4000); // 2000 milliseconds (2 seconds)
         } catch (error) {
             console.error("An error occurred:", error);
             alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
         }
-        toast.success("Đặt hàng thành công!!!");
     };
 
 
@@ -203,15 +208,6 @@ class Muahang extends React.Component {
                                                 >
                                                     {infoProduct[0].soluong > 0 ? 'ĐẶT HÀNG' : 'ĐÃ HẾT HÀNG'}
                                                 </button>
-                                                {/* <button
-                                                    className="muahang-xacnhan"
-                                                    type="button"
-                                                    onClick={(event) => this.handleConfirm(event)}
-                                                    disabled={!this.state.isButtonVisible}  // Sử dụng trạng thái để kiểm soát việc vô hiệu hóa nút
-                                                >
-                                                    {infoProduct[0].soluong > 0 ? 'ĐẶT HÀNG' : 'ĐÃ HẾT HÀNG'}
-                                                </button> */}
-
                                             </div>
                                         </div>
                                     </div>

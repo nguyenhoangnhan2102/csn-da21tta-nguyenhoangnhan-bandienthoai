@@ -26,6 +26,7 @@ const getDetailBill = async (req, res) => {
         const [results, fields] = await connection.execute(`
             SELECT
                 HOADON.maHD,
+                KHACHHANG.maKH,
                 SANPHAM.tenSP,
                 KHACHHANG.hotenKH,
                 KHACHHANG.sdt,

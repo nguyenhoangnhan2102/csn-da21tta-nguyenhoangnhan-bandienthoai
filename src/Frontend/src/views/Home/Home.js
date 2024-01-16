@@ -154,7 +154,7 @@ class Home extends React.Component {
         ];
 
         const { currentImageIndex } = this.state;
-        const imageSources = ['/img/Anh1.jpg', '/img/Anh2.webp', '/img/Anh3.jpg', '/img/Anh4.jpg', '/img/Anh5.jpg'];
+        const imageSources = ['/img/Anh1.jpg', '/img/Anh2.webp', '/img/Anh10.webp', '/img/Anh4.jpg', '/img/Anh5.jpg'];
 
         const firstTenProducts = filteredData ? filteredData.slice(0, 10) : [];
 
