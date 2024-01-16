@@ -41,6 +41,9 @@ class InfoProduct extends React.Component {
                                 </div>
                                 <div className="border">
                                 </div>
+                                <div className="thongtinchitiet">
+                                    Thông tin sản phẩm
+                                </div>
                                 <div className="ghichu">
                                     {item.ghichu}
                                 </div>

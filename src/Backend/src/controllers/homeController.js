@@ -189,6 +189,7 @@ const searchProduct = async (req, res) => {
         const search = req.body.tenSP || ''; // Lấy giá trị tìm kiếm từ form
         const tenNSXFilter = req.body.tenNSX || ''; // Lấy giá trị lọc từ dropdown
         const tenloaiSPFilter = req.body.tenloaiSP || '';
+        const giaFilter = req.body.giatien || ''; // Lấy giá trị lọc từ form
 
         let query = "SELECT * FROM SANPHAM WHERE 1"; // 1 để bắt đầu chuỗi truy vấn
 
@@ -202,6 +203,20 @@ const searchProduct = async (req, res) => {
 
         if (tenloaiSPFilter) {
             query += " AND tenloaiSP = ?";
+        }
+        if (giaFilter) {
+            // Xử lý trường chọn giá tương ứng với các khoảng giá
+            if (giaFilter === "5000000") {
+                query += " AND giatien < 5000000";
+            } else if (giaFilter === "10000000") {
+                query += " AND giatien >= 10000000 AND giatien <= 15000000";
+            } else if (giaFilter === "15000000") {
+                query += " AND giatien >= 15000000 AND giatien <= 20000000";
+                // Thêm các trường hợp khác tùy theo nhu cầu
+            } else if (giaFilter === "20000000") {
+                query += " AND giatien > 20000000";
+                // Thêm các trường hợp khác tùy theo nhu cầu
+            }
         }
 
         const queryParams = [];
@@ -217,6 +232,10 @@ const searchProduct = async (req, res) => {
         if (tenloaiSPFilter) {
             queryParams.push(tenloaiSPFilter);
         }
+
+        // if (giaFilter) {
+        //     queryParams.push(giaFilter);
+        // }
 
         const [results, fields] = await connection.execute(
             query,
