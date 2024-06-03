@@ -2,6 +2,9 @@ const express = require("express");
 const connection = require("../config/dataBase");
 const fs = require("fs");
 //hien thi data thong qua api
+const {
+    getUser
+} = require('../controllers/homeController');
 
 const getAllProduct = async (req, res) => {
     try {
@@ -66,10 +69,12 @@ const createProduct = async (req, res) => {
     let soluong = req.body.soluong;
     let dungluong = req.body.dungluong;
     let ram = req.body.ram;
+    let manhinh = req.body.manhinh;
+    let pin = req.body.pin;
     let giatien = req.body.giatien;
     let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
-    if (!id || !tenSP || !tenloaiSP || !soluong || !dungluong || !ram || !giatien || !tenNSX) {
+    if (!id || !tenSP || !tenloaiSP || !soluong || !dungluong || !ram || !giatien || !manhinh || !pin || !tenNSX) {
         return res.status(200).json({
             message: "missing ",
         });
@@ -105,9 +110,11 @@ const updateProduct = async (req, res) => {
     let ram = req.body.ram;
     let soluong = req.body.soluong;
     let giatien = req.body.giatien;
+    let manhinh = req.body.manhinh;
+    let pin = req.body.pin;
     let ghichu = req.body.ghichu;
     let tenNSX = req.body.tenNSX;
-    if (!id || !tenSP || !tenloaiSP || !soluong || !dungluong || !ram || !giatien || !tenNSX) {
+    if (!id || !tenSP || !tenloaiSP || !soluong || !dungluong || !ram || !giatien || !manhinh || !pin || !tenNSX) {
         return res.status(200).json({
             message: "missing ",
         });
@@ -162,6 +169,47 @@ const getTenLoaiSP = async (req, res) => {
     }
 }
 
+const getAllUser = async (req, res) => {
+    const results = await getUser();
+    return res.status(200).json({
+        EM: results.EM,
+        EC: results.EC,
+        DT: results.DT,
+    });
+};
+
+const getInfoUser = async (req, res) => {
+    try {
+        const taikhoan = req.params.username;
+
+        const results = await getThongtinUser(taikhoan);
+        return res.status(200).json({
+            EM: results.EM,
+            EC: results.EC,
+            DT: results.DT,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const CapnhatUser = async (req, res) => {
+    try {
+        const taikhoan = req.params.username;
+        const ten = req.body.ten;
+        const diachi = req.body.diachi;
+        const sodienthoai = req.body.sodienthoai;
+        const results = await updateUser(taikhoan, ten, diachi, sodienthoai);
+        return res.status(200).json({
+            EM: results.EM,
+            EC: results.EC,
+            DT: results.DT,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 module.exports = {
     getAllProduct,
     createProduct,
@@ -169,5 +217,9 @@ module.exports = {
     updateProduct,
     deleteNSX,
     getIdProduct,
-    getTenLoaiSP
+    getTenLoaiSP,
+    //User
+    getAllUser,
+    getInfoUser,
+    CapnhatUser,
 };

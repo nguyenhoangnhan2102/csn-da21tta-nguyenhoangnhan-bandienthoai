@@ -121,8 +121,6 @@ class Muahang extends React.Component {
         }
     };
 
-
-
     render() {
         let { infoProduct } = this.state;
         return (

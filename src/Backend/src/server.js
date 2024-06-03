@@ -160,5 +160,5 @@ app.use('/', webRoutes);
 app.use("/api/v1/", apiRoute);
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${hostname}:${port}`);
+    console.log(`Example app listening on port http://${hostname}:${port}`);
 });

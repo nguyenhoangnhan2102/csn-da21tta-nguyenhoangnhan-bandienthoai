@@ -14,12 +14,22 @@ const getHomePage = async (req, res) => {
     return res.render("home.ejs", { dataProduct: results, AllNSX: getAllNSXX });
 };
 
-
 const getUserPage = async (req, res) => {
     const [results, fields] = await connection.execute("SELECT * FROM KHACHHANG ");
 
     return res.render("user.ejs", { dataUsers: results });
 };
+
+const getUser = async (req, res) => {
+    const [results, fields] = await connection.execute("SELECT * FROM KHACHHANG ");
+    console.log(results);
+    return {
+        EM: "xem thông tin thành công",
+        EC: 1,
+        DT: results,
+    };
+};
+
 
 const getDetailBill = async (req, res) => {
     try {
@@ -260,6 +270,7 @@ module.exports = {
     getEditPage,
     updateProduct,
     getUserPage,
+    getUser,
     addNewNSX,
     getAddNew,
     deleteNSX,

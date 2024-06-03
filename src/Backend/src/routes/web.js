@@ -23,7 +23,7 @@ const {
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, appRoot + "/src/public/img");
+        cb(null, appRoot + "../public/img");
     },
 
     // By default, multer removes file extensions so let's add them back
@@ -71,6 +71,7 @@ router.post("/delete-tenNSX", deleteNSX);
 router.post("/delete-user", deleteUser);
 
 router.get("/bill-order", getDetailBill);
-// router.post("/delete-detailbill", deleteDetailBill);
+
+
 
 module.exports = router;

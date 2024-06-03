@@ -34,6 +34,7 @@
                     <th>Họ tên khách hàng</th>
                     <th>Số điện thoại</th>
                     <th>Địa chỉ chi tiết</th>
+                    <th>Tài khoản</th>
                     <th>Chức năng</th>
                 </tr>
             </thead>
@@ -51,6 +52,9 @@
                         </td>
                         <td>
                             <%= dataUsers[i].diachi %>
+                        </td>
+                        <td>
+                            <%= dataUsers[i].taikhoan %>
                         </td>
                         <td style="display: flex">
                             <form id="deleteForm<%= i %>" action="/delete-user" method="post">
