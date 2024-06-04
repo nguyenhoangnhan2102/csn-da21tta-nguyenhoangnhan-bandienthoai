@@ -1,6 +1,5 @@
 import React from "react";
-import './Login.css';
-import { withRouter } from 'react-router-dom';
+import './Login.scss';
 
 class Login extends React.Component {
 
@@ -32,4 +31,4 @@ class Login extends React.Component {
         )
     }
 }
-export default withRouter(Login);
+export default Login;

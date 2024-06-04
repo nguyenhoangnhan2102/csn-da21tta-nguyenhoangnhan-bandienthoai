@@ -2,8 +2,6 @@ import React from "react";
 import './SanPham.scss';
 //import axios from "axios";
 
-import { withRouter } from "react-router-dom";
-
 class SanPham extends React.Component {
 
     // state = {
@@ -231,4 +229,4 @@ class SanPham extends React.Component {
 
 }
 
-export default withRouter(SanPham);
+export default SanPham;

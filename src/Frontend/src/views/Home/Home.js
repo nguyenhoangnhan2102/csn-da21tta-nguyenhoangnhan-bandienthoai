@@ -1,31 +1,25 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import Nav from '../Nav/Nav';
+import { useState, useEffect } from "react";
 import './Home.scss';
+import { Link } from "react-router-dom";
 
-class Home extends React.Component {
+const Home = () => {
 
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [priceFilter, setPriceFilter] = useState("");
+    const [productTypeFilter, setProductTypeFilter] = useState("");
+    const [manufacturerFilter, setManufacturerFilter] = useState("");
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+    useEffect(() => {
+        fetchData();
+    }, []); // Empty dependency array means this effect runs once after the first render
 
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            data: null,
-            loading: true,
-            error: null,
-            searchTerm: "",
-            priceFilter: "",
-            productTypeFilter: "",
-            manufacturerFilter: "",
-            currentImageIndex: 0,
-        };
-    }
-
-    componentDidMount() {
-        this.fetchData();
-    }
-
-    fetchData = async () => {
+    const fetchData = async () => {
         try {
             const response = await fetch("http://localhost:8080/api/v1/product", {
                 method: "GET",
@@ -36,132 +30,105 @@ class Home extends React.Component {
             }
 
             const jsonResponse = await response.json();
-
-            this.setState({
-                data: jsonResponse.data,
-                loading: false,
-            });
-
+            setData(jsonResponse.data);
+            setLoading(false);
             console.log(jsonResponse);
         } catch (error) {
             console.error(error.message);
-            this.setState({
-                error: error.message,
-                loading: false,
-            });
+            setError(error.message);
+            setLoading(false);
         }
     };
 
-    handleSearchChange = (event) => {
-        this.setState({ searchTerm: event.target.value });
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
     };
 
-    handlePriceFilterChange = (value) => {
-        this.setState({ priceFilter: value });
+    const handlePriceFilterChange = (value) => {
+        setPriceFilter(value);
     };
 
-    handleManufacturerFilterChange = (value) => {
-        this.setState({ manufacturerFilter: value });
+    const handleManufacturerFilterChange = (value) => {
+        setManufacturerFilter(value);
     };
 
-    handleProductTypeFilterChange = (value) => {
-        this.setState({ productTypeFilter: value });
+    const handleProductTypeFilterChange = (value) => {
+        setProductTypeFilter(value);
     };
 
-    handleNextImage = () => {
-        const { currentImageIndex } = this.state;
+    const handleNextImage = () => {
         const totalImages = 5; // Số lượng ảnh trong danh sách
-
-        // Chuyển đến ảnh tiếp theo, quay lại ảnh đầu nếu đã đến ảnh cuối cùng
-        this.setState({
-            currentImageIndex: (currentImageIndex + 1) % totalImages,
-        });
+        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % totalImages);
     };
 
-    handlePrevImage = () => {
-        const { currentImageIndex } = this.state;
+    const handlePrevImage = () => {
         const totalImages = 5; // Số lượng ảnh trong danh sách
-
-        // Chuyển đến ảnh trước đó, quay lại ảnh cuối cùng nếu đã ở ảnh đầu tiên
-        this.setState({
-            currentImageIndex:
-                (currentImageIndex - 1 + totalImages) % totalImages,
-        });
+        setCurrentImageIndex((prevIndex) => (prevIndex - 1 + totalImages) % totalImages);
     };
 
-    render() {
+    const filteredData =
+        data &&
+        data.length > 0 &&
+        data
+            .filter((item) =>
+                item.tenSP.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+            .filter((item) =>
+                priceFilter === "5000000"
+                    ? item.giatien < 5000000
+                    : priceFilter === "10000000"
+                        ? item.giatien <= 10000000 && item.giatien >= 5000000
+                        : priceFilter === "20000000"
+                            ? item.giatien <= 20000000 && item.giatien > 10000000
+                            : priceFilter === "above20000000" // Thêm điều kiện mới
+                                ? item.giatien > 20000000
+                                : true
+            )
+            .filter((item) =>
+                manufacturerFilter
+                    ? item.tenNSX === manufacturerFilter
+                    : true
+            )
+            .filter((item) =>
+                productTypeFilter
+                    ? item.tenloaiSP === productTypeFilter
+                    : true
+            );
 
-        const { data,
-            loading,
-            error,
-            searchTerm,
-            priceFilter,
-            productTypeFilter,
-            manufacturerFilter,
-        } = this.state;
+    const priceOptions = [
+        { label: "Tất cả", value: "" },
+        { label: "Dưới 5 triệu", value: "5000000" },
+        { label: "5 - 10 triệu", value: "10000000" },
+        { label: "10 - 20 triệu", value: "20000000" },
+        { label: "Trên 20 triệu", value: "above20000000" },
+    ];
 
-        const filteredData =
-            data &&
-            data.length > 0 &&
-            data
-                .filter((item) =>
-                    item.tenSP.toLowerCase().includes(searchTerm.toLowerCase())
-                )
-                .filter((item) =>
-                    priceFilter === "5000000"
-                        ? item.giatien < 5000000
-                        : priceFilter === "10000000"
-                            ? item.giatien <= 10000000 && item.giatien >= 5000000
-                            : priceFilter === "20000000"
-                                ? item.giatien <= 20000000 && item.giatien > 10000000
-                                : priceFilter === "above20000000" // Thêm điều kiện mới
-                                    ? item.giatien > 20000000
-                                    : true
-                )
-                .filter((item) =>
-                    manufacturerFilter
-                        ? item.tenNSX === manufacturerFilter
-                        : true
-                )
-                .filter((item) =>
-                    productTypeFilter
-                        ? item.tenloaiSP === productTypeFilter
-                        : true
-                )
+    const manufacturerOptions = [
+        { label: "Tất cả", value: "" },
+        { label: "Apple", value: "Apple" },
+        { label: "OPPO", value: "OPPO" },
+        { label: "realme", value: "realme" },
+        { label: "Samsung", value: "Samsung" },
+        { label: "vivo", value: "vivo" },
+        { label: "Xiaomi", value: "Xiaomi" },
+    ];
 
-        const priceOptions = [
-            { label: "Tất cả", value: "" },
-            { label: "Dưới 5 triệu", value: "5000000" },
-            { label: "5 - 10 triệu", value: "10000000" },
-            { label: "10 - 20 triệu", value: "20000000" },
-            { label: "Trên 20 triệu", value: "above20000000" },
-        ];
+    const productTypeOptions = [
+        { label: "Tất cả", value: "" },
+        { label: "Android", value: "Android" },
+        { label: "iOS", value: "iOS" },
+    ];
 
-        const manufacturerOptions = [
-            { label: "Tất cả", value: "" },
-            { label: "Apple", value: "Apple" },
-            { label: "OPPO", value: "OPPO" },
-            { label: "realme", value: "realme" },
-            { label: "Samsung", value: "Samsung" },
-            { label: "vivo", value: "vivo" },
-            { label: "Xiaomi", value: "Xiaomi" },
-        ];
+    const imageSources = ['/img/Anh1.jpg', '/img/Anh2.webp', '/img/Anh10.webp', '/img/Anh4.jpg', '/img/Anh5.jpg'];
 
-        const productTypeOptions = [
-            { label: "Tất cả", value: "" },
-            { label: "Android", value: "Android" },
-            { label: "iOS", value: "iOS" },
-        ];
+    const firstTenProducts = filteredData ? filteredData.slice(0, 10) : [];
 
-        const { currentImageIndex } = this.state;
-        const imageSources = ['/img/Anh1.jpg', '/img/Anh2.webp', '/img/Anh10.webp', '/img/Anh4.jpg', '/img/Anh5.jpg'];
-
-        const firstTenProducts = filteredData ? filteredData.slice(0, 10) : [];
-
-        return (
+    return (
+        <>
+            <Nav />
             <div className="container">
                 <div className="introduce">
-                    <button className="introduce-slide" onClick={this.handlePrevImage}>&lt;</button>
+                    <button className="introduce-slide" onClick={handlePrevImage}>&lt;</button>
                     <div>
                         {imageSources.map((src, index) => (
                             <img
@@ -174,7 +141,7 @@ class Home extends React.Component {
                         ))}
                     </div>
 
-                    <button className="introduce-slide" onClick={this.handleNextImage}>&gt;</button>
+                    <button className="introduce-slide" onClick={handleNextImage}>&gt;</button>
                 </div>
                 <div className="tieude1">
 
@@ -184,14 +151,14 @@ class Home extends React.Component {
                             <input
                                 placeholder="Tìm kiếm sản phẩm"
                                 value={searchTerm}
-                                onChange={this.handleSearchChange}
+                                onChange={handleSearchChange}
                             />
                         </div>
                         <div className="price-filter">
                             <label className="gia-title">Chọn giá:</label>
                             <select
                                 value={priceFilter}
-                                onChange={(e) => this.handlePriceFilterChange(e.target.value)}
+                                onChange={(e) => handlePriceFilterChange(e.target.value)}
                             >
                                 {priceOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -205,7 +172,7 @@ class Home extends React.Component {
                             <label className="manufacturer-title">Hãng:</label>
                             <select
                                 value={manufacturerFilter}
-                                onChange={(e) => this.handleManufacturerFilterChange(e.target.value)}
+                                onChange={(e) => handleManufacturerFilterChange(e.target.value)}
                             >
                                 {manufacturerOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -219,7 +186,7 @@ class Home extends React.Component {
                             <label className="type-title">Hệ điều hành:</label>
                             <select
                                 value={productTypeFilter}
-                                onChange={(e) => this.handleProductTypeFilterChange(e.target.value)}
+                                onChange={(e) => handleProductTypeFilterChange(e.target.value)}
                             >
                                 {productTypeOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
@@ -229,8 +196,6 @@ class Home extends React.Component {
                             </select>
                         </div>
                     </div>
-
-
                 </div >
 
                 <div className="content">
@@ -242,17 +207,13 @@ class Home extends React.Component {
                         firstTenProducts.map((item, index) => (
                             <li key={index}>
                                 <div className="product-top">
-                                    <a
-                                        href={`/product/${item.id}`}
-                                        className="product-thumb"
-                                    >
-
-                                        <img className="product-pic"
+                                    <Link to={`/product/${item.id}`} className="product-thumb">
+                                        <img
+                                            className="product-pic"
                                             src={`http://localhost:8080/public/img/${item.mota}`}
                                             alt={item.tenSP}
                                         />
-
-                                    </a>
+                                    </Link>
                                 </div>
                                 <div className="product-info">
                                     <div className="product-name">{item.tenSP}</div>
@@ -262,10 +223,11 @@ class Home extends React.Component {
                                 </div>
                             </li>
                         ))}
+
                 </ul>
             </div >
-        );
-    }
+        </>
+    );
 }
 
-export default withRouter(Home);
+export default Home;

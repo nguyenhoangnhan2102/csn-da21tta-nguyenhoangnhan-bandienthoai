@@ -1,11 +1,5 @@
 import React from "react";
-import './App.scss';
-
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -27,29 +21,15 @@ function App() {
         <header className="App-header">
           {/* Uncomment Nav if needed */}
           {/* <Nav /> */}
-          <Switch>
-            <Route path="/login" exact>
-              <Login />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/" exact>
-              <Home />
-            </Route>
-            <Route path="/product" exact>
-              <SanPham />
-            </Route>
-            <Route path="/product/:id">
-              <Chitietsanpham />
-            </Route>
-            <Route path="/mua/:id">
-              <Muahang />
-            </Route>
-            <Route path="/user">
-              <User />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/product" element={<SanPham />} />
+            <Route path="/product/:id" element={<Chitietsanpham />} />
+            <Route path="/mua/:id" element={<Muahang />} />
+            <Route path="/user" element={<User />} />
+          </Routes>
           {/* Uncomment Footer if needed */}
           {/* <Footer /> */}
         </header>
