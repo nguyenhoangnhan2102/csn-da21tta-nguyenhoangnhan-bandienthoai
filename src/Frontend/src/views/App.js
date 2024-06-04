@@ -1,9 +1,8 @@
-// App.jsx
 import React from "react";
 import './App.scss';
 
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Switch,
   Route,
 } from "react-router-dom";
@@ -23,15 +22,16 @@ import Signup from "./Signup/Signup";
 
 function App() {
   return (
-    <BrowserRouter forceRefresh={true}>
+    <Router>
       <div className="App">
         <header className="App-header">
+          {/* Uncomment Nav if needed */}
           {/* <Nav /> */}
           <Switch>
             <Route path="/login" exact>
               <Login />
             </Route>
-            <Route path="/signup" exact>
+            <Route path="/signup">
               <Signup />
             </Route>
             <Route path="/" exact>
@@ -50,6 +50,7 @@ function App() {
               <User />
             </Route>
           </Switch>
+          {/* Uncomment Footer if needed */}
           {/* <Footer /> */}
         </header>
         <ToastContainer
@@ -63,8 +64,8 @@ function App() {
           draggable
           pauseOnHover
         />
-      </div >
-    </BrowserRouter>
+      </div>
+    </Router>
   );
 }
 
