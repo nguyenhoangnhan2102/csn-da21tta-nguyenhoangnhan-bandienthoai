@@ -210,6 +210,23 @@ const CapnhatUser = async (req, res) => {
     }
 };
 
+const NewAccount = (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).json({ error: "Username and password are required." });
+    }
+
+    const sql = 'INSERT INTO TAIKHOAN (taikhoan, matkhau) VALUES (?, ?)';
+    connection.query(sql, [username, password], (error, results, fields) => {
+        if (error) {
+            console.error('Error inserting user: ' + error.stack);
+            return res.status(500).json({ error: "Failed to create user." });
+        }
+        res.status(201).json({ message: "User created successfully." });
+    });
+}
+
 module.exports = {
     getAllProduct,
     createProduct,
@@ -222,4 +239,5 @@ module.exports = {
     getAllUser,
     getInfoUser,
     CapnhatUser,
+    NewAccount,
 };

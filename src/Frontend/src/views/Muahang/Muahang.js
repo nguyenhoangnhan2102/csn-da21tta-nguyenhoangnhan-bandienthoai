@@ -3,14 +3,17 @@ import axios from 'axios';
 import './Muahang.scss';
 import { toast } from 'react-toastify';
 import { useParams } from "react-router-dom";
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-const Muahang = (props) => {
+const Muahang = () => {
 
     const [infoProduct, setInfoProduct] = useState([]);
     const [quantity, setQuantity] = useState(1);
     const [hoTenKhachHang, setHoTenKhachHang] = useState('');
     const [sodienthoai, setSodienthoai] = useState('');
     const [diachi, setDiachi] = useState('');
+    const [error, setError] = useState('');
     const { id } = useParams();
     console.log(id);
 
@@ -52,19 +55,12 @@ const Muahang = (props) => {
         try {
             event.preventDefault();
 
+            const hoTenKhachHang = document.querySelector('input[name="tenKH"]').value.trim();
+            const sodienthoai = document.querySelector('input[name="sdt"]').value.trim();
+            const diachi = document.querySelector('input[name="diachi"]').value.trim();
+
             if (infoProduct[0]?.soluong <= 0) {
                 alert("Xin lỗi quý khách, đã hết hàng!!!");
-                return;
-            }
-
-            const namePattern = /^[A-Za-zÀ-Ỹà-ỹ\s]+$/;
-            if (!namePattern.test(hoTenKhachHang)) {
-                alert("Họ tên không hợp lệ. Vui lòng chỉ nhập kí tự!!!");
-                return;
-            }
-
-            if (isNaN(sodienthoai) || parseInt(sodienthoai) < 0) {
-                alert("Số điện thoại không hợp lệ!!!");
                 return;
             }
 
@@ -73,10 +69,15 @@ const Muahang = (props) => {
                 return;
             }
 
+            if (isNaN(sodienthoai) || parseInt(sodienthoai, 10) < 0) {
+                alert("Số điện thoại không hợp lệ!!!");
+                return;
+            }
+
             const totalPrice = (quantity * infoProduct[0]?.giatien) + 20000;
 
             const response = await axios.post('http://localhost:8080/confirmOrder', {
-                id: props.match.params.id,
+                id,
                 hoTenKhachHang,
                 sodienthoai,
                 diachi,
@@ -102,6 +103,7 @@ const Muahang = (props) => {
 
     return (
         <>
+            <Nav />
             <form>
                 <div className="muahang-container">
                     <div className="container-thongtinkhachhang">
@@ -185,6 +187,7 @@ const Muahang = (props) => {
                     </div>
                 </div>
             </form>
+            <Footer />
         </>
     );
 }

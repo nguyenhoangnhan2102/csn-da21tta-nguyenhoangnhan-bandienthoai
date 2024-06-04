@@ -3,6 +3,8 @@ body {
 }
 
 .topnav {
+    position: fixed;
+    width: 100%;
     background-color: #ffffff;
     overflow: hidden;
     border-bottom: 3px solid rgb(237, 233, 233);
