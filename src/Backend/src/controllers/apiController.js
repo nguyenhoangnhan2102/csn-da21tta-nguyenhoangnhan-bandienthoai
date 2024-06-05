@@ -210,22 +210,21 @@ const CapnhatUser = async (req, res) => {
     }
 };
 
-const NewAccount = (req, res) => {
-    const { username, password } = req.body;
+// const Signup = async (req, res) => {
+//     try {
+//         const { username, password } = req.body;
 
-    if (!username || !password) {
-        return res.status(400).json({ error: "Username and password are required." });
-    }
+//         await connection.execute(`
+//         INSERT INTO TAIKHOAN (username, password) 
+//         VALUES (?, ?)
+//     `, [username, password]);
 
-    const sql = 'INSERT INTO TAIKHOAN (taikhoan, matkhau) VALUES (?, ?)';
-    connection.query(sql, [username, password], (error, results, fields) => {
-        if (error) {
-            console.error('Error inserting user: ' + error.stack);
-            return res.status(500).json({ error: "Failed to create user." });
-        }
-        res.status(201).json({ message: "User created successfully." });
-    });
-}
+//         res.status(200).json({ success: true });
+//     } catch (error) {
+//         console.error('Error inserting into MySQL:', error);
+//         res.status(500).json({ success: false, error: error.message });
+//     }
+// };
 
 module.exports = {
     getAllProduct,
@@ -239,5 +238,5 @@ module.exports = {
     getAllUser,
     getInfoUser,
     CapnhatUser,
-    NewAccount,
+    //Signup,
 };
