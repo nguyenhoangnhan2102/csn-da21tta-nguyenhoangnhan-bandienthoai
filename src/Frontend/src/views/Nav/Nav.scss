@@ -8,26 +8,45 @@ body {
     background-color: #ffffff;
     overflow: hidden;
     border-bottom: 3px solid rgb(237, 233, 233);
+    margin-bottom: 100px;
 }
 
 .topnav a {
     float: left;
     color: black;
     text-align: center;
-    padding: 16px 16px;
+    padding: 0 0 0 0;
     text-decoration: none;
-    font-size: 25px;
-    margin-top: 0.5%;
     font-weight: bold;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.logo-shopphone {
+.logo_shopphone {
+    height: 50px;
     font-family: 'Niconne', cursive;
     font-style: italic;
+    font-size: 25px;
 }
 
-.all-product {
+.all_product {
+    height: 50px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    margin-left: 20px;
+}
 
+.nav_login{
+
+    width: 10rem;
+    height: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 74%;
+}
+
+.nav_login:hover{
+    background-color: rgb(200, 210, 210);
 }

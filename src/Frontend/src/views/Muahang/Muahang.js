@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import './Muahang.scss';
-import { toast } from 'react-toastify';
 import { useParams } from "react-router-dom";
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Muahang = () => {
 
@@ -27,7 +28,7 @@ const Muahang = () => {
                 }
             } catch (error) {
                 console.error("An error occurred:", error);
-                alert("Đã xảy ra lỗi khi tải sản phẩm. Vui lòng thử lại sau.");
+                toast.error("Đã xảy ra lỗi khi tải sản phẩm. Vui lòng thử lại sau.");
             }
         };
         fetchData();
@@ -44,9 +45,9 @@ const Muahang = () => {
             setQuantity(prevQuantity => prevQuantity + 1);
         } else {
             if (infoProduct[0]?.soluong <= 0) {
-                alert("Sản phẩm đã hết hàng!!!");
+                toast.warn("Sản phẩm đã hết hàng!!!");
             } else {
-                alert("Số lượng vượt quá số lượng tồn kho!!!");
+                toast.warn("Số lượng vượt quá số lượng tồn kho!!!");
             }
         }
     };
@@ -60,17 +61,17 @@ const Muahang = () => {
             const diachi = document.querySelector('input[name="diachi"]').value.trim();
 
             if (infoProduct[0]?.soluong <= 0) {
-                alert("Xin lỗi quý khách, đã hết hàng!!!");
+                toast.warn("Xin lỗi quý khách, đã hết hàng!!!");
                 return;
             }
 
             if (!hoTenKhachHang || !sodienthoai || !diachi) {
-                alert("Vui lòng điền đầy đủ thông tin khách hàng!!!");
+                toast.warn("Vui lòng điền đầy đủ thông tin khách hàng!!!");
                 return;
             }
 
             if (isNaN(sodienthoai) || parseInt(sodienthoai, 10) < 0) {
-                alert("Số điện thoại không hợp lệ!!!");
+                toast.warn("Số điện thoại không hợp lệ!!!");
                 return;
             }
 
@@ -89,15 +90,15 @@ const Muahang = () => {
                 console.log("Order confirmed successfully:", response.data);
             } else {
                 console.error("Unexpected response status:", response.status);
-                alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
+                toast.error("Đã xảy ra lỗi. Vui lòng thử lại sau.");
             }
-            alert("Đặt hàng thành công!!!");
+            toast.success("Đặt hàng thành công!!!");
             setTimeout(() => {
                 window.location.reload();
             }, 4000);
         } catch (error) {
             console.error("An error occurred:", error);
-            alert("Đã xảy ra lỗi. Vui lòng thử lại sau.");
+            toast.error("Đã xảy ra lỗi. Vui lòng thử lại sau.");
         }
     };
 

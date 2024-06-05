@@ -41,6 +41,24 @@
    border-radius: 6px;
    outline: none;
  }
+
+ .form a:hover{
+  cursor: pointer;
+}
+
+ .form button{
+  height: 3rem;
+  color: #fff;
+  background: #009579;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin-top: 1.7rem;
+  cursor: pointer;
+  transition: 0.4s;
+  margin-bottom: 10px;
+}
+
  .form input:focus{
    box-shadow: 0 1px 0 rgba(0,0,0,0.2);
  }
@@ -65,14 +83,12 @@
 .form input.button:hover{
   background: #006653;
 }
-.signup{
-  font-size: 17px;
-  text-align: center;
-}
-.signup label{
-  color: #009579;
-  cursor: pointer;
-}
-.signup label:hover{
-  text-decoration: underline;
+
+.signup>label{
+  width: 10px;
+  height: 10px;
+  padding-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

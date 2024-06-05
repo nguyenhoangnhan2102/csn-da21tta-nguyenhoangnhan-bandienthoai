@@ -1,5 +1,7 @@
 import React from "react";
 import './SanPham.scss';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 //import axios from "axios";
 
 class SanPham extends React.Component {
@@ -138,95 +140,98 @@ class SanPham extends React.Component {
         console.log(this.state.data)
 
         return (
-            <div className="container">
-                <div className="tieude1">
-                    <div>
-                        <h1>Danh Sách Sản Phẩm</h1>
-                    </div>
-
-                    <div className="Searchfillter">
-                        <div className="editinput">
-                            <input
-                                placeholder="Tìm kiếm sản phẩm"
-                                value={searchTerm}
-                                onChange={this.handleSearchChange}
-                            />
-                        </div>
-                        <div className="price-filter">
-                            <label className="gia-title">Chọn giá:</label>
-                            <select
-                                value={priceFilter}
-                                onChange={(e) => this.handlePriceFilterChange(e.target.value)}
-                            >
-                                <option value="">Tất cả</option>
-                                {priceOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
+            <>
+                <Nav />
+                <div className="container">
+                    <div className="tieude1">
+                        <div>
+                            <h1>Danh Sách Sản Phẩm</h1>
                         </div>
 
-                        <div className="manufacturer-filter">
-                            <label className="manufacturer-title">Hãng:</label>
-                            <select
-                                value={manufacturerFilter}
-                                onChange={(e) => this.handleManufacturerFilterChange(e.target.value)}
-                            >
-                                {manufacturerOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
+                        <div className="Searchfillter">
+                            <div className="editinput">
+                                <input
+                                    placeholder="Tìm kiếm sản phẩm"
+                                    value={searchTerm}
+                                    onChange={this.handleSearchChange}
+                                />
+                            </div>
+                            <div className="price-filter">
+                                <label className="gia-title">Chọn giá:</label>
+                                <select
+                                    value={priceFilter}
+                                    onChange={(e) => this.handlePriceFilterChange(e.target.value)}
+                                >
+                                    <option value="">Tất cả</option>
+                                    {priceOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="manufacturer-filter">
+                                <label className="manufacturer-title">Hãng:</label>
+                                <select
+                                    value={manufacturerFilter}
+                                    onChange={(e) => this.handleManufacturerFilterChange(e.target.value)}
+                                >
+                                    {manufacturerOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <div className="product-type-filter">
+                                <label className="type-title">Loại điện thoại:</label>
+                                <select
+                                    value={productTypeFilter}
+                                    onChange={(e) => this.handleProductTypeFilterChange(e.target.value)}
+                                >
+                                    {productTypeOptions.map((option) => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
+                    </div >
 
-                        <div className="product-type-filter">
-                            <label className="type-title">Loại điện thoại:</label>
-                            <select
-                                value={productTypeFilter}
-                                onChange={(e) => this.handleProductTypeFilterChange(e.target.value)}
-                            >
-                                {productTypeOptions.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                    </div>
-                </div >
+                    <ul className="products">
+                        {filteredData &&
+                            filteredData.map((item, index) => (
+                                <li key={index}>
+                                    <div className="product-top">
+                                        <a
+                                            href={`/product/${item.id}`}
+                                            className="product-thumb"
+                                        >
 
-                <ul className="products">
-                    {filteredData &&
-                        filteredData.map((item, index) => (
-                            <li key={index}>
-                                <div className="product-top">
-                                    <a
-                                        href={`/product/${item.id}`}
-                                        className="product-thumb"
-                                    >
+                                            <img className="product-pic"
+                                                src={`http://localhost:8080/public/img/${item.mota}`}
+                                                alt={item.tenSP}
+                                            />
 
-                                        <img className="product-pic"
-                                            src={`http://localhost:8080/public/img/${item.mota}`}
-                                            alt={item.tenSP}
-                                        />
-
-                                    </a>
-                                </div>
-                                <div className="product-info">
-                                    <div className="product-name">{item.tenSP}</div>
-                                    <div className="product-price">
-                                        {item.giatien.toLocaleString()}<sup><u>đ</u></sup>
+                                        </a>
                                     </div>
-                                </div>
-                            </li>
-                        ))}
-                </ul>
-            </div >
+                                    <div className="product-info">
+                                        <div className="product-name">{item.tenSP}</div>
+                                        <div className="product-price">
+                                            {item.giatien.toLocaleString()}<sup><u>đ</u></sup>
+                                        </div>
+                                    </div>
+                                </li>
+                            ))}
+                    </ul>
+                </div >
+                <Footer />
+            </>
         );
     }
-
 }
 
 export default SanPham;

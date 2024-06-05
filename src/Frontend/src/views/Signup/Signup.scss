@@ -54,6 +54,11 @@
   color: #009579;
   text-decoration: none;
 }
+
+.form a:hover{
+  cursor: pointer;
+}
+
 .form a:hover{
   text-decoration: underline;
 }
@@ -69,6 +74,7 @@
   transition: 0.4s;
   margin-bottom: 10px;
 }
+
 .form input.button:hover{
   background: #006653;
 }
@@ -81,5 +87,5 @@
   cursor: pointer;
 }
 .signup label:hover{
-  text-decoration: underline;
+  text-decoration: none;
 }
