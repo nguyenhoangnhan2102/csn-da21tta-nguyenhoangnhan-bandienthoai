@@ -8,19 +8,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
 
-    // const navigate = useNavigate();
-    // const [username, setUsername] = useState('');
-    // const [password, setPassword] = useState('');
-
-    // const handleSubmit = async (event) => {
-    //     event.preventDefault(); // Prevent default form submission
-
-    //     const response = await fetch('/api/signup', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({ username, password }),
-    //     });
-
     const alertFunction = () => {
         toast.info("Chức năng đang phát triển. Vui lòng thử lại sau!!!")
     }
