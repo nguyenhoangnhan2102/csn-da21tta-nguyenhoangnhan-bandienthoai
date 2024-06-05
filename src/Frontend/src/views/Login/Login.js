@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
 
-    const alertFunction = () => {
+    const alertFunction_login = () => {
         toast.info("Chức năng đang phát triển. Vui lòng thử lại sau")
     }
 
@@ -21,7 +21,7 @@ const Login = () => {
                     <form action="#">
                         <input type="text" placeholder="Enter your email" />
                         <input type="password" placeholder="Enter your password" />
-                        <a onClick={alertFunction}>Forgot password?</a>
+                        <a onClick={alertFunction_login}> Forgot password? </a>
                         <button className="button" value="Login">Login</button>
                     </form>
                     <div className="signup">

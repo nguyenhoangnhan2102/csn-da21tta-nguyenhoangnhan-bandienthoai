@@ -155,6 +155,9 @@ app.post('/confirmSignup', async (req, res) => {
         if (!username || !password) {
             return res.status(400).json({ message: 'Username and password are required' });
         }
+
+        //const hashedPassword = await bcrypt.hash(password, 20);
+
         // Thực hiện truy vấn INSERT
         await connection.execute(`
             INSERT INTO TAIKHOAN (taikhoan, matkhau)
@@ -166,7 +169,6 @@ app.post('/confirmSignup', async (req, res) => {
         console.error('Error inserting into MySQL:', error);
         res.status(500).json({ success: false, error: error.message });
     }
-
 
 });
 
