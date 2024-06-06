@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 const Signup = () => {
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -19,6 +20,10 @@ const Signup = () => {
             const username = document.querySelector('input[name="username"]').value.trim();
             const password = document.querySelector('input[name="password"]').value.trim();
             const repassword = document.querySelector('input[name="repassword"]').value.trim();
+
+            console.log(username);
+            console.log(password);
+            console.log(repassword);
 
             if (password !== repassword) {
                 toast.error("Mật khẩu không trùng khớp!!!");

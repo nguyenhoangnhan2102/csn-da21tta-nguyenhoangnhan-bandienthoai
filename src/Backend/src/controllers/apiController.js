@@ -193,6 +193,30 @@ const getInfoUser = async (req, res) => {
     }
 };
 
+const getThongtinUser = async (taikhoan) => {
+    try {
+
+        const respon = await connection.execute(`
+        SELECT * FROM TAIKHOAN where taikhoan = ?`, [taikhoan])
+        console.log(respon[[0]])
+        if (respon.length > 0) {
+            return {
+                EM: 'Oke',
+                EC: "1",
+                DT: respon[[0]],
+            };
+        } else {
+            return {
+                EM: 'Oke',
+                EC: "1",
+                DT: [],
+            };
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 const CapnhatUser = async (req, res) => {
     try {
         const taikhoan = req.params.username;
@@ -209,22 +233,6 @@ const CapnhatUser = async (req, res) => {
         console.log(error);
     }
 };
-
-// const Signup = async (req, res) => {
-//     try {
-//         const { username, password } = req.body;
-
-//         await connection.execute(`
-//         INSERT INTO TAIKHOAN (username, password) 
-//         VALUES (?, ?)
-//     `, [username, password]);
-
-//         res.status(200).json({ success: true });
-//     } catch (error) {
-//         console.error('Error inserting into MySQL:', error);
-//         res.status(500).json({ success: false, error: error.message });
-//     }
-// };
 
 const Signup = async (req, res) => {
     try {

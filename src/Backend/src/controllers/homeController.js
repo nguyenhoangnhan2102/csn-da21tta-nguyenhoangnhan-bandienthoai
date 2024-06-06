@@ -30,6 +30,8 @@ const getUser = async (req, res) => {
     };
 };
 
+// JOIN
+// KHACHHANG ON HOADON.maKH = KHACHHANG.maKH
 
 const getDetailBill = async (req, res) => {
     try {
@@ -39,8 +41,11 @@ const getDetailBill = async (req, res) => {
                 KHACHHANG.maKH,
                 SANPHAM.tenSP,
                 KHACHHANG.hotenKH,
-                KHACHHANG.sdt,
+                KHACHHANG.sdt,  
                 KHACHHANG.diachi,
+                HOADON.tenKH,
+                HOADON.diachiKH,
+                HOADON.sdtKH,
                 CHITIETHOADON.soluongdat,
                 CHITIETHOADON.tongtien,
                 HOADON.thoigiandat
