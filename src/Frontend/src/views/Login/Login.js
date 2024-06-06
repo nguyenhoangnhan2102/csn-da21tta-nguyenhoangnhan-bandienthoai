@@ -8,17 +8,17 @@ import axios from 'axios';
 
 const Login = () => {
 
-    const [email, setEmail] = useState('');
+    const [username, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/login', { username: email, password });
+            const response = await axios.post('http://localhost:8080/login', { username: username, password });
             toast.success(response.data.message);
             console.log(response);
-            navigate('/');
+            navigate(`/user/${username}`);
         } catch (error) {
             toast.error(error.response?.data?.message || 'Login failed');
         }
@@ -36,7 +36,7 @@ const Login = () => {
                 <div className="login form">
                     <header>Login</header>
                     <form onSubmit={handleLogin}>
-                        <input type="text" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type="text" placeholder="Enter your email" value={username} onChange={(e) => setEmail(e.target.value)} />
                         <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
                         <a onClick={alertFunction_login}> Forgot password? </a>
                         <button className="button" type="submit">Login</button>

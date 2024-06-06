@@ -28,7 +28,7 @@ function App() {
             <Route path="/product" element={<SanPham />} />
             <Route path="/product/:id" element={<Chitietsanpham />} />
             <Route path="/mua/:id" element={<Muahang />} />
-            <Route path="/user" element={<User />} />
+            <Route path="/user/:username" element={<User />} />
           </Routes>
           {/* Uncomment Footer if needed */}
           {/* <Footer /> */}

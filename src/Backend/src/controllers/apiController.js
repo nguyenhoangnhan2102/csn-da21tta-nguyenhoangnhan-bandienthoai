@@ -199,11 +199,15 @@ const getThongtinUser = async (taikhoan) => {
         const respon = await connection.execute(`
         SELECT * FROM TAIKHOAN where taikhoan = ?`, [taikhoan])
         console.log(respon[[0]])
+
         if (respon.length > 0) {
+            const respon1 = await connection.execute(`
+            SELECT * FROM KHACHHANG where taikhoan = ?`, [taikhoan])
+            console.log("respone1 = ", respon1[0]);
             return {
                 EM: 'Oke',
                 EC: "1",
-                DT: respon[[0]],
+                DT: respon1[[0]],
             };
         } else {
             return {
@@ -238,9 +242,6 @@ const Signup = async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        if (!username || !password) {
-            return res.status(400).json({ message: 'Username and password are required' });
-        }
 
         //const hashedPassword = await bcrypt.hash(password, 20);
 

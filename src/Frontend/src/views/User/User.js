@@ -1,14 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './User.scss';
-import Nav from '../Nav/Nav';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
-function User() {
+const User = () => {
+    const { username } = useParams();
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+
+    useEffect(() => {
+        fetchData();
+    }, []); // Empty dependency array means this effect runs once after the first render
+
+    const fetchData = async () => {
+        try {
+            console.log("username=", username);
+            const response = await axios.get(`http://localhost:8080/api/v1/user/info/${username}`, {
+                method: "GET",
+                mode: "cors",
+            });
+
+            console.log("res=", response.data.DT[0]);
+
+            if (+ response.data.EC === 1) {
+                console.log("res.data.DT", response.data.DT);
+                setData(response.data.DT);
+                console.log("data.ec = ", response.data.EC);
+
+            }
+
+
+            setLoading(false);
+        } catch (error) {
+            console.error(error.message);
+            setError(error.message);
+            setLoading(false);
+        }
+    };
+    console.log("data = ", data)
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
+
+
+
     return (
-        <>
-            <div>
+        <div>
+            <ul className="products">
+                {data ? (
+                    data.map((item, index) => (
+                        <li key={index}>
+                            {/* <div className="product-top">
+                                <a
+                                    href={`/user/${item.avatar}`}
+                                    className="product-thumb"
+                                >
+                                </a>
+                            </div> */}
+                            <div className="product-info">
+                                <div className="product-name">{item.hotenKH}</div>
+                                <div className="product-name">{item.sdt}</div>
+                                <div className="product-name">{item.diachi}</div>
 
-            </div>
-        </>
+                            </div>
+                        </li>
+                    ))
+                ) : 'Không có dữ liệu'
+                }
+            </ul>
+        </div>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+//import { Navigate, useNavigate } from 'react-router-dom';
 import './Signup.scss';
 import { NavLink } from 'react-router-dom';
 import Nav from '../Nav/Nav';
@@ -30,7 +30,7 @@ const Signup = () => {
                 return;
             }
 
-            const response = await axios.post('http://localhost:8080/confirmSignup', {
+            const response = await axios.post('http://localhost:8080/api/v1/confirmSignup', {
                 username, password
             });
 
