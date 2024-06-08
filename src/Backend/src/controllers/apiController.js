@@ -41,16 +41,16 @@ const getIdProduct = async (req, res) => {
         );
 
         //Thêm đường dẫn đầy đủ cho mỗi sản phẩm
-        const productsWithImageUrls = results.map((product) => {
+        const profilesWithImageUrls = results.map((profile) => {
             return {
-                ...product,
-                imageUrl: `http://localhost:8080/api/v1/img/${product.mota}`,
+                ...profile,
+                imageUrl: `http://localhost:8080/api/v1/img/${profile.avatar}`,
             };
         });
 
         return res.status(200).json({
             //message: "ok",
-            data: productsWithImageUrls,
+            data: profilesWithImageUrls,
         });
     } catch (error) {
         console.error(error.message);
@@ -188,12 +188,14 @@ const getInfoUser = async (req, res) => {
             EC: results.EC,
             DT: results.DT,
         });
+
     } catch (error) {
         console.log(error);
     }
 };
 
 const getThongtinUser = async (taikhoan) => {
+
     try {
 
         const respon = await connection.execute(`
@@ -202,7 +204,9 @@ const getThongtinUser = async (taikhoan) => {
 
         if (respon.length > 0) {
             const respon1 = await connection.execute(`
-            SELECT * FROM KHACHHANG where taikhoan = ?`, [taikhoan])
+            SELECT * FROM KHACHHANG where taikhoan = ?`, [taikhoan]);
+
+
             console.log("respone1 = ", respon1[0]);
             return {
                 EM: 'Oke',
@@ -216,27 +220,24 @@ const getThongtinUser = async (taikhoan) => {
                 DT: [],
             };
         }
+
     } catch (error) {
         console.log(error);
     }
+    const productsWithImageUrls = results.map((product) => {
+        return {
+            ...product,
+            imageUrl: `http://localhost:8080/api/v1/img/${product.avatar}`,
+        };
+    });
+
+    return res.status(200).json({
+        //message: "ok",
+        data: productsWithImageUrls,
+    });
 };
 
-const CapnhatUser = async (req, res) => {
-    try {
-        const taikhoan = req.params.username;
-        const ten = req.body.ten;
-        const diachi = req.body.diachi;
-        const sodienthoai = req.body.sodienthoai;
-        const results = await updateUser(taikhoan, ten, diachi, sodienthoai);
-        return res.status(200).json({
-            EM: results.EM,
-            EC: results.EC,
-            DT: results.DT,
-        });
-    } catch (error) {
-        console.log(error);
-    }
-};
+
 
 const confirmOrder = async () => {
     try {
@@ -284,12 +285,13 @@ const Signup = async (req, res) => {
 
 };
 
-const handleLogin = async (res, req) => {
+const handleLogin = async (req, res) => {
+    const { username, password } = req.body;
+
+    console.log(username + password);
     try {
 
-        const { username, password } = req.body;
 
-        console.log(username + password);
 
         if (!username || !password) {
             return res.status(400).send({ message: 'Please provide both username and password' });
@@ -313,6 +315,53 @@ const handleLogin = async (res, req) => {
     }
 };
 
+const updateUser = async (req, res) => {
+    try {
+        const username = req.params.username;
+        const { hotenKH, sdt, diachi, avatar } = req.body;
+
+        const results = await CapnhatUser(username, hotenKH, sdt, diachi, avatar);
+        return res.status(200).json({
+            EM: results.EM,
+            EC: results.EC,
+            DT: results.DT,
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+const CapnhatUser = async (username, hotenKH, sdt, diachi, avatar) => {
+    try {
+        const [results, fields] = await connection.execute(
+            "SELECT * from KHACHHANG WHERE taikhoan = ?",
+            [taikhoan]
+        );
+        console.log("check resultls", results);
+        if (results.length > 0) {
+            const [results2, fields] = await connection.execute(
+                "UPDATE KHACHHANG SET hotenKH = ?, sdt = ?, diachi = ? avatar = ? where taikhoan = ?",
+                [hotenKH, sdt, avatar, diachi, username]
+            );
+            return {
+                EM: "thay đổi thông tin thành công",
+                EC: 1,
+                DT: results2,
+            };
+        } else {
+            return {
+                EM: "Tài khoản không tồn tại",
+                EC: 0,
+                DT: [],
+            };
+        }
+        console.log(results);
+    } catch (error) {
+        console.error("Error in postLoginUser:", error);
+        throw error;
+    }
+};
+
 module.exports = {
     getAllProduct,
     createProduct,
@@ -328,4 +377,5 @@ module.exports = {
     Signup,
     confirmOrder,
     handleLogin,
+    updateUser,
 };

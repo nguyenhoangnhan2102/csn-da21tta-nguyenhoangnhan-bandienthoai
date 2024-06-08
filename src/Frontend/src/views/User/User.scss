@@ -1,31 +1,37 @@
-/* App.css */
+.profile_container{
+  padding-top: 7%;
+  width: 90%;
+  display: flex ;
+  justify-content: center;
+  align-items: center;
+}
 
-.App {
-    text-align: center;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  li {
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    margin-bottom: 30px;
-  }
-  
-  h2 {
-    margin-bottom: 10px;
-  }
-  
-  p {
-    margin: 5px 0;
-  }
-  
+.profile{
+
+  width: 100%;
+  display: flex;
+}
+
+.profile_avatar{
+  display: block;
+  width: 50%;
+  text-align: center;
+}
+
+.profile_info{
+  width: 50%;
+}
+
+.avatar{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.taikhoan{
+  color: rgb(141, 139, 139);
+}
+
+.profile_spacing{
+  margin-bottom: 20px;
+}

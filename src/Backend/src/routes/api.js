@@ -13,6 +13,7 @@ const {
     getAllUser,
     getInfoUser,
     CapnhatUser,
+    updateUser,
 
     Signup,
 
@@ -33,14 +34,18 @@ router.get("/product/:id", getIdProduct);
 //User
 router.get("/user", getAllUser); // get list of users
 router.get("/user/info/:username", getInfoUser); //get info 1 user
-router.put("/user/info/update/:username", CapnhatUser);
+//router.put("/user/info/update/:username", CapnhatUser);
 // router.put("/user/info/update/password/:username", CapnhatPasswordUser); //update 1 user (cho người dùng)
 // router.delete("/user/info/delete/:username", XoaUser); //xóa user (cho admin)
+router.put("/user/info/update/:username", updateUser);
+
 
 router.post('/confirmOrder', confirmOrder);
 
 router.post('/confirmSignup', Signup);
 
 router.post('/login', handleLogin);
+
+
 
 module.exports = router;

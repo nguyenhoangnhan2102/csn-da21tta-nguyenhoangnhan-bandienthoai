@@ -2,7 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './views/App';
 import reportWebVitals from './reportWebVitals';
-import Login from './views/Login/Login';
+
 
 
 const root = createRoot(document.getElementById('root'));
@@ -10,7 +10,6 @@ const root = createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
-    {/* <Login /> */}
   </React.StrictMode>
 );
 

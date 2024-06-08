@@ -2,13 +2,19 @@ import React, { useState, useEffect } from 'react';
 import './User.scss';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Nav from '../Nav/Nav';
 
 const User = () => {
     const { username } = useParams();
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const [editData, setEditData] = useState({
+        hotenKH: '',
+        sdt: '',
+        diachi: '',
+        avatar: ''
+    });
 
     useEffect(() => {
         fetchData();
@@ -39,6 +45,30 @@ const User = () => {
             setLoading(false);
         }
     };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setEditData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.put(`http://localhost:8080/user/info/update/${username}`, editData);
+            if (response.data.EC === 1) {
+                setData(editData);
+                alert('Cập nhật thành công');
+            } else {
+                alert('Cập nhật thất bại');
+            }
+        } catch (error) {
+            console.error(error.message);
+            alert('Có lỗi xảy ra khi cập nhật');
+        }
+    };
+
     console.log("data = ", data)
 
     if (loading) {
@@ -53,33 +83,61 @@ const User = () => {
 
 
     return (
-        <div>
-            <ul className="products">
+        <>
+            <Nav />
+            <div className='profile_container'>
                 {data ? (
                     data.map((item, index) => (
-                        <li key={index}>
-                            {/* <div className="product-top">
-                                <a
-                                    href={`/user/${item.avatar}`}
-                                    className="product-thumb"
-                                >
-                                </a>
-                            </div> */}
-                            <div className="product-info">
-                                <label>Họ tên:</label>
-                                <div className="product-name">{item.hotenKH}</div>
-                                <label>Số điện thoại:</label>
-                                <div className="product-name">{item.sdt}</div>
-                                <label>Địa chỉ:</label>
-                                <div className="product-name">{item.diachi}</div>
-
+                        <div className='profile'>
+                            <div className='profile_avatar'>
+                                <img
+                                    className='avatar'
+                                    src={`http://localhost:8080/public/img/${item.avatar}`}
+                                    onChange={(e) => handleChange(e, 'avatar')}
+                                />
+                                <div className='taikhoan'>{item.taikhoan}</div>
                             </div>
-                        </li>
+                            <div className='profile_info'>
+                                <label>Họ tên:</label>
+                                <div className="profile_spacing hoten">
+                                    <input
+                                        type="text"
+                                        name="hotenKH"
+                                        value={item.hotenKH}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <label>Số điện thoại:</label>
+                                <div className="profile_spacing sdt" >
+                                    <input
+                                        type="text"
+                                        name="sdt"
+                                        value={item.sdt}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <label>Địa chỉ:</label>
+                                <div className="profile_spacing diachi">
+                                    <input
+                                        type="text"
+                                        name="diachi"
+                                        value={item.diachi}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className='profile_button'>
+                                    <button
+                                        className='btn btn-primary'
+                                        onClick={handleSubmit}
+                                    >Sửa</button>
+                                </div>
+                            </div>
+                        </div>
                     ))
                 ) : 'Không có dữ liệu'
                 }
-            </ul>
-        </div>
+            </div >
+        </>
     );
 }
 

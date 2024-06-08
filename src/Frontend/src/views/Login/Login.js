@@ -16,10 +16,11 @@ const Login = () => {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/login', { username: username, password });
+            const response = await axios.post('http://localhost:8080/api/v1/login', { username: username, password });
             toast.success(response.data.message);
             console.log(response);
             navigate(`/user/${username}`);
+            //navigate('/');
 
         } catch (error) {
             toast.error(error.response?.data?.message || 'Login failed');
