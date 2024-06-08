@@ -132,55 +132,6 @@ async function subtractProductQuantity(id, quantity) {
 
 //------------------------------------------------------------------------------------------------------//
 
-// Xử lý POST request từ React
-app.post('/confirmOrder', async (req, res) => {
-    try {
-        const maKH = await random();
-        const { id, hoTenKhachHang, sodienthoai, diachi, quantity, totalPrice } = req.body;
-
-        // Thực hiện truy vấn INSERT
-
-        await connection.execute(`
-        INSERT INTO KHACHHANG (maKH, hotenKH, sdt, diachi)
-        VALUES (?, ?, ?, ?)
-        `, [maKH, hoTenKhachHang, sodienthoai, diachi,]);
-
-        console.log('Khách hàng');
-
-        await hoadon(maKH, hoTenKhachHang, sodienthoai, diachi, id, quantity, totalPrice);
-
-        res.status(200).json({ success: true });
-    } catch (error) {
-        console.error('Error inserting into MySQL:', error);
-        res.status(500).json({ success: false, error: error.message });
-    }
-});
-
-
-app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-
-    console.log(username + password);
-
-    if (!username || !password) {
-        return res.status(400).send({ message: 'Please provide both username and password' });
-    }
-
-    const respone = await connection.execute(`
-            SELECT * FROM TAIKHOAN WHERE taikhoan = ? AND matkhau = ?
-            `, [username, password]);
-
-
-    console.log(respone);
-    if (respone.length > 0) {
-        //res.status({ message: 'Login successful', user: respone[0] });
-        res.status(200).send({ message: 'Login successful', user: respone[0] });
-    } else {
-        res.status(401).send({ message: 'Invalid username or password' });
-    }
-
-});
-
 
 //configViewEngine
 configViewEngine(app);

@@ -15,6 +15,10 @@ const {
     CapnhatUser,
 
     Signup,
+
+    confirmOrder,
+
+    handleLogin,
 } = require("../controllers/apiController");
 
 //const { deleteNSX } = require("../controllers/homeController");
@@ -33,7 +37,10 @@ router.put("/user/info/update/:username", CapnhatUser);
 // router.put("/user/info/update/password/:username", CapnhatPasswordUser); //update 1 user (cho người dùng)
 // router.delete("/user/info/delete/:username", XoaUser); //xóa user (cho admin)
 
+router.post('/confirmOrder', confirmOrder);
 
 router.post('/confirmSignup', Signup);
+
+router.post('/confirmLogin', handleLogin);
 
 module.exports = router;

@@ -66,8 +66,11 @@ const User = () => {
                                 </a>
                             </div> */}
                             <div className="product-info">
+                                <label>Họ tên:</label>
                                 <div className="product-name">{item.hotenKH}</div>
+                                <label>Số điện thoại:</label>
                                 <div className="product-name">{item.sdt}</div>
+                                <label>Địa chỉ:</label>
                                 <div className="product-name">{item.diachi}</div>
 
                             </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 //import { Navigate, useNavigate } from 'react-router-dom';
 import './Signup.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -12,6 +12,7 @@ const Signup = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
 
     const handleConfirm = async (e) => {
         try {
@@ -30,13 +31,16 @@ const Signup = () => {
                 return;
             }
 
-            const response = await axios.post('http://localhost:8080/api/v1/confirmSignup', {
+
+
+            const response = await axios.post('http://localhost:8080/confirmSignup', {
                 username, password
             });
 
             if (response.status === 200) {
                 console.log("Order confirmed successfully:", response.data);
                 toast.success("Đăng ký thành công!!!");
+                navigate("/");
             } else {
                 console.error("Unexpected response status:", response.status);
                 toast.error("Đã xảy ra lỗi. Vui lòng thử lại sau.");
