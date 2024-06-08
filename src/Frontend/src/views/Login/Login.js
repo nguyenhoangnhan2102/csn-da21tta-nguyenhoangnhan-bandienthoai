@@ -11,14 +11,16 @@ const Login = () => {
     const [username, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    console.log("username = ", username + "password = ", password);
 
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/confirmLogin', { username: username, password });
+            const response = await axios.post('http://localhost:8080/login', { username: username, password });
             toast.success(response.data.message);
             console.log(response);
             navigate(`/user/${username}`);
+
         } catch (error) {
             toast.error(error.response?.data?.message || 'Login failed');
         }

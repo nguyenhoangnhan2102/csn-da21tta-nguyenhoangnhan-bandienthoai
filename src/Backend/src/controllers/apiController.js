@@ -264,6 +264,7 @@ const confirmOrder = async () => {
 
 const Signup = async (req, res) => {
     try {
+
         const { username, password } = req.body;
 
 
@@ -284,26 +285,31 @@ const Signup = async (req, res) => {
 };
 
 const handleLogin = async (res, req) => {
+    try {
 
-    const { username, password } = req.body;
+        const { username, password } = req.body;
 
-    console.log(username + password);
+        console.log(username + password);
 
-    if (!username || !password) {
-        return res.status(400).send({ message: 'Please provide both username and password' });
-    }
+        if (!username || !password) {
+            return res.status(400).send({ message: 'Please provide both username and password' });
+        }
 
-    const respone = await connection.execute(`
+        const respone = await connection.execute(`
             SELECT * FROM TAIKHOAN WHERE taikhoan = ? AND matkhau = ?
             `, [username, password]);
 
 
-    console.log(respone);
-    if (respone.length > 0) {
-        //res.status({ message: 'Login successful', user: respone[0] });
-        res.status(200).send({ message: 'Login successful', user: respone[0] });
-    } else {
-        res.status(401).send({ message: 'Invalid username or password' });
+        console.log(respone);
+        if (respone.length > 0) {
+            //res.status({ message: 'Login successful', user: respone[0] });
+            res.status(200).send({ message: 'Login successful', user: respone[0] });
+        } else {
+            res.status(401).send({ message: 'Invalid username or password' });
+        }
+    } catch (error) {
+        console.error('Error inserting into MySQL:', error);
+        res.status(500).json({ success: false, error: error.message });
     }
 };
 

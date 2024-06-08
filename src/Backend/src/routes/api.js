@@ -41,6 +41,6 @@ router.post('/confirmOrder', confirmOrder);
 
 router.post('/confirmSignup', Signup);
 
-router.post('/confirmLogin', handleLogin);
+router.post('/login', handleLogin);
 
 module.exports = router;

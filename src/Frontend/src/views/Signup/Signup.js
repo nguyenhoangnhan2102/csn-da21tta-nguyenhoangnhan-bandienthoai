@@ -33,7 +33,7 @@ const Signup = () => {
 
 
 
-            const response = await axios.post('http://localhost:8080/confirmSignup', {
+            const response = await axios.post('http://localhost:8080/api/v1/confirmSignup', {
                 username, password
             });
 
