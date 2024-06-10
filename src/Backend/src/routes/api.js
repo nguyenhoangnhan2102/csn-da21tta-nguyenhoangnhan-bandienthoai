@@ -25,6 +25,8 @@ const {
     handleLogin,
 
     updateIMG,
+
+    getIdBill,
 } = require("../controllers/apiController");
 
 //Ensure the directory exists
@@ -67,6 +69,8 @@ router.post('/confirmOrder', confirmOrder);
 router.post('/confirmSignup', Signup);
 router.post('/login', handleLogin);
 router.put('/updateimg', upload.single('avatar'), updateIMG);
+
+router.get("/bill/:username", getIdBill);
 
 
 module.exports = router;

@@ -3,6 +3,7 @@ import './User.scss';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Nav from '../Nav/Nav';
+import Donhang from './Donhang/Donhang';
 
 const User = () => {
     const { username } = useParams();
@@ -126,6 +127,7 @@ const User = () => {
                             />
                             <button onClick={handleSaveImage}>Lưu hình ảnh</button>
                             <div className='taikhoan'>Tài khoản: {taikhoan}</div>
+                            <Donhang username={username} />
                         </div>
                         <div className='profile_info'>
                             <label>Họ tên:</label>

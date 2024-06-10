@@ -6,6 +6,7 @@ const moment = require('moment');
 const {
     getUser
 } = require('../controllers/homeController');
+const { use } = require("../routes/api");
 
 const getAllProduct = async (req, res) => {
     try {
@@ -490,6 +491,40 @@ const updateIMG = async (req, res) => {
     }
 }
 
+const getIdBill = async (req, res) => {
+    try {
+        const username = req.params.username;
+        console.log("username=", username);
+
+        // Kiểm tra nếu username không tồn tại hoặc không hợp lệ
+        if (!username) {
+            return res.status(400).json({
+                EM: 'Username is required',
+                EC: 0,
+                DT: null,
+            });
+        }
+
+        // Phản hồi thành công với thông tin username
+        return res.status(200).json({
+            EM: 'Oke',
+            EC: 1,
+            DT: username,
+        });
+    } catch (error) {
+        // In lỗi ra console
+        console.error("Error: ", error);
+
+        // Phản hồi lỗi server
+        return res.status(500).json({
+            EM: 'Internal Server Error',
+            EC: -1,
+            DT: null,
+        });
+    }
+}
+
+
 module.exports = {
     getAllProduct,
     createProduct,
@@ -506,5 +541,6 @@ module.exports = {
     confirmOrder,
     handleLogin,
     updateUser,
-    updateIMG
+    updateIMG,
+    getIdBill
 };
