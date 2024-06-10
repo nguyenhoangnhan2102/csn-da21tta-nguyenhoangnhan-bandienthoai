@@ -18,6 +18,8 @@ const Muahang = () => {
     const { id } = useParams();
     console.log(id);
 
+    const getusername = sessionStorage.getItem("accessToken");
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -60,6 +62,7 @@ const Muahang = () => {
             const sodienthoai = document.querySelector('input[name="sdt"]').value.trim();
             const diachi = document.querySelector('input[name="diachi"]').value.trim();
 
+
             if (infoProduct[0]?.soluong <= 0) {
                 toast.warn("Xin lỗi quý khách, đã hết hàng!!!");
                 return;
@@ -77,14 +80,23 @@ const Muahang = () => {
 
             const totalPrice = (quantity * infoProduct[0]?.giatien) + 20000;
 
-            const response = await axios.post('http://localhost:8080/confirmOrder', {
+            console.log("id=", id);
+            console.log("hoTenKhachHang=", hoTenKhachHang);
+            console.log("sodienthoai=", sodienthoai);
+            console.log("diachi=", diachi);
+            console.log("quantity=", quantity);
+            console.log("totalPrice=", totalPrice);
+            const response = await axios.post('http://localhost:8080/api/v1/confirmOrder', {
                 id,
                 hoTenKhachHang,
                 sodienthoai,
                 diachi,
                 quantity,
                 totalPrice,
+                getusername,
             });
+
+
 
             if (response.status === 200) {
                 console.log("Order confirmed successfully:", response.data);

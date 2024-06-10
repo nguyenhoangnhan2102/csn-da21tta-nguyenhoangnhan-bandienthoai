@@ -9,12 +9,14 @@ const User = () => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [editData, setEditData] = useState({
-        hotenKH: '',
-        sdt: '',
-        diachi: '',
-        avatar: ''
-    });
+    const [hotenKH, sethotenKH] = useState();
+    const [sdt, setsdt] = useState();
+    const [diachi, setdiachi] = useState();
+    const [avatar, setavatar] = useState();
+    const [taikhoan, settaikhoan] = useState();
+
+
+    const [editIMG, setEditIMG] = useState(null);
 
     useEffect(() => {
         fetchData();
@@ -30,13 +32,16 @@ const User = () => {
 
             console.log("res=", response.data.DT[0]);
 
-            if (+ response.data.EC === 1) {
-                console.log("res.data.DT", response.data.DT);
+            if (+response.data.EC === 1) {
                 setData(response.data.DT);
-                console.log("data.ec = ", response.data.EC);
-
+                sethotenKH(response.data.DT[0].hotenKH);
+                setsdt(response.data.DT[0].sdt);
+                setdiachi(response.data.DT[0].diachi);
+                setavatar(response.data.DT[0].avatar);
+                settaikhoan(response.data.DT[0].taikhoan);
+                console.log("hotenKH=", response.data.DT[0].sdt)
+                console.log("avatar=", response.data.DT[0].avatar);
             }
-
 
             setLoading(false);
         } catch (error) {
@@ -46,28 +51,51 @@ const User = () => {
         }
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setEditData(prevState => ({
-            ...prevState,
-            [name]: value
-        }));
+
+    const handleFileChange = (e) => {
+
+        setEditIMG(e.target.files[0]);
+
     };
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.put(`http://localhost:8080/user/info/update/${username}`, editData);
+            const response = await axios.put(`http://localhost:8080/api/v1/user/info/update/${username}`,
+                {
+                    hotenKH: hotenKH,
+                    sdt: sdt,
+                    diachi: diachi,
+                });
+
             if (response.data.EC === 1) {
-                setData(editData);
+                setData(response.data.DT);
+                console.log("=>", response.data.DT);
                 alert('Cập nhật thành công');
             } else {
                 alert('Cập nhật thất bại');
             }
         } catch (error) {
-            console.error(error.message);
             alert('Có lỗi xảy ra khi cập nhật');
         }
     };
+
+    const handleSaveImage = async () => {
+        const formData = new FormData();
+        console.log(editIMG)
+        formData.append('avatar', editIMG);
+        formData.append('username', username);
+
+        try {
+            const response = await axios.put(`http://localhost:8080/api/v1/updateimg`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+        } catch (error) {
+            console.log("Lỗi", error);
+        }
+    }
+
 
     console.log("data = ", data)
 
@@ -79,64 +107,63 @@ const User = () => {
         return <div>Error: {error}</div>;
     }
 
-
-
-
     return (
         <>
-            <Nav />
+            <Nav
+            />
             <div className='profile_container'>
                 {data ? (
-                    data.map((item, index) => (
-                        <div className='profile'>
-                            <div className='profile_avatar'>
-                                <img
-                                    className='avatar'
-                                    src={`http://localhost:8080/public/img/${item.avatar}`}
-                                    onChange={(e) => handleChange(e, 'avatar')}
+                    <div className='profile'>
+                        <div className='profile_avatar'>
+                            <img
+                                className='avatar'
+                                src={`http://localhost:8080/public/img/${avatar}`}
+                                alt='Avatar'
+                            />
+                            <input
+                                type='file'
+                                onChange={handleFileChange}
+                            />
+                            <button onClick={handleSaveImage}>Lưu hình ảnh</button>
+                            <div className='taikhoan'>Tài khoản: {taikhoan}</div>
+                        </div>
+                        <div className='profile_info'>
+                            <label>Họ tên:</label>
+                            <div className="profile_spacing hoten">
+                                <input
+                                    type="text"
+                                    name="hotenKH"
+                                    value={hotenKH}
+                                    onChange={(e) => sethotenKH(e.target.value)}
                                 />
-                                <div className='taikhoan'>{item.taikhoan}</div>
                             </div>
-                            <div className='profile_info'>
-                                <label>Họ tên:</label>
-                                <div className="profile_spacing hoten">
-                                    <input
-                                        type="text"
-                                        name="hotenKH"
-                                        value={item.hotenKH}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <label>Số điện thoại:</label>
-                                <div className="profile_spacing sdt" >
-                                    <input
-                                        type="text"
-                                        name="sdt"
-                                        value={item.sdt}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <label>Địa chỉ:</label>
-                                <div className="profile_spacing diachi">
-                                    <input
-                                        type="text"
-                                        name="diachi"
-                                        value={item.diachi}
-                                        onChange={handleChange}
-                                    />
-                                </div>
-                                <div className='profile_button'>
-                                    <button
-                                        className='btn btn-primary'
-                                        onClick={handleSubmit}
-                                    >Sửa</button>
-                                </div>
+                            <label>Số điện thoại:</label>
+                            <div className="profile_spacing sdt">
+                                <input
+                                    type="text"
+                                    name="sdt"
+                                    value={sdt}
+                                    onChange={(e) => setsdt(e.target.value)}
+                                />
+                            </div>
+                            <label>Địa chỉ:</label>
+                            <div className="profile_spacing diachi">
+                                <input
+                                    type="text"
+                                    name="diachi"
+                                    value={diachi}
+                                    onChange={(e) => setdiachi(e.target.value)}
+                                />
+                            </div>
+                            <div className='profile_button'>
+                                <button
+                                    onClick={handleSubmit}
+                                >Sửa</button>
                             </div>
                         </div>
-                    ))
-                ) : 'Không có dữ liệu'
-                }
-            </div >
+                    </div>
+                ) : 'Không có dữ liệu'}
+            </div>
         </>
     );
 }

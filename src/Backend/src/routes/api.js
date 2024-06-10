@@ -1,6 +1,9 @@
-
 const express = require("express");
 const router = express.Router();
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+var appRoot = require('app-root-path');
 
 const {
     getAllProduct,
@@ -10,7 +13,7 @@ const {
     deleteNSX,
     getIdProduct,
     //user
-    getAllUser,
+    //getAllUser,
     getInfoUser,
     CapnhatUser,
     updateUser,
@@ -20,9 +23,33 @@ const {
     confirmOrder,
 
     handleLogin,
+
+    updateIMG,
 } = require("../controllers/apiController");
 
-//const { deleteNSX } = require("../controllers/homeController");
+//Ensure the directory exists
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, '..', 'public', 'img'));
+    },
+    filename: function (req, file, cb) {
+        cb(
+            null,
+            file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+        );
+    },
+});
+
+const imageFilter = function (req, file, cb) {
+    // Accept images only
+    if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF|webp)$/)) {
+        req.fileValidationError = "Only image files are allowed!";
+        return cb(new Error("Only image files are allowed!"), false);
+    }
+    cb(null, true);
+};
+
+const upload = multer({ storage: storage, fileFilter: imageFilter });
 
 router.get("/product", getAllProduct);
 router.post("/create-product", createProduct);
@@ -32,20 +59,14 @@ router.delete("/delete-tenNSX/:tenNSX", deleteNSX);
 router.get("/product/:id", getIdProduct);
 
 //User
-router.get("/user", getAllUser); // get list of users
-router.get("/user/info/:username", getInfoUser); //get info 1 user
-//router.put("/user/info/update/:username", CapnhatUser);
-// router.put("/user/info/update/password/:username", CapnhatPasswordUser); //update 1 user (cho người dùng)
-// router.delete("/user/info/delete/:username", XoaUser); //xóa user (cho admin)
+//router.get("/user", getAllUser);
+router.get("/user/info/:username", getInfoUser);
 router.put("/user/info/update/:username", updateUser);
 
-
 router.post('/confirmOrder', confirmOrder);
-
 router.post('/confirmSignup', Signup);
-
 router.post('/login', handleLogin);
-
+router.put('/updateimg', upload.single('avatar'), updateIMG);
 
 
 module.exports = router;

@@ -19,8 +19,9 @@ const Login = () => {
             const response = await axios.post('http://localhost:8080/api/v1/login', { username: username, password });
             toast.success(response.data.message);
             console.log(response);
+            sessionStorage.setItem("accessToken", username);
             navigate(`/user/${username}`);
-            //navigate('/');
+            navigate('/');
 
         } catch (error) {
             toast.error(error.response?.data?.message || 'Login failed');

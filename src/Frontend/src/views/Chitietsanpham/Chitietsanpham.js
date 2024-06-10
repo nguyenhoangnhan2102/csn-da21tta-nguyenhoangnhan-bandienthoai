@@ -10,12 +10,11 @@ const Chitietsanpham = (props) => {
 
     const { id } = useParams();
     console.log(id)
+    console.log("pros:", props);
 
     useEffect(() => {
         const fetchData = async () => {
             if (id) {
-                //let id = props.match.params.id;
-
                 try {
                     let res = await axios.get(`http://localhost:8080/api/v1/product/${id}`);
                     setInfoProduct(res?.data?.data || []);
