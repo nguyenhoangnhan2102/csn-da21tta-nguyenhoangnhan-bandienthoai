@@ -3,6 +3,7 @@ import './Nav.scss';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Nav = () => {
 
@@ -51,13 +52,16 @@ const Nav = () => {
     };
 
     const handleProfile = () => {
+        toast.success("Đăng nhập thành công")
         navigate(`/user/${taikhoan}`);
     }
 
     const handleLogout = () => {
         setLoggedIn(false);
         setshowBar(false);
+        toast.success("Đăng xuất thành công!!!")
         sessionStorage.removeItem('accessToken');
+        navigate("/")
     }
 
     useEffect(() => {
@@ -68,12 +72,12 @@ const Nav = () => {
     return (
         <>
             <div className="topnav">
-                <NavLink className="logo_shopphone" to="/" activeClassName="active">
+                <NavLink className="logo_shopphone" to="/">
                     Shopphone
                 </NavLink>
-                <NavLink className="all_product" to="/product" activeClassName="active">
+                {/* <NavLink className="all_product" to="/product" activeClassName="active">
                     Tất cả
-                </NavLink>
+                </NavLink> */}
                 {loggedIn ? (
                     <div className="avatar_container">
                         <img
@@ -85,20 +89,21 @@ const Nav = () => {
                         <span style={{ display: 'none' }}>{hotenKH}</span>
                     </div>
                 ) : (
-                    <NavLink className="nav_login" to="/login" activeClassName="active">
+                    <NavLink className="nav_login" to="/login">
                         Đăng nhập
                     </NavLink>
                 )}
             </div>
             {showBar ? (
                 <div className="profile_bar">
-                    <span className="pro" onClick={handleProfile}>
-                        Xem
-                    </span>
-                    <br></br>
-                    <span className="pro" onClick={handleLogout}>
-                        Đăng xuất
-                    </span>
+                    <div className="profile_content">
+                        <div className="pro xem" onClick={handleProfile}>
+                            Xem
+                        </div>
+                        <div className="pro dangxuat" onClick={handleLogout}>
+                            Đăng xuất
+                        </div>
+                    </div>
                 </div>
             ) : false}
         </>

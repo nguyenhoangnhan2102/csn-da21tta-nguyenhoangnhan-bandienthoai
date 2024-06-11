@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './User.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Nav from '../Nav/Nav';
 import Donhang from './Donhang/Donhang';
+import { toast, ToastContainer } from 'react-toastify';
 
 const User = () => {
     const { username } = useParams();
@@ -15,6 +16,7 @@ const User = () => {
     const [diachi, setdiachi] = useState();
     const [avatar, setavatar] = useState();
     const [taikhoan, settaikhoan] = useState();
+    const navigate = useNavigate();
 
 
     const [editIMG, setEditIMG] = useState(null);
@@ -52,11 +54,8 @@ const User = () => {
         }
     };
 
-
     const handleFileChange = (e) => {
-
         setEditIMG(e.target.files[0]);
-
     };
 
     const handleSubmit = async () => {
@@ -71,7 +70,7 @@ const User = () => {
             if (response.data.EC === 1) {
                 setData(response.data.DT);
                 console.log("=>", response.data.DT);
-                alert('Cập nhật thành công');
+                toast.success('Cập nhật thành công');
             } else {
                 alert('Cập nhật thất bại');
             }
@@ -126,10 +125,11 @@ const User = () => {
                                 onChange={handleFileChange}
                             />
                             <button onClick={handleSaveImage}>Lưu hình ảnh</button>
-                            <div className='taikhoan'>Tài khoản: {taikhoan}</div>
-                            <Donhang username={username} />
+
+                            {/* <Donhang username={username} /> */}
                         </div>
                         <div className='profile_info'>
+                            <div className='taikhoan'>Tài khoản: {taikhoan}</div>
                             <label>Họ tên:</label>
                             <div className="profile_spacing hoten">
                                 <input
@@ -160,7 +160,8 @@ const User = () => {
                             <div className='profile_button'>
                                 <button
                                     onClick={handleSubmit}
-                                >Sửa</button>
+                                >Sửa
+                                </button>
                             </div>
                         </div>
                     </div>

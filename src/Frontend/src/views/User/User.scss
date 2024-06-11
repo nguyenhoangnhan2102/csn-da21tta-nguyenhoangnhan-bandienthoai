@@ -7,7 +7,6 @@
 }
 
 .profile{
-
   width: 100%;
   display: flex;
 }
@@ -16,6 +15,25 @@
   display: block;
   width: 50%;
   text-align: center;
+}
+
+.profile_avatar>input{
+  margin: 2% 0 2% 0;
+  display: block;
+  margin-left: 33%;
+}
+
+.profile_avatar>input:hover{
+  cursor: pointer;
+}
+
+.profile_avatar>button{
+  border-radius: 12px;
+  height: 35px;
+}
+
+.profile_avatar>button:hover{
+  cursor: pointer;
 }
 
 .profile_info{
@@ -29,9 +47,30 @@
 }
 
 .taikhoan{
-  color: rgb(141, 139, 139);
+  margin: 2% 0 2% 0;
+  color: rgb(62, 61, 61);
 }
 
 .profile_spacing{
   margin-bottom: 20px;
+}
+
+.profile_spacing>input{
+  width: 50%;
+}
+
+.profile_button>button{
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 12px;
+}
+
+.profile_button>button:hover{
+  cursor: pointer;
 }

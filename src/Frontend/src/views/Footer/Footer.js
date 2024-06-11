@@ -42,7 +42,7 @@ const Footer = () => {
                         <p className="footer-hotro1">
                             <b>Hỗ Trợ </b>
                         </p>
-                        <p><a onClick={alertFunction} className="footer-hotro2">Tuyển dụng</a></p>
+                        <p onClick={alertFunction} className="footer-hotro2">Tuyển dụng</p>
                     </div>
                     <div className="footer-hr"></div>
                     <div className="footer-mangxahoi">

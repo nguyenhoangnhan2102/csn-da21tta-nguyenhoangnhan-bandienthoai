@@ -3,9 +3,7 @@ const connection = require("../config/dataBase");
 const fs = require("fs");
 const moment = require('moment');
 //hien thi data thong qua api
-const {
-    getUser
-} = require('../controllers/homeController');
+
 const { use } = require("../routes/api");
 
 const getAllProduct = async (req, res) => {
@@ -172,15 +170,6 @@ const getTenLoaiSP = async (req, res) => {
     }
 }
 
-// const getAllUser = async (req, res) => {
-//     const results = await getUser();
-//     return res.status(200).json({
-//         EM: results.EM,
-//         EC: results.EC,
-//         DT: results.DT,
-//     });
-// };
-
 const getInfoUser = async (req, res) => {
     try {
         const taikhoan = req.params.username;
@@ -307,7 +296,6 @@ const chitiethoadon = async (maHD, id, quantity, totalPrice) => {
 
 async function subtractProductQuantity(id, quantity) {
     // Tạo kết nối đến cơ sở dữ liệu
-
     try {
         // Lấy số lượng sản phẩm trước khi trừ
         const [rows] = await connection.execute('SELECT soluong FROM SANPHAM WHERE id = ?', [id]);
@@ -362,8 +350,6 @@ const Signup = async (req, res) => {
     try {
 
         const { username, password } = req.body;
-
-
         //const hashedPassword = await bcrypt.hash(password, 20);
 
         // Thực hiện truy vấn INSERT
@@ -383,29 +369,27 @@ const Signup = async (req, res) => {
 const handleLogin = async (req, res) => {
     const { username, password } = req.body;
 
+    if (!username || !password) {
+        return res.status(400).send({ message: 'Vui lòng điền đầy đủ tài khoản và mật khẩu' });
+    }
+
     console.log(username + password);
     try {
 
+        const [rows] = await connection.execute(
+            'SELECT * FROM TAIKHOAN WHERE taikhoan = ? AND matkhau = ?',
+            [username, password]
+        );
 
-
-        if (!username || !password) {
-            return res.status(400).send({ message: 'Please provide both username and password' });
-        }
-
-        const respone = await connection.execute(`
-            SELECT * FROM TAIKHOAN WHERE taikhoan = ? AND matkhau = ?
-            `, [username, password]);
-
-
-        console.log(respone);
-        if (respone.length > 0) {
-            //res.status({ message: 'Login successful', user: respone[0] });
-            res.status(200).send({ message: 'Login successful', user: respone[0] });
+        // Kiểm tra kết quả truy vấn
+        if (rows.length > 0) {
+            res.status(200).send({ message: 'Đăng nhập thành công', user: rows[0] });
         } else {
-            res.status(401).send({ message: 'Invalid username or password' });
+            res.status(401).send({ message: 'Tài khoản hoặc mật khẩu không chính xác' });
         }
+
     } catch (error) {
-        console.error('Error inserting into MySQL:', error);
+        console.error('Error querying MySQL:', error);
         res.status(500).json({ success: false, error: error.message });
     }
 };

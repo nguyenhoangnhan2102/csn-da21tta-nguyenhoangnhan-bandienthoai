@@ -10,6 +10,7 @@
 .container-thongtinkhachhang {
     width: 50%;
     height: auto;
+    margin-left: 5%;
 }
 
 .input-ttkh {
@@ -28,7 +29,7 @@
     margin-top: 1%;
     margin-bottom: 1%;
     border-radius: 10px;
-    padding-left: 15px;
+    padding-left: 2%;
 }
 
 .container-thongtinkhachhang>h3 {
@@ -110,7 +111,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 35px;
+    height: 35.5px;
     width: 5%;
     color: white;
     background-color: black;
@@ -134,7 +135,7 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 35px;
+    height: 35.5px;
     width: 5%;
     color: white;
     background-color: black;
@@ -215,11 +216,13 @@ hr {
     align-items: center;
     margin-left: 10%;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .muahang-xacnhan {
+    margin-left: 18.5%;
     padding: 5px;
-    margin-top: 10%;
+    margin-top: 5%;
     font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
@@ -231,4 +234,8 @@ hr {
 .muahang-xacnhan:hover {
     box-shadow: 0 0 10px rgb(255, 255, 255);
     filter: brightness(200%);
+}
+
+.warning{
+    font-size: 13px;
 }

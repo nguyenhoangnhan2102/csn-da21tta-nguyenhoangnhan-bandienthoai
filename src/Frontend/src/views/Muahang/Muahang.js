@@ -63,6 +63,13 @@ const Muahang = () => {
             const diachi = document.querySelector('input[name="diachi"]').value.trim();
 
 
+            const specialChars = /[!@#$%^&*(),.?":{}|<>]/;
+
+            if (specialChars.test(hoTenKhachHang)) {
+                toast.warn("Tên không được chứa ký tự đặc biệt!!!");
+                return;
+            }
+
             if (infoProduct[0]?.soluong <= 0) {
                 toast.warn("Xin lỗi quý khách, đã hết hàng!!!");
                 return;
@@ -75,6 +82,11 @@ const Muahang = () => {
 
             if (isNaN(sodienthoai) || parseInt(sodienthoai, 10) < 0) {
                 toast.warn("Số điện thoại không hợp lệ!!!");
+                return;
+            }
+
+            if (sodienthoai.length !== 10) {
+                toast.warn("Số điện thoại phải có đúng 10 số!!!");
                 return;
             }
 
@@ -122,7 +134,9 @@ const Muahang = () => {
                     <div className="container-thongtinkhachhang">
                         <h3>Thông tin khách hàng</h3>
                         <input type="text" name="tenKH" placeholder="Họ và tên" required /> <br />
+                        <div className="warning"><span style={{ color: 'red' }}>* </span>Tên không chứa ký tự đặc biệt</div>
                         <input type="number" name="sdt" pattern="[0-9]*" placeholder="Số điện thoại" /> <br />
+                        <div className="warning"><span style={{ color: 'red' }}>* </span>Số điện thoại phải đủ 10 số</div>
                         <input type="text" name="diachi" placeholder="Địa chỉ" /> <br />
                     </div>
                     <div className="thanhdoc"></div>

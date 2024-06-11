@@ -3,6 +3,7 @@ import Nav from '../Nav/Nav';
 import { useState, useEffect } from "react";
 import './Home.scss';
 import { Link } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
 
@@ -226,6 +227,7 @@ const Home = () => {
 
                 </ul>
             </div >
+            <Footer />
         </>
     );
 }
