@@ -35,7 +35,7 @@
                     <th>Số điện thoại</th>
                     <th>Địa chỉ chi tiết</th>
                     <th>Tài khoản</th>
-                    <th>Chức năng</th>
+                    <!-- <th>Chức năng</th> -->
                 </tr>
             </thead>
             <tbody>
@@ -56,12 +56,12 @@
                         <td>
                             <%= dataUsers[i].taikhoan %>
                         </td>
-                        <td style="display: flex">
+                        <!-- <td style="display: flex">
                             <form id="deleteForm<%= i %>" action="/delete-user" method="post">
                                 <input type="text" hidden value="<%= dataUsers[i].maKH %>" name="idUser" />
                                 <button type="button" onclick="deleteUser('<%= i %>')">Xóa</button>
                             </form>
-                        </td>
+                        </td> -->
                     </tr>
                     <% } %>
 

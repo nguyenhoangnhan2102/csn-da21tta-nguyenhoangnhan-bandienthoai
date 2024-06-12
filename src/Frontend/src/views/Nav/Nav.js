@@ -62,7 +62,7 @@ const Nav = () => {
         toast.success("Đăng xuất thành công!!!")
         sessionStorage.removeItem('accessToken');
         navigate("/")
-    }
+    };
 
     useEffect(() => {
         if (username) {

@@ -66,8 +66,6 @@ const getDetailBill = async (req, res) => {
     }
 };
 
-
-
 const createNewProduct = async (req, res) => {
     //let id = req.body.id;
     let tenSP = req.body.tenSP;
@@ -264,8 +262,6 @@ const searchProduct = async (req, res) => {
         return res.status(500).send(error.message || "Đã có lỗi xảy ra");
     }
 };
-
-
 
 module.exports = {
     getHomePage,
