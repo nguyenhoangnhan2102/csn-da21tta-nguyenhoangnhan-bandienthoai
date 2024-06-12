@@ -103,25 +103,25 @@ const deleteProduct = async (req, res) => {
     return res.redirect("/");
 };
 
-const deleteUser = async (req, res) => {
-    const maKH = req.body.idUser;
+// const deleteUser = async (req, res) => {
+//     const maKH = req.body.idUser;
 
-    try {
-        // Xóa tất cả chi tiết hóa đơn của các hóa đơn liên quan
-        await connection.execute("DELETE FROM CHITIETHOADON WHERE maHD IN (SELECT maHD FROM HOADON WHERE maKH = ?)", [maKH]);
+//     try {
+//         // Xóa tất cả chi tiết hóa đơn của các hóa đơn liên quan
+//         await connection.execute("DELETE FROM CHITIETHOADON WHERE maHD IN (SELECT maHD FROM HOADON WHERE maKH = ?)", [maKH]);
 
-        // Sau đó xóa các hóa đơn của khách hàng
-        await connection.execute("DELETE FROM HOADON WHERE maKH = ?", [maKH]);
+//         // Sau đó xóa các hóa đơn của khách hàng
+//         await connection.execute("DELETE FROM HOADON WHERE maKH = ?", [maKH]);
 
-        // Cuối cùng, xóa khách hàng
-        await connection.execute("DELETE FROM KHACHHANG WHERE maKH = ?", [maKH]);
+//         // Cuối cùng, xóa khách hàng
+//         await connection.execute("DELETE FROM KHACHHANG WHERE maKH = ?", [maKH]);
 
-        res.redirect("/user-order");
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Lỗi Nội Server");
-    }
-};
+//         res.redirect("/user-order");
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send("Lỗi Nội Server");
+//     }
+// };
 
 const getEditPage = async (req, res) => {
     let id = req.params.id;
@@ -263,6 +263,24 @@ const searchProduct = async (req, res) => {
     }
 };
 
+const deleteBills = async (req, res) => {
+    const maHD = req.body.idBills;
+
+    try {
+        // Xóa tất cả chi tiết hóa đơn của các hóa đơn liên quan
+        await connection.execute("DELETE FROM CHITIETHOADON WHERE maHD = ?", [maHD]);
+
+        // Sau đó xóa hóa đơn
+        await connection.execute("DELETE FROM HOADON WHERE maHD = ?", [maHD]);
+
+        res.redirect("/bill-order");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Lỗi Nội Server");
+    }
+}
+
+
 module.exports = {
     getHomePage,
     //getDetailPage,
@@ -276,7 +294,8 @@ module.exports = {
     getAddNew,
     deleteNSX,
     searchProduct,
-    deleteUser,
+    //deleteUser,
     getDetailBill,
     //deleteDetailBill
+    deleteBills,
 };

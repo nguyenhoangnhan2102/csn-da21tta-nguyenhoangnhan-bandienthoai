@@ -17,9 +17,10 @@ const {
     getAddNew,
     deleteNSX,
     searchProduct,
-    deleteUser,
+    //deleteUser,
     getDetailBill,
     //deleteDetailBill,
+    deleteBills,
 } = require('../controllers/homeController');
 
 const storage = multer.diskStorage({
@@ -60,6 +61,8 @@ router.post("/update-product", upload.single("profile_pic"), updateProduct);
 
 router.get("/user-order", getUserPage);
 
+//Xóa hóa đơn
+
 //Thêm loại sản phẩm
 router.get("/tao-moi-NSX", addNewNSX);
 router.post("/add-new-NSX", getAddNew);
@@ -68,10 +71,10 @@ router.post("/Tim", searchProduct);
 
 router.post("/delete-tenNSX", deleteNSX);
 
-router.post("/delete-user", deleteUser);
+//router.post("/delete-user", deleteUser);
 
 router.get("/bill-order", getDetailBill);
-
+router.post("/delete-bill", deleteBills)
 
 
 module.exports = router;

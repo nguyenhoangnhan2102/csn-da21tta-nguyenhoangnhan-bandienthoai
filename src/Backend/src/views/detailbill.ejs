@@ -6,8 +6,15 @@
     <title>Document</title>
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
-
-
+    <script>
+        function deleteBills(index) {
+            var formId = 'deleteForm' + index;
+            var form = document.getElementById(formId);
+            if (confirm('Bạn có chắc chắn muốn thanh toán hóa đơn này không?')) {
+                form.submit();
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -32,6 +39,7 @@
                     <th>Số lượng</th>
                     <th>Tổng tiền</th>
                     <th>Thời gian đặt hàng</th>
+                    <th>Chức năng</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,6 +74,12 @@
 
                         <td>
                             <%= dataBills[i].thoigiandat %>
+                        </td>
+                        <td style="display: flex">
+                            <form id="deleteForm<%= i %>" action="/delete-bill" method="post">
+                                <input type="hidden" name="idBills" value="<%= dataBills[i].maHD %>" />
+                                <button type="button" onclick="deleteBills('<%= i %>')">Xóa</button>
+                            </form>
                         </td>
                     </tr>
                     <% } %>
